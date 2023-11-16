@@ -210,7 +210,7 @@ export default function Home() {
         <h1>Dinger : {myDid}</h1>
       </header> */}
       <Button variant="outline">Button</Button>
-      <div className="text-red-700">Home</div>
+      <h1 className="text-3xl font-bold underline">Hello world!</h1>
       {/* <main>
         <Sidebar
           groupedDings={groupedDings}
