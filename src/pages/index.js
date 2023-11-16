@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { NoChatSelected } from "@/components/NoChatSelected";
 import { Sidebar } from "@/components/Sidebar";
 import { Chat } from "@/components/Chat";
+import { Button } from "@/components/ui/button";
 
 export default function Home() {
   const [web5, setWeb5] = useState(null);
@@ -207,6 +208,7 @@ export default function Home() {
     <div className="app-container">
       <header>
         <h1>Dinger : {myDid}</h1>
+        <Button variant="outline">Button</Button>
       </header>
       {/* <main>
         <Sidebar
