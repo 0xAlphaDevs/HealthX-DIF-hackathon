@@ -206,10 +206,11 @@ export default function Home() {
 
   return (
     <div className="app-container">
-      <header>
+      {/* <header>
         <h1>Dinger : {myDid}</h1>
-        <Button variant="outline">Button</Button>
-      </header>
+      </header> */}
+      <Button variant="outline">Button</Button>
+      <div className="text-red-700">Home</div>
       {/* <main>
         <Sidebar
           groupedDings={groupedDings}
