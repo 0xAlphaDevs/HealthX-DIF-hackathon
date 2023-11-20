@@ -14,7 +14,7 @@ export default function Form() {
   const [details, setDetails] = useState({ name: "", year: "" }); // user or organization details
   const [did, setDid] = useState(""); // DID of user or organization
   const [loading, setLoading] = useState(false); // loading state
-  const [step, setStep] = useState(0); // step state
+  const [step, setStep] = useState(2); // step state
   console.log("Step: ", step);
   console.log("Type: ", type);
   console.log("Details: ", details);
