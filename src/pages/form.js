@@ -10,15 +10,17 @@ import CreateDid from "@/components/form/createDid";
 // 3. DID Creation
 
 export default function Form() {
-  const [type, setType] = useState(""); // "user" or "organization"
+  const [type, setType] = useState(""); // "individual" or "organization"
   const [details, setDetails] = useState({}); // user or organization details
   const [did, setDid] = useState(""); // DID of user or organization
   const [loading, setLoading] = useState(false); // loading state
   const [step, setStep] = useState(0); // step state
+  console.log("Step: ", step);
+  console.log("Type: ", type);
 
   return (
     <div className="app-container">
-      {step === 0 && <SelectType />}
+      {step === 0 && <SelectType setType={setType} setStep={setStep} />}
       {step === 1 && <EnterDetails />}
       {step === 2 && <CreateDid />}
     </div>
