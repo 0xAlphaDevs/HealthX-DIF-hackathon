@@ -1,7 +1,9 @@
-import React from "react";
+import { Button } from "@/components/ui/button";
 
-const CreateDid = () => {
-  return <div>createDid</div>;
-};
-
-export default CreateDid;
+export default function CreateDid() {
+  return (
+    <div className=" flex flex-col h-screen justify-center items-center">
+      <Button className="w-32">Enter App</Button>
+    </div>
+  );
+}
