@@ -6,8 +6,8 @@ export default function SelectType({ setType, setStep }) {
   // console.log(value);
 
   return (
-    <div className="flex flex-col mt-40 justify-center items-center translate-y-6">
-      <h1 className="text-5xl mb-8 font-semibold">
+    <div className="flex flex-col mt-40 justify-center items-center animate-in slide-in-from-bottom fade-in duration-700 ">
+      <h1 className="text-5xl mb-8 font-semibold ">
         Are you an individual or Organization?
       </h1>
       <ToggleGroup
