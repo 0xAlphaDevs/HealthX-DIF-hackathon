@@ -11,7 +11,7 @@ import CreateDid from "@/components/form/createDid";
 
 export default function Form() {
   const [type, setType] = useState(""); // "individual" or "organization"
-  const [details, setDetails] = useState({}); // user or organization details
+  const [details, setDetails] = useState({ name: "", year: "" }); // user or organization details
   const [did, setDid] = useState(""); // DID of user or organization
   const [loading, setLoading] = useState(false); // loading state
   const [step, setStep] = useState(0); // step state
@@ -25,7 +25,7 @@ export default function Form() {
       {step === 1 && (
         <EnterDetails type={type} setDetails={setDetails} setStep={setStep} />
       )}
-      {step === 2 && <CreateDid />}
+      {step === 2 && <CreateDid name={details.name} />}
     </div>
   );
 }
