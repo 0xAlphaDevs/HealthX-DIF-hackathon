@@ -21,7 +21,7 @@ export default function Form() {
   return (
     <div className="app-container">
       {step === 0 && <SelectType setType={setType} setStep={setStep} />}
-      {step === 1 && <EnterDetails />}
+      {step === 1 && <EnterDetails type={type} />}
       {step === 2 && <CreateDid />}
     </div>
   );

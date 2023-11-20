@@ -13,8 +13,9 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 
 const EnterDetails = ({ type }) => {
-  const isIndividualType = type === "individual";
-  const cardTitle = isIndividualType ? "User Details" : "Organization Details";
+  const isType = type === "individual";
+  const cardTitle = isType ? "User Details" : "Organization Details";
+  const dobLabel = isType ? "D.O.B." : "Year of Establishment";
   return (
     <div className="flex justify-center items-center h-screen">
       <Card className="w-[550px]">
@@ -30,16 +31,16 @@ const EnterDetails = ({ type }) => {
                 <Input
                   id={`name${type}`}
                   placeholder={`Enter ${
-                    isIndividualType ? "your" : "organization's"
+                    isType ? "your" : "organization's"
                   } name`}
                 />
               </div>
               <div className="flex flex-col space-y-1.5">
-                <Label htmlFor={`dob${type}`}>D.O.B.</Label>
+                <Label htmlFor={`dob${type}`}>{dobLabel}</Label>
                 <Input
                   id={`dob${type}`}
                   placeholder={`Enter ${
-                    isIndividualType ? "your D.O.B" : "organization's"
+                    isType ? "your D.O.B" : "your year of establishment"
                   } `}
                 />
               </div>
@@ -47,7 +48,6 @@ const EnterDetails = ({ type }) => {
           </form>
         </CardContent>
         <CardFooter className="flex justify-between">
-          <Button>Prev</Button>
           <Button>Next</Button>
         </CardFooter>
       </Card>
