@@ -17,11 +17,14 @@ export default function Form() {
   const [step, setStep] = useState(0); // step state
   console.log("Step: ", step);
   console.log("Type: ", type);
+  console.log("Details: ", details);
 
   return (
     <div className="app-container">
       {step === 0 && <SelectType setType={setType} setStep={setStep} />}
-      {step === 1 && <EnterDetails type={type} />}
+      {step === 1 && (
+        <EnterDetails type={type} setDetails={setDetails} setStep={setStep} />
+      )}
       {step === 2 && <CreateDid />}
     </div>
   );
