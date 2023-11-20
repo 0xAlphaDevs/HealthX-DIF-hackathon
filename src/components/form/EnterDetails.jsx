@@ -42,7 +42,7 @@ const EnterDetails = ({ type, setDetails, setStep }) => {
     setStep(2);
   };
   return (
-    <div className="flex justify-center mt-40 h-screen animate-in slide-in-from-bottom fade-in duration-700">
+    <div className="flex justify-center mt-40 animate-in slide-in-from-bottom fade-in duration-700">
       <Card className="w-[550px]">
         <CardHeader>
           <CardTitle>{cardTitle}</CardTitle>
