@@ -46,13 +46,18 @@ export default function CreateDid({ name }) {
       </div>
 
       <br />
-      {loading ? (
-        <Skeleton className="w-[100px] h-[20px] rounded-full" />
-      ) : (
-        <Button onClick={handleClick} className="w-32">
-          Enter App
-        </Button>
-      )}
+      <Button onClick={handleClick} className="w-32">
+        {loading ? (
+          <div className="flex gap-2">
+            {" "}
+            <Skeleton className="w-[10px] h-[10px] rounded-full" />
+            <Skeleton className="w-[10px] h-[10px] rounded-full" />
+            <Skeleton className="w-[10px] h-[10px] rounded-full" />
+          </div>
+        ) : (
+          "Enter App"
+        )}
+      </Button>
     </div>
   );
 }
