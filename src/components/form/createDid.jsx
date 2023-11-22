@@ -3,6 +3,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import Loader from "../loader";
 import { Web5 } from "@web5/api";
+import { Skeleton } from "@/components/ui/skeleton";
 
 export default function CreateDid({ name }) {
   const router = useRouter();
@@ -45,9 +46,13 @@ export default function CreateDid({ name }) {
       </div>
 
       <br />
-      <Button onClick={handleClick} className="w-32">
-        Enter App
-      </Button>
+      {loading ? (
+        <Skeleton className="w-[100px] h-[20px] rounded-full" />
+      ) : (
+        <Button onClick={handleClick} className="w-32">
+          Enter App
+        </Button>
+      )}
     </div>
   );
 }
