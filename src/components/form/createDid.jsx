@@ -23,18 +23,18 @@ export default function CreateDid({ name }) {
     return did;
   }
 
-  async function getDidDocument(did) {
-    const didDocument = await web5.did.resolve(did);
-    return didDocument;
-  }
+  // async function getDidDocument(did) {
+  //   const didDocument = await web5.did.resolve(did);
+  //   return didDocument;
+  // }
 
   async function handleClick() {
     setLoading(true);
     setText("Please wait while we create your DID");
     const did = await generateDid();
     console.log(did);
-    const didDocument = await getDidDocument(did);
-    console.log(didDocument);
+    // const didDocument = await getDidDocument(did);
+    // console.log(didDocument);
   }
 
   return (
