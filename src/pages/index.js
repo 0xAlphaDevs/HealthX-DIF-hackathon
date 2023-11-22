@@ -102,7 +102,7 @@ export default function Home() {
     console.log("Delete:", deleteResult);
   }
   return (
-    <div className="app-container">
+    <div className="app-container ">
       <Button variant="outline" onClick={createJsonRecord}>
         Create Record
       </Button>

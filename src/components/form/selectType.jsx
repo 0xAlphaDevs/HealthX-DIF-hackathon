@@ -7,7 +7,7 @@ export default function SelectType({ setType, setStep }) {
 
   return (
     <div className="flex flex-col mt-48 justify-center items-center animate-in slide-in-from-bottom fade-in duration-700 ">
-      <h1 className="text-5xl mb-8 font-semibold ">
+      <h1 className="text-5xl mb-8 font-semibold text-emerald-500">
         Are you an individual or Organization?
       </h1>
       <ToggleGroup
@@ -24,10 +24,14 @@ export default function SelectType({ setType, setStep }) {
         type="single"
       >
         <ToggleGroupItem value="individual" aria-label="Toggle user">
-          <h2 className="text-lg text-gray-700">Individual</h2>
+          <h2 className="text-lg text-emerald-600 hover:text-white ">
+            Individual
+          </h2>
         </ToggleGroupItem>
         <ToggleGroupItem value="organization" aria-label="Toggle Organization">
-          <h2 className="text-lg text-gray-700">Organization</h2>
+          <h2 className="text-lg text-emerald-600 hover:text-white">
+            Organization
+          </h2>
         </ToggleGroupItem>
       </ToggleGroup>
     </div>
