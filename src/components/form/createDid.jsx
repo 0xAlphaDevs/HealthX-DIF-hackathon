@@ -122,20 +122,23 @@ export default function CreateDid({ name }) {
 
   return (
     <div className=" flex flex-col h-screen justify-center items-center">
-      <h1 className="text-3xl font-bold">Welcome, {name} </h1>
+      <h1 className="text-3xl font-bold text-emerald-600">Welcome, {name} </h1>
       <div className="flex space-x-3">
         {loading && <Loader />}
-        <p className="text-xl text-gray-500">{text}</p>
+        <p className="text-xl text-emerald-500">{text}</p>
       </div>
 
       <br />
-      <Button onClick={handleClick} className="w-32">
+      <Button
+        onClick={handleClick}
+        className="w-32 bg-emerald-700 hover:bg-emerald-400"
+      >
         {loading ? (
           <div className="flex gap-2">
             {" "}
-            <Skeleton className="w-[10px] h-[10px] rounded-full" />
-            <Skeleton className="w-[10px] h-[10px] rounded-full" />
-            <Skeleton className="w-[10px] h-[10px] rounded-full" />
+            <Skeleton className="w-[10px] h-[10px] rounded-full bg-emerald-100" />
+            <Skeleton className="w-[10px] h-[10px] rounded-full bg-emerald-100" />
+            <Skeleton className="w-[10px] h-[10px] rounded-full bg-emerald-100" />
           </div>
         ) : (
           "Enter App"
