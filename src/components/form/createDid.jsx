@@ -160,7 +160,7 @@ export default function CreateDid({ name }) {
 
       <Button
         onClick={() => {
-          fetchDings(web5, did);
+          fetchDings(web5, recipientDid);
         }}
         className="w-32"
       >
