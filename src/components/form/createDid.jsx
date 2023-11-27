@@ -4,6 +4,8 @@ import { useState } from "react";
 import Loader from "../loader";
 import { Web5 } from "@web5/api";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useRecoilState } from "recoil";
+import didState from "@/atoms/didData";
 
 const protocolDefinition = {
   protocol: "dinger-chat-protocol",
@@ -25,10 +27,12 @@ const protocolDefinition = {
   },
 };
 
-export default function CreateDid({ name }) {
+export default function CreateDid({ name, year }) {
   const router = useRouter();
   const [web5, setWeb5] = useState(null);
   const [myDid, setMyDid] = useState(null);
+
+  const [didData, setDidData] = useRecoilState(didState);
 
   // receiver did
   const recipientDid =
@@ -118,6 +122,8 @@ export default function CreateDid({ name }) {
     console.log(did);
     setText("DID created successfully!");
     setLoading(false);
+    // update recoil state
+    setDidData({ did: did, name: name, year: year });
     router.push("/dashboard");
   }
 

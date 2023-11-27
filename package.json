@@ -24,6 +24,7 @@
     "process": "^0.11.10",
     "react": "^18",
     "react-dom": "^18",
+    "recoil": "^0.7.7",
     "stream-browserify": "3.0.0",
     "tailwind-merge": "^2.0.0",
     "tailwindcss-animate": "^1.0.7"

@@ -26,7 +26,7 @@ export default function Form() {
       {step === 1 && (
         <EnterDetails type={type} setDetails={setDetails} setStep={setStep} />
       )}
-      {step === 2 && <CreateDid name={details.name} />}
+      {step === 2 && <CreateDid name={details.name} year={details.year} />}
     </div>
   );
 }
