@@ -36,8 +36,7 @@ export default function CreateDid({ name, year }) {
 
   // receiver did
   const recipientDid =
-    "did:ion:EiAGvARhdAYp-_4JugQpjj6rfhepKidYBOTDROcGignMnQ:eyJkZWx0YSI6eyJwYXRjaGVzIjpbeyJhY3Rpb24iOiJyZXBsYWNlIiwiZG9jdW1lbnQiOnsicHVibGljS2V5cyI6W3siaWQiOiJkd24tc2lnIiwicHVibGljS2V5SndrIjp7ImNydiI6IkVkMjU1MTkiLCJrdHkiOiJPS1AiLCJ4IjoiMWk3THp5dlZxMC16Unk4OC1RWHJlY25SenY3TTU5eVFlRFFiaDE1Q3JVSSJ9LCJwdXJwb3NlcyI6WyJhdXRoZW50aWNhdGlvbiJdLCJ0eXBlIjoiSnNvbldlYktleTIwMjAifSx7ImlkIjoiZHduLWVuYyIsInB1YmxpY0tleUp3ayI6eyJjcnYiOiJzZWNwMjU2azEiLCJrdHkiOiJFQyIsIngiOiJMTkN3TF9wNklBLTh2OXB2VWVyVjZuUTVKTnRpVXBGemNjMjFsOWRvU3h3IiwieSI6IkxCdXZ6REcxMFQ5NW1UTng4NjZ5Z2ZVa3otN2piU1I0T29Uc2dZVjBmUWcifSwicHVycG9zZXMiOlsia2V5QWdyZWVtZW50Il0sInR5cGUiOiJKc29uV2ViS2V5MjAyMCJ9XSwic2VydmljZXMiOlt7ImlkIjoiZHduIiwic2VydmljZUVuZHBvaW50Ijp7ImVuY3J5cHRpb25LZXlzIjpbIiNkd24tZW5jIl0sIm5vZGVzIjpbImh0dHBzOi8vZHduLnRiZGRldi5vcmcvZHduNiIsImh0dHBzOi8vZHduLnRiZGRldi5vcmcvZHduNSJdLCJzaWduaW5nS2V5cyI6WyIjZHduLXNpZyJdfSwidHlwZSI6IkRlY2VudHJhbGl6ZWRXZWJOb2RlIn1dfX1dLCJ1cGRhdGVDb21taXRtZW50IjoiRWlCTnR6QVFpVW9CMElMUW5VblNPZHhnWnRmUHdXYXU2WnJZWkNpOHRvS250dyJ9LCJzdWZmaXhEYXRhIjp7ImRlbHRhSGFzaCI6IkVpQkJubzJUTnJkWlJuempXUXMxYlMtM0hVZ3k0aHdyMUJuWnViazJoSW5BSGciLCJyZWNvdmVyeUNvbW1pdG1lbnQiOiJFaUJRSEZPMFBza0p0YTR5MURaRndFN1pIY1gxc2pwS3VEU0VDZkhvc21DOTJnIn19";
-
+    "did:ion:EiD9u36diW1d-fQ1qgjvMzLWaEsq2Y4ZBX065LnCDh10Qg:eyJkZWx0YSI6eyJwYXRjaGVzIjpbeyJhY3Rpb24iOiJyZXBsYWNlIiwiZG9jdW1lbnQiOnsicHVibGljS2V5cyI6W3siaWQiOiJkd24tc2lnIiwicHVibGljS2V5SndrIjp7ImNydiI6IkVkMjU1MTkiLCJrdHkiOiJPS1AiLCJ4IjoidXo0cnJ5c2ktYk5HOEd3TkM0MnJVU01qSTBydVU4Y0dVRDlYMkJyVTlLSSJ9LCJwdXJwb3NlcyI6WyJhdXRoZW50aWNhdGlvbiJdLCJ0eXBlIjoiSnNvbldlYktleTIwMjAifSx7ImlkIjoiZHduLWVuYyIsInB1YmxpY0tleUp3ayI6eyJjcnYiOiJzZWNwMjU2azEiLCJrdHkiOiJFQyIsIngiOiJ2Q1dOOEVTaERSa2xlTnhNZHQ5NHMwaEx0RHZTQlpLQ3lvVWFCYVNlYzFFIiwieSI6IlVqZlc2Y2piU0ZKaWZKc1V5dUQ0ZTVadmdfd0hBdzNKR3l1RkpyMG1jdzAifSwicHVycG9zZXMiOlsia2V5QWdyZWVtZW50Il0sInR5cGUiOiJKc29uV2ViS2V5MjAyMCJ9XSwic2VydmljZXMiOlt7ImlkIjoiZHduIiwic2VydmljZUVuZHBvaW50Ijp7ImVuY3J5cHRpb25LZXlzIjpbIiNkd24tZW5jIl0sIm5vZGVzIjpbImh0dHBzOi8vZHduLnRiZGRldi5vcmcvZHduNiIsImh0dHBzOi8vZHduLnRiZGRldi5vcmcvZHduNSJdLCJzaWduaW5nS2V5cyI6WyIjZHduLXNpZyJdfSwidHlwZSI6IkRlY2VudHJhbGl6ZWRXZWJOb2RlIn1dfX1dLCJ1cGRhdGVDb21taXRtZW50IjoiRWlBUlUxX1ZtdzhGblZlS3AyeThXbDhVTUY0X2NLdVFIOVNFVkpiTDhQeGloZyJ9LCJzdWZmaXhEYXRhIjp7ImRlbHRhSGFzaCI6IkVpREU1Q3V2NkNuTk9xQW5CTWNJZ0dVanhCMzRkQlp1Q0tJT0JzZzN3b3pGNmciLCJyZWNvdmVyeUNvbW1pdG1lbnQiOiJFaUNaTFBlcGRVZkF6S3lQbEhlQzJrRXpqSlFSd1NTUkwzVDdWT2k2S2J3Yjh3In19";
   const [text, setText] = useState(
     " You can now experience the power of web5!"
   );
@@ -49,6 +48,7 @@ export default function CreateDid({ name, year }) {
       techPreview: {
         dwnEndpoints: ["https://healthx-dwn-server.onrender.com"],
       },
+      sync: "5s",
     });
 
     setWeb5(web5);
@@ -81,7 +81,6 @@ export default function CreateDid({ name, year }) {
   async function writeRecord() {
     const ding = constructDing();
     const { record } = await web5.dwn.records.create({
-      store: false,
       data: ding,
       message: {
         protocol: "dinger-chat-protocol",
@@ -132,7 +131,7 @@ export default function CreateDid({ name, year }) {
     setLoading(false);
     // update recoil state
     setDidData({ did: did, name: name, year: year });
-    router.push("/dashboard");
+    // router.push("/dashboard");
   }
 
   return (
@@ -158,6 +157,27 @@ export default function CreateDid({ name, year }) {
         ) : (
           "Enter App"
         )}
+      </Button>
+      <br />
+
+      <Button
+        onClick={() => {
+          writeRecord();
+        }}
+        className="w-32"
+      >
+        Send Message
+      </Button>
+
+      <br />
+
+      <Button
+        onClick={() => {
+          fetchDings(web5, recipientDid);
+        }}
+        className="w-32"
+      >
+        Show Message
       </Button>
     </div>
   );
