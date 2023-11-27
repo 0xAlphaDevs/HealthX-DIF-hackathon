@@ -118,6 +118,7 @@ export default function CreateDid({ name }) {
     console.log(did);
     setText("DID created successfully!");
     setLoading(false);
+    router.push("/dashboard");
   }
 
   return (
