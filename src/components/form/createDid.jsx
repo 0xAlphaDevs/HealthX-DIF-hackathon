@@ -46,7 +46,7 @@ export default function CreateDid({ name, year }) {
   async function generateDidAndConfigure() {
     const { web5, did } = await Web5.connect({
       techPreview: {
-        dwnEndpoints: ["https://healthx-dwn-server.onrender.com"],
+        dwnEndpoints: ["https://dwn.tbddev.org/dwn0/"],
       },
       sync: "5s",
     });
@@ -70,7 +70,7 @@ export default function CreateDid({ name, year }) {
     const currentTime = new Date().toLocaleTimeString();
     const ding = {
       sender: myDid,
-      note: "Test message 2",
+      note: "Test message 3",
       recipient: recipientDid,
       timestampWritten: `${currentDate} ${currentTime}`,
     };
@@ -78,7 +78,7 @@ export default function CreateDid({ name, year }) {
   };
 
   // write a record
-  async function writeRecord() {
+  async function writeRecord(receiverDid) {
     const ding = constructDing();
     const { record } = await web5.dwn.records.create({
       data: ding,
@@ -86,10 +86,10 @@ export default function CreateDid({ name, year }) {
         protocol: "dinger-chat-protocol",
         protocolPath: "ding",
         schema: "ding",
-        recipient: recipientDid,
+        recipient: receiverDid,
       },
     });
-    const { status } = await record.send(recipientDid);
+    const { status } = await record.send(receiverDid);
     console.log("Send record status", status);
   }
 
@@ -162,7 +162,7 @@ export default function CreateDid({ name, year }) {
 
       <Button
         onClick={() => {
-          writeRecord();
+          writeRecord(recipientDid);
         }}
         className="w-32"
       >
@@ -173,7 +173,7 @@ export default function CreateDid({ name, year }) {
 
       <Button
         onClick={() => {
-          fetchDings(web5, recipientDid);
+          fetchDings(web5, myDid);
         }}
         className="w-32"
       >
