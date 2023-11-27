@@ -145,28 +145,6 @@ export default function CreateDid({ name }) {
           "Enter App"
         )}
       </Button>
-
-      <br />
-
-      <Button
-        onClick={() => {
-          writeRecord();
-        }}
-        className="w-32"
-      >
-        Send Message
-      </Button>
-
-      <br />
-
-      <Button
-        onClick={() => {
-          fetchDings(web5, myDid);
-        }}
-        className="w-32"
-      >
-        Show Message
-      </Button>
     </div>
   );
 }
