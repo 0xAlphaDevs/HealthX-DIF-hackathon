@@ -8,13 +8,13 @@ const Navbar = () => {
   const [didData, setDidData] = useRecoilState(didState);
   const formattedDid = `${didData.did.slice(8, 14)}...${didData.did.slice(-6)}`;
   return (
-    <div className="p-2 bg-emerald-500 flex justify-between">
+    <div className="p-2 bg-emerald-700 flex justify-between">
       <div className="flex gap-2 items-center">
         <Avatar>
           <AvatarImage src="favicon.svg" alt="@shadcn" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
-        <p className="font-bold text-emerald-900 text-xl">HealthX</p>
+        <p className="font-bold text-emerald-200 text-xl">HealthX</p>
       </div>
 
       <Badge>{formattedDid}</Badge>

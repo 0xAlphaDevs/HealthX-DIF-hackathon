@@ -14,8 +14,8 @@ const UserBanner = () => {
   const [didData, setDidData] = useRecoilState(didState);
   const formattedDid = `${didData.did.slice(8, 14)}...${didData.did.slice(-6)}`;
   return (
-    <Card className="m-8 text-emerald-900">
-      <CardHeader className="flex flex-row justify-between bg-emerald-200">
+    <Card className="m-8 text-emerald-900 bg-emerald-200">
+      <CardHeader className="flex flex-row justify-between ">
         <div className="">
           <CardTitle>DID :</CardTitle>
           <CardDescription>{formattedDid}</CardDescription>
