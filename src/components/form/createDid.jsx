@@ -32,7 +32,7 @@ export default function CreateDid({ name }) {
 
   // receiver did
   const recipientDid =
-    "did:ion:EiAzbnE6S_e2QxvQ4iXWt7F6cMOuMIvjQtcbtypY3u9lRw:eyJkZWx0YSI6eyJwYXRjaGVzIjpbeyJhY3Rpb24iOiJyZXBsYWNlIiwiZG9jdW1lbnQiOnsicHVibGljS2V5cyI6W3siaWQiOiJkd24tc2lnIiwicHVibGljS2V5SndrIjp7ImNydiI6IkVkMjU1MTkiLCJrdHkiOiJPS1AiLCJ4IjoiMVBoYlY5MmFkc09UaFNWazFaOEUwVk5hMGFTWEtOZS1pb3V6bzhDc1pPTSJ9LCJwdXJwb3NlcyI6WyJhdXRoZW50aWNhdGlvbiJdLCJ0eXBlIjoiSnNvbldlYktleTIwMjAifSx7ImlkIjoiZHduLWVuYyIsInB1YmxpY0tleUp3ayI6eyJjcnYiOiJzZWNwMjU2azEiLCJrdHkiOiJFQyIsIngiOiI0M1NzZGo5N0V2NWhBVUZSNm1GeWU2UWt2TzBNelJKVzVrZmpMQm1QZ3NBIiwieSI6Il9nb1JDajdpVldpSXJyRFY0TXdyU1VOd0dtcW15OThLcEtweXpBUnhTa00ifSwicHVycG9zZXMiOlsia2V5QWdyZWVtZW50Il0sInR5cGUiOiJKc29uV2ViS2V5MjAyMCJ9XSwic2VydmljZXMiOlt7ImlkIjoiZHduIiwic2VydmljZUVuZHBvaW50Ijp7ImVuY3J5cHRpb25LZXlzIjpbIiNkd24tZW5jIl0sIm5vZGVzIjpbImh0dHBzOi8vZHduLnRiZGRldi5vcmcvZHduNCIsImh0dHBzOi8vZHduLnRiZGRldi5vcmcvZHduMyJdLCJzaWduaW5nS2V5cyI6WyIjZHduLXNpZyJdfSwidHlwZSI6IkRlY2VudHJhbGl6ZWRXZWJOb2RlIn1dfX1dLCJ1cGRhdGVDb21taXRtZW50IjoiRWlDNGpfX21FZjFJZ004eENFNEpseEEydjlpMGJsVnE4QncyN1d2TVd0WW1TZyJ9LCJzdWZmaXhEYXRhIjp7ImRlbHRhSGFzaCI6IkVpRHhXVVc5UEM4WFRMODZBYV8xdmE5RUl0YnZoVUlVNmVaaFhzMXVlOU54QkEiLCJyZWNvdmVyeUNvbW1pdG1lbnQiOiJFaUI0bjhUcE5Ld1ZKakpRTGpobXYzVkJUU1I5Y1NsZU5JRmY2ZEptazVVNi1nIn19";
+    "did:ion:EiAGvARhdAYp-_4JugQpjj6rfhepKidYBOTDROcGignMnQ:eyJkZWx0YSI6eyJwYXRjaGVzIjpbeyJhY3Rpb24iOiJyZXBsYWNlIiwiZG9jdW1lbnQiOnsicHVibGljS2V5cyI6W3siaWQiOiJkd24tc2lnIiwicHVibGljS2V5SndrIjp7ImNydiI6IkVkMjU1MTkiLCJrdHkiOiJPS1AiLCJ4IjoiMWk3THp5dlZxMC16Unk4OC1RWHJlY25SenY3TTU5eVFlRFFiaDE1Q3JVSSJ9LCJwdXJwb3NlcyI6WyJhdXRoZW50aWNhdGlvbiJdLCJ0eXBlIjoiSnNvbldlYktleTIwMjAifSx7ImlkIjoiZHduLWVuYyIsInB1YmxpY0tleUp3ayI6eyJjcnYiOiJzZWNwMjU2azEiLCJrdHkiOiJFQyIsIngiOiJMTkN3TF9wNklBLTh2OXB2VWVyVjZuUTVKTnRpVXBGemNjMjFsOWRvU3h3IiwieSI6IkxCdXZ6REcxMFQ5NW1UTng4NjZ5Z2ZVa3otN2piU1I0T29Uc2dZVjBmUWcifSwicHVycG9zZXMiOlsia2V5QWdyZWVtZW50Il0sInR5cGUiOiJKc29uV2ViS2V5MjAyMCJ9XSwic2VydmljZXMiOlt7ImlkIjoiZHduIiwic2VydmljZUVuZHBvaW50Ijp7ImVuY3J5cHRpb25LZXlzIjpbIiNkd24tZW5jIl0sIm5vZGVzIjpbImh0dHBzOi8vZHduLnRiZGRldi5vcmcvZHduNiIsImh0dHBzOi8vZHduLnRiZGRldi5vcmcvZHduNSJdLCJzaWduaW5nS2V5cyI6WyIjZHduLXNpZyJdfSwidHlwZSI6IkRlY2VudHJhbGl6ZWRXZWJOb2RlIn1dfX1dLCJ1cGRhdGVDb21taXRtZW50IjoiRWlCTnR6QVFpVW9CMElMUW5VblNPZHhnWnRmUHdXYXU2WnJZWkNpOHRvS250dyJ9LCJzdWZmaXhEYXRhIjp7ImRlbHRhSGFzaCI6IkVpQkJubzJUTnJkWlJuempXUXMxYlMtM0hVZ3k0aHdyMUJuWnViazJoSW5BSGciLCJyZWNvdmVyeUNvbW1pdG1lbnQiOiJFaUJRSEZPMFBza0p0YTR5MURaRndFN1pIY1gxc2pwS3VEU0VDZkhvc21DOTJnIn19";
 
   const [text, setText] = useState(
     " You can now experience the power of web5!"
@@ -44,12 +44,12 @@ export default function CreateDid({ name }) {
     const { web5, did } = await Web5.connect();
     setWeb5(web5);
     setMyDid(did);
-    const { protocolStatus } = await web5.dwn.protocols.configure({
+    const { protocol, status } = await web5.dwn.protocols.configure({
       message: {
         definition: protocolDefinition,
       },
     });
-    console.log("Configure protocol status", protocolStatus);
+    console.log("Configure protocol status :", protocol, status);
     return did;
   }
 
@@ -59,7 +59,7 @@ export default function CreateDid({ name }) {
     const currentTime = new Date().toLocaleTimeString();
     const ding = {
       sender: myDid,
-      note: "This is a test message",
+      note: "Test message 2",
       recipient: recipientDid,
       timestampWritten: `${currentDate} ${currentTime}`,
     };
@@ -88,7 +88,7 @@ export default function CreateDid({ name }) {
     const { records, status: recordStatus } = await web5.dwn.records.query({
       message: {
         filter: {
-          protocol: "https://blackgirlbytes.dev/dinger-chat-protocol",
+          protocol: "dinger-chat-protocol",
           protocolPath: "ding",
         },
         dateSort: "createdAscending",
@@ -160,7 +160,7 @@ export default function CreateDid({ name }) {
 
       <Button
         onClick={() => {
-          fetchDings(web5, recipientDid);
+          fetchDings(web5, myDid);
         }}
         className="w-32"
       >
