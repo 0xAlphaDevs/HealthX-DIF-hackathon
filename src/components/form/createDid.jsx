@@ -45,14 +45,21 @@ export default function CreateDid({ name, year }) {
 
   // create did using web5
   async function generateDidAndConfigure() {
-    const { web5, did } = await Web5.connect();
+    const { web5, did } = await Web5.connect({
+      techPreview: {
+        dwnEndpoints: ["https://healthx-dwn-server.onrender.com"],
+      },
+    });
+
     setWeb5(web5);
     setMyDid(did);
+
     const { protocol, status } = await web5.dwn.protocols.configure({
       message: {
         definition: protocolDefinition,
       },
     });
+
     console.log("Configure protocol status :", protocol, status);
     return did;
   }
@@ -73,7 +80,8 @@ export default function CreateDid({ name, year }) {
   // write a record
   async function writeRecord() {
     const ding = constructDing();
-    const { record } = await web5.dwn.records.write({
+    const { record } = await web5.dwn.records.create({
+      store: false,
       data: ding,
       message: {
         protocol: "dinger-chat-protocol",
