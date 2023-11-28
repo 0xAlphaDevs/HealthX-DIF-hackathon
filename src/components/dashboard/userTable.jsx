@@ -38,27 +38,27 @@ import {
 const data = [
   {
     id: "m5gr84i9",
-    healthrecordName: "success",
+    healthrecordName: "CBC ",
     date: "1-1-2023",
   },
   {
     id: "3u1reuv4",
-    healthrecordName: "success",
+    healthrecordName: "X-ray",
     date: "12-06-2022",
   },
   {
     id: "derv1ws0",
-    healthrecordName: "processing",
+    healthrecordName: "MRI",
     date: "15-07-2021",
   },
   {
     id: "5kma53ae",
-    healthrecordName: "success",
+    healthrecordName: "CECT",
     date: "26-09-2023",
   },
   {
     id: "bhqecj4p",
-    healthrecordName: "failed",
+    healthrecordName: "KFT",
     date: "11-01-2022",
   },
 ];
@@ -67,6 +67,7 @@ const columns = [
   {
     accessorKey: "date",
     header: "Date",
+    // In later stages can sort by the order of date 🟡
     // header: ({ column }) => {
     //   return (
     //     <Button
@@ -163,7 +164,6 @@ export function UserTable() {
           }
           className="max-w-sm bg-emerald-50"
         />
-
         {/* <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">

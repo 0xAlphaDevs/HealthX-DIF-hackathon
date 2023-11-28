@@ -131,7 +131,7 @@ export default function CreateDid({ name, year }) {
     setLoading(false);
     // update recoil state
     setDidData({ did: did, name: name, year: year });
-    // router.push("/dashboard");
+    router.push("/dashboard");
   }
 
   return (
