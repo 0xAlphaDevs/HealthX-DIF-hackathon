@@ -191,7 +191,7 @@ export function UserTable() {
           </DropdownMenuContent>
         </DropdownMenu> */}
       </div>
-      <div className="rounded-md border bg-emerald-200">
+      <div className="rounded-md border bg-emerald-50">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (
