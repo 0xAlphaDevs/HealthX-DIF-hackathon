@@ -125,7 +125,7 @@ const columns = [
               <DialogTitle>Here is your Healthrecord.</DialogTitle>
               <DialogDescription>
                 <img
-                  src="report.png" // Update with the correct path
+                  src="report.png"
                   alt="Healthrecord Image"
                   style={{ width: "100%", height: "500px" }}
                 />
@@ -222,6 +222,7 @@ export function UserTable() {
             }
             className="max-w-sm bg-emerald-50"
           />
+          {/* categoryFilter UI */}
           {table.getColumn("healthrecordCategory") && (
             <CategoryFilter
               column={table.getColumn("healthrecordCategory")}
