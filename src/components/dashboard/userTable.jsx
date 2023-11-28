@@ -97,10 +97,13 @@ const columns = [
           </Button>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Are you sure absolutely sure?</DialogTitle>
+              <DialogTitle>Here is your Healthrecord.</DialogTitle>
               <DialogDescription>
-                This action cannot be undone. This will permanently delete your
-                account and remove your data from our servers.
+                <img
+                  src="report.png" // Update with the correct path
+                  alt="Healthrecord Image"
+                  style={{ width: "100%", height: "500px" }}
+                />
               </DialogDescription>
             </DialogHeader>
           </DialogContent>
@@ -115,7 +118,7 @@ const columns = [
       return (
         <Dialog>
           <Button className="bg-emerald-900 text-emerald-50 hover:bg-emerald-500">
-            Share
+            <DialogTrigger> Share</DialogTrigger>
           </Button>
           <DialogContent>
             <DialogHeader>
