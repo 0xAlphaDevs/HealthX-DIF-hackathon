@@ -131,7 +131,7 @@ export default function CreateDid({ name, year }) {
     setLoading(false);
     // update recoil state
     setDidData({ did: did, name: name, year: year });
-    // router.push("/dashboard");
+    router.push("/dashboard");
   }
 
   return (
@@ -160,7 +160,7 @@ export default function CreateDid({ name, year }) {
       </Button>
       <br />
 
-      <Button
+      {/* <Button
         onClick={() => {
           writeRecord(recipientDid);
         }}
@@ -178,7 +178,7 @@ export default function CreateDid({ name, year }) {
         className="w-32"
       >
         Show Message
-      </Button>
+      </Button> */}
     </div>
   );
 }
