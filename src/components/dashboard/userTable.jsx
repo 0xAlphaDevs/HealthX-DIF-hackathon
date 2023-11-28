@@ -39,53 +39,43 @@ const data = [
   {
     id: "m5gr84i9",
     healthrecordName: "success",
+    healthrecordCategory: "MRI",
     date: "1-1-2023",
   },
   {
-    id: "3u1reuv4",
-    healthrecordName: "success",
-    date: "12-06-2022",
+    id: "m5gr84i9",
+    healthrecordName: "abc",
+    healthrecordCategory: "MRI",
+    date: "1-1-2023",
   },
   {
-    id: "derv1ws0",
-    healthrecordName: "processing",
-    date: "15-07-2021",
-  },
-  {
-    id: "5kma53ae",
-    healthrecordName: "success",
-    date: "26-09-2023",
-  },
-  {
-    id: "bhqecj4p",
-    healthrecordName: "failed",
-    date: "11-01-2022",
+    id: "m5gr84i9",
+    healthrecordName: "def",
+    healthrecordCategory: "MRI",
+    date: "1-1-2023",
   },
 ];
 
 const columns = [
-  {
-    accessorKey: "date",
-    header: "Date",
-    // header: ({ column }) => {
-    //   return (
-    //     <Button
-    //       variant="ghost"
-    //       onClick={() => column.toggleSorting(column.getIsSorted() === "asc")}
-    //     >
-    //       Date
-    //       <ArrowUpDown className="ml-2 h-4 w-4" />
-    //     </Button>
-    //   );
-    // },
-    cell: ({ row }) => <div className="lowercase">{row.getValue("date")}</div>,
-  },
   {
     accessorKey: "healthrecordName",
     header: "Healthrecord Name",
     cell: ({ row }) => (
       <div className="capitalize">{row.getValue("healthrecordName")}</div>
     ),
+  },
+  {
+    accessorKey: "healthrecordCategory",
+    header: "Category",
+    cell: ({ row }) => (
+      <div className="capitalize">{row.getValue("healthrecordCategory")}</div>
+    ),
+  },
+
+  {
+    accessorKey: "date",
+    header: "Issued On",
+    cell: ({ row }) => <div className="lowercase">{row.getValue("date")}</div>,
   },
 
   {
@@ -156,18 +146,20 @@ export function UserTable() {
     <div className="p-8 ">
       <div className="flex items-center py-4">
         <Input
-          placeholder="Filter by dates..."
-          value={table.getColumn("date")?.getFilterValue() || ""}
+          placeholder="Search a record..."
+          value={table.getColumn("healthrecordName")?.getFilterValue() || ""}
           onChange={(event) =>
-            table.getColumn("date")?.setFilterValue(event.target.value)
+            table
+              .getColumn("healthrecordName")
+              ?.setFilterValue(event.target.value)
           }
           className="max-w-sm bg-emerald-50"
         />
 
-        {/* <DropdownMenu>
+        <DropdownMenu>
           <DropdownMenuTrigger asChild>
             <Button variant="outline" className="ml-auto">
-              Columns <ChevronDown className="ml-2 h-4 w-4" />
+              Filter <ChevronDown className="ml-2 h-4 w-4" />
             </Button>
           </DropdownMenuTrigger>
           <DropdownMenuContent align="end">
@@ -189,7 +181,7 @@ export function UserTable() {
                 );
               })}
           </DropdownMenuContent>
-        </DropdownMenu> */}
+        </DropdownMenu>
       </div>
       <div className="rounded-md border bg-emerald-200">
         <Table>
