@@ -41,6 +41,12 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import CategoryFilter from "./categoryFilter";
+import {
+  CircleIcon,
+  QuestionMarkCircledIcon,
+  StopwatchIcon,
+} from "@radix-ui/react-icons";
 
 const data = [
   {
@@ -59,6 +65,24 @@ const data = [
     id: "m5gr84i9",
     healthrecordName: "def",
     healthrecordCategory: "MRI",
+    date: "1-1-2023",
+  },
+  {
+    id: "m5gr84i9",
+    healthrecordName: "def",
+    healthrecordCategory: "CBC",
+    date: "1-1-2023",
+  },
+  {
+    id: "m5gr84i9",
+    healthrecordName: "def",
+    healthrecordCategory: "CBC",
+    date: "1-1-2023",
+  },
+  {
+    id: "m5gr84i9",
+    healthrecordName: "def",
+    healthrecordCategory: "CECT",
     date: "1-1-2023",
   },
 ];
@@ -86,14 +110,16 @@ const columns = [
   },
 
   {
-    id: "actions",
+    id: "view",
     cell: ({ row }) => {
       const payment = row.original;
       return (
         <Dialog>
-          <Button className="bg-emerald-900 text-emerald-50 hover:bg-emerald-500">
-            <DialogTrigger>View</DialogTrigger>
-          </Button>
+          <DialogTrigger>
+            <Button className="bg-emerald-900 text-emerald-50 hover:bg-emerald-500">
+              View
+            </Button>
+          </DialogTrigger>
           <DialogContent>
             <DialogHeader>
               <DialogTitle>Here is your Healthrecord.</DialogTitle>
@@ -111,14 +137,17 @@ const columns = [
     },
   },
   {
-    accessorKey: "amount",
+    accessorKey: "share",
     header: () => <div className="text-right"></div>,
     cell: () => {
       return (
         <Dialog>
-          <Button className="bg-emerald-900 text-emerald-50 hover:bg-emerald-500">
-            <DialogTrigger> Share</DialogTrigger>
-          </Button>
+          <DialogTrigger>
+            {" "}
+            <Button className="bg-emerald-900 text-emerald-50 hover:bg-emerald-500">
+              Share
+            </Button>
+          </DialogTrigger>
           <DialogContent>
             <DialogHeader>
               <DialogTitle>Are you sure absolutely sure?</DialogTitle>
@@ -131,6 +160,25 @@ const columns = [
         </Dialog>
       );
     },
+  },
+];
+
+//schema for the healthrecord category filter
+export const healthrecordCategory = [
+  {
+    value: "mri",
+    label: "MRI",
+    icon: QuestionMarkCircledIcon,
+  },
+  {
+    value: "cect",
+    label: "CECT",
+    icon: CircleIcon,
+  },
+  {
+    value: "cbc",
+    label: "cbc",
+    icon: StopwatchIcon,
   },
 ];
 
@@ -162,16 +210,26 @@ export function UserTable() {
   return (
     <div className="p-8 ">
       <div className="flex items-center py-4">
-        <Input
-          placeholder="Search a record..."
-          value={table.getColumn("healthrecordName")?.getFilterValue() || ""}
-          onChange={(event) =>
-            table
-              .getColumn("healthrecordName")
-              ?.setFilterValue(event.target.value)
-          }
-          className="max-w-sm bg-emerald-50"
-        />
+        <div className="flex flex-1 items-center space-x-2">
+          {" "}
+          <Input
+            placeholder="Search a record..."
+            value={table.getColumn("healthrecordName")?.getFilterValue() || ""}
+            onChange={(event) =>
+              table
+                .getColumn("healthrecordName")
+                ?.setFilterValue(event.target.value)
+            }
+            className="max-w-sm bg-emerald-50"
+          />
+          {table.getColumn("healthrecordCategory") && (
+            <CategoryFilter
+              column={table.getColumn("healthrecordCategory")}
+              title="Category"
+              options={healthrecordCategory}
+            />
+          )}
+        </div>
 
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
