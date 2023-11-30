@@ -26,7 +26,7 @@ const OrganizationBanner = () => {
   }
   return (
     <div className="grid grid-cols-2 gap-8 m-8">
-      <Card className=" text-emerald-900 bg-emerald-50">
+      <Card className=" text-cyan-900 bg-cyan-50">
         <CardHeader className="grid grid-cols-2 justify-between ">
           <div>
             <div className="">
@@ -63,13 +63,15 @@ const OrganizationBanner = () => {
             <div className="mt-2">
               <CardTitle>Type</CardTitle>
               <CardDescription>
-                <Badge className="mt-1">{didData.userType}</Badge>
+                <Badge className="mt-1 bg-cyan-200 hover:bg-cyan-200 text-cyan-900 ">
+                  {didData.userType}
+                </Badge>
               </CardDescription>
             </div>
           </div>
         </CardHeader>
       </Card>
-      <Card className=" text-emerald-900 bg-emerald-50">
+      <Card className=" text-cyan-900 bg-cyan-50">
         {/* <CardHeader className="flex flex-col justify-between ">
           <div className="">
             <CardTitle>DID</CardTitle>

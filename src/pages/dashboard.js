@@ -17,15 +17,15 @@ const MyDashboard = () => {
     <>
       <Navbar />
       {isUser ? (
-        <>
+        <div className="bg-emerald-100">
           <UserBanner />
           <UserTable />
-        </>
+        </div>
       ) : (
-        <>
+        <div className="bg-cyan-100">
           <OrganizationBanner />
           <OrganizationTable />
-        </>
+        </div>
       )}
 
       {/* <div className="mt-4">
