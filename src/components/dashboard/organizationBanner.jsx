@@ -25,7 +25,7 @@ const OrganizationBanner = () => {
     navigator.clipboard.writeText(didData.did);
   }
   return (
-    <div className="grid grid-cols-2 gap-8 m-8">
+    <div className="grid grid-cols-2 gap-8 p-8">
       <Card className=" text-cyan-900 bg-cyan-50">
         <CardHeader className="grid grid-cols-2 justify-between ">
           <div>
