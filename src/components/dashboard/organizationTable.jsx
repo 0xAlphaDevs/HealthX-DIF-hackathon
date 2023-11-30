@@ -48,6 +48,7 @@ import {
   CircleIcon,
   QuestionMarkCircledIcon,
   StopwatchIcon,
+  Cross2Icon,
 } from "@radix-ui/react-icons";
 
 const data = [
