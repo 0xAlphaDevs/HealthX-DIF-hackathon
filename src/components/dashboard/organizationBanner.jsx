@@ -18,7 +18,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 
-const UserBanner = () => {
+const OrganizationBanner = () => {
   const [didData, setDidData] = useRecoilState(didState);
   const formattedDid = `${didData.did.slice(8, 16)}...${didData.did.slice(-8)}`;
 
@@ -97,4 +97,4 @@ const UserBanner = () => {
   );
 };
 
-export default UserBanner;
+export default OrganizationBanner;
