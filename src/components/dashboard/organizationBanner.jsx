@@ -2,12 +2,11 @@
 import React from "react";
 import {
   Card,
-  CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
 import { useRecoilState } from "recoil";
 import didState from "@/atoms/didData";
 import { CopyIcon } from "@radix-ui/react-icons";
@@ -28,35 +27,45 @@ const OrganizationBanner = () => {
   return (
     <div className="grid grid-cols-2 gap-8 m-8">
       <Card className=" text-emerald-900 bg-emerald-50">
-        <CardHeader className="flex flex-col justify-between ">
-          <div className="">
-            <CardTitle>DID</CardTitle>
-            <div className="flex">
-              <CardDescription>{formattedDid}</CardDescription>
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger>
-                    <div
-                      className="cursor-pointer ml-2 mr-4 h-8 text-md"
-                      onClick={handleCopyToClipboard}
-                    >
-                      <CopyIcon />
-                    </div>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Copy DID</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
+        <CardHeader className="grid grid-cols-2 justify-between ">
+          <div>
+            <div className="">
+              <CardTitle>DID :</CardTitle>
+              <div className="flex">
+                <CardDescription>{formattedDid}</CardDescription>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <div
+                        className="cursor-pointer ml-2 mr-4 h-8 text-md"
+                        onClick={handleCopyToClipboard}
+                      >
+                        <CopyIcon />
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Copy DID</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </div>
+            </div>
+            <div className="mt-2">
+              <CardTitle>Organization Name</CardTitle>
+              <CardDescription>{didData.name}</CardDescription>
             </div>
           </div>
           <div>
-            <CardTitle>Organization Name</CardTitle>
-            <CardDescription>{didData.name}</CardDescription>
-          </div>
-          <div>
-            <CardTitle>Y.O.E.</CardTitle>
-            <CardDescription>{didData.year}</CardDescription>
+            <div>
+              <CardTitle>Year of Establishment</CardTitle>
+              <CardDescription>{didData.year}</CardDescription>
+            </div>
+            <div className="mt-2">
+              <CardTitle>Type</CardTitle>
+              <CardDescription>
+                <Badge className="mt-1">{didData.userType}</Badge>
+              </CardDescription>
+            </div>
           </div>
         </CardHeader>
       </Card>

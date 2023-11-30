@@ -53,39 +53,46 @@ import {
 
 const data = [
   {
-    id: "m5gr84i9",
-    healthrecordName: "success",
-    healthrecordCategory: "mri",
+    id: "",
+    healthrecordName: "KFT",
+    healthrecordCategory: "pathology",
     date: "1-1-2023",
   },
   {
-    id: "m5gr84i9",
-    healthrecordName: "abc",
-    healthrecordCategory: "mri",
+    id: "",
+    healthrecordName: "Electroencephalogram",
+    healthrecordCategory: "neurology",
     date: "1-1-2023",
   },
   {
-    id: "m5gr84i9",
-    healthrecordName: "def",
-    healthrecordCategory: "mri",
+    id: "",
+    healthrecordName: "Brain MRI ",
+    healthrecordCategory: "neurology",
     date: "1-1-2023",
   },
   {
-    id: "m5gr84i9",
-    healthrecordName: "def",
-    healthrecordCategory: "cbc",
+    id: "",
+    healthrecordName: "ECG",
+    healthrecordCategory: "cardiology",
     date: "1-1-2023",
   },
   {
-    id: "m5gr84i9",
-    healthrecordName: "def",
-    healthrecordCategory: "cbc",
+    id: "",
+    healthrecordName: "CECT",
+    healthrecordCategory: "radiology",
+    date: "1-1-2023",
+  },
+
+  {
+    id: "",
+    healthrecordName: "X-Ray",
+    healthrecordCategory: "radiology",
     date: "1-1-2023",
   },
   {
-    id: "m5gr84i9",
-    healthrecordName: "def",
-    healthrecordCategory: "cect",
+    id: "",
+    healthrecordName: "CBC",
+    healthrecordCategory: "pathology",
     date: "1-1-2023",
   },
 ];
@@ -172,18 +179,23 @@ const columns = [
 //schema for the healthrecord category filter
 const healthrecordCategory = [
   {
-    value: "mri",
-    label: "Mri",
+    value: "radiology",
+    label: "Radiology",
     icon: QuestionMarkCircledIcon,
   },
   {
-    value: "cect",
-    label: "Cect",
+    value: "pathology",
+    label: "Pathology",
     icon: CircleIcon,
   },
   {
-    value: "cbc",
-    label: "Cbc",
+    value: "cardiology",
+    label: "Cardiology",
+    icon: StopwatchIcon,
+  },
+  {
+    value: "neurology",
+    label: "Neurology",
     icon: StopwatchIcon,
   },
 ];
@@ -218,6 +230,9 @@ export function UserTable() {
   const isFiltered = table.getState().columnFilters.length > 0;
   return (
     <div className="p-8 ">
+      <div className="text-emerald-900 font-bold text-xl bg-emerald-50 p-2 rounded-lg inline-block">
+        Issued Records
+      </div>
       {/* Table Toolbar  */}
       <div className="flex items-center py-4">
         <div className="flex flex-1 items-center space-x-2">
