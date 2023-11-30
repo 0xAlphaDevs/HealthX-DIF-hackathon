@@ -252,7 +252,6 @@ export function OrganizationTable() {
     receiverDid
   ) => {
     let base64Image = null;
-    console.log("Image File: ", imageFile);
 
     base64Image = await createBase64Image(imageFile);
 
