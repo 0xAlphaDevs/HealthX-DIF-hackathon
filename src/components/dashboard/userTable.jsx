@@ -140,16 +140,22 @@ const columns = [
                 <img
                   src="report.png"
                   alt="Healthrecord Image"
-                  style={{ width: "100%", height: "500px" }}
+                  style={{
+                    width: "100%",
+                    height: "400px",
+                    objectFit: "contain",
+                  }}
                 />
-                <Button
-                  onClick={() =>
-                    router.push(`/viewRecord?imagePath=report.png`)
-                  }
-                  className="bg-emerald-900 text-emerald-50 hover:bg-emerald-500"
-                >
-                  Open Record
-                </Button>
+                <div className="flex justify-center">
+                  <Button
+                    onClick={() =>
+                      router.push(`/viewRecord?imagePath=report.png`)
+                    }
+                    className="bg-emerald-900 text-emerald-50 hover:bg-emerald-500 mt-4"
+                  >
+                    Open Record
+                  </Button>
+                </div>
               </DialogDescription>
             </DialogHeader>
           </DialogContent>
