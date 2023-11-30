@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { useRecoilState } from "recoil";
-import didState from "@/atoms/didData";
+import { didState } from "@/atoms/data";
 import Navbar from "@/components/navbar";
 import UserBanner from "@/components/dashboard/userBanner";
 import { UserTable } from "@/components/dashboard/userTable";

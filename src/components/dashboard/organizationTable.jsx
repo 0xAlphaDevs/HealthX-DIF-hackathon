@@ -70,7 +70,7 @@ import {
   PlusCircledIcon,
 } from "@radix-ui/react-icons";
 import { useRecoilState } from "recoil";
-import didState from "@/atoms/didData";
+import { didState, healthRecordsState } from "@/atoms/data";
 
 const data = [
   {
@@ -201,6 +201,7 @@ export function OrganizationTable() {
   const [rowSelection, setRowSelection] = useState({});
 
   const [didData, setDidData] = useRecoilState(didState);
+  const [healthRecord, setHealthRecord] = useRecoilState(healthRecordsState);
 
   const table = useReactTable({
     data,

@@ -8,7 +8,7 @@ import {
 } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { useRecoilState } from "recoil";
-import didState from "@/atoms/didData";
+import { didState } from "@/atoms/data";
 import { CopyIcon } from "@radix-ui/react-icons";
 import {
   Tooltip,

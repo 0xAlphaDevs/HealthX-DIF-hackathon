@@ -23,6 +23,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { testBase64Image } from "@/helpers/mock";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -149,7 +150,7 @@ const columns = [
                 <div className="flex justify-center">
                   <Button
                     onClick={() =>
-                      router.push(`/viewRecord?imagePath=report.png`)
+                      router.push(`/viewRecord?base64Image=${testBase64Image}`)
                     }
                     className="bg-emerald-900 text-emerald-50 hover:bg-emerald-500 mt-4"
                   >

@@ -7,7 +7,7 @@ import Loader from "../loader";
 import { Web5 } from "@web5/api";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useRecoilState } from "recoil";
-import didState from "@/atoms/didData";
+import { didState } from "@/atoms/data";
 
 const protocolDefinition = {
   protocol: "https://alphadevs.dev/healthX-protocol",

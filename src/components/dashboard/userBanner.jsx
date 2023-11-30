@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { useRecoilState } from "recoil";
-import didState from "@/atoms/didData";
+import { didState } from "@/atoms/data";
 import { CopyIcon } from "@radix-ui/react-icons";
 import { Badge } from "@/components/ui/badge";
 import {
