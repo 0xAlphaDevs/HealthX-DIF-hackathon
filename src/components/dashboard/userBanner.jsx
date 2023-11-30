@@ -29,11 +29,11 @@ const UserBanner = () => {
   return (
     <div className="grid grid-cols-2 gap-8 m-8">
       <Card className=" text-emerald-900 bg-emerald-50">
-        <CardHeader className="grid grid-cols-2 justify-between ">
+        <CardHeader className="grid grid-cols-2 justify-between gap-2 ">
           <div>
             <div className="">
-              <CardTitle>DID :</CardTitle>
-              <div className="flex">
+              <CardTitle className="text-emerald-900">DID </CardTitle>
+              <div className="flex mt-2">
                 <CardDescription>{formattedDid}</CardDescription>
                 <TooltipProvider>
                   <Tooltip>
@@ -53,55 +53,35 @@ const UserBanner = () => {
               </div>
             </div>
             <div className="mt-2">
-              <CardTitle>User Name :</CardTitle>
-              <CardDescription>{didData.name}</CardDescription>
+              <CardTitle className="text-emerald-900">User Name </CardTitle>
+              <CardDescription className="mt-2">{didData.name}</CardDescription>
             </div>
           </div>
           <div>
             <div>
-              <CardTitle>Date of Birth :</CardTitle>
-              <CardDescription>{didData.year}</CardDescription>
+              <CardTitle className="text-emerald-900">Date of Birth </CardTitle>
+              <CardDescription className="mt-2">{didData.year}</CardDescription>
             </div>
-            <div className="mt-4 flex gap-2">
+            <div className="mt-3">
+              <CardTitle className="text-emerald-900">User Type </CardTitle>
               <CardDescription>
-                <Badge className="mt-1">{didData.userType}</Badge>
+                <Badge className="mt-2 text-lg">{didData.userType}</Badge>
               </CardDescription>
             </div>
           </div>
         </CardHeader>
       </Card>
       <Card className=" text-emerald-900 bg-emerald-50">
-        {/* <CardHeader className="flex flex-col justify-between ">
-          <div className="">
-            <CardTitle>DID</CardTitle>
-            <div className="flex">
-              <CardDescription>{formattedDid}</CardDescription>
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger>
-                    <div
-                      className="cursor-pointer ml-2 mr-4 h-8 text-md"
-                      onClick={handleCopyToClipboard}
-                    >
-                      <CopyIcon />
-                    </div>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Copy DID</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            </div>
+        <div className="grid grid-cols-2 justify-center h-full">
+          <div className="flex flex-col items-center justify-center">
+            <dt class="mb-2 text-3xl font-extrabold">73M+</dt>
+            <dd class="text-gray-500 dark:text-gray-400">Health Records</dd>
           </div>
-          <div>
-            <CardTitle>User Name</CardTitle>
-            <CardDescription>{didData.name}</CardDescription>
+          <div class="flex flex-col items-center justify-center">
+            <dt class="mb-2 text-3xl font-extrabold">100M+</dt>
+            <dd class="text-gray-500 dark:text-gray-400">Issuers</dd>
           </div>
-          <div>
-            <CardTitle>D.O.B.</CardTitle>
-            <CardDescription>{didData.year}</CardDescription>
-          </div>
-        </CardHeader> */}
+        </div>
       </Card>
     </div>
   );

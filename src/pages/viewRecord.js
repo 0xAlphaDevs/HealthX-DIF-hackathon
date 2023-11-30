@@ -12,7 +12,6 @@ const ViewHealthRecord = () => {
 
   useEffect(() => {
     // get base64 image from atom state
-
     console.log("Base 64 image :", base64Image);
     setImage(base64Image);
   }, []);

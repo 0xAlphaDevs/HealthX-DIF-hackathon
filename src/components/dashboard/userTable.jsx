@@ -253,7 +253,7 @@ export function UserTable() {
   const isFiltered = table.getState().columnFilters.length > 0;
   return (
     <div className="p-8 ">
-      <div className="text-emerald-900 font-bold text-xl bg-emerald-50 p-2 rounded-lg inline-block">
+      <div className="text-emerald-900 font-bold text-2xl bg-emerald-50 p-4 rounded-lg inline-block">
         Issued Records
       </div>
       {/* Table Toolbar  */}
