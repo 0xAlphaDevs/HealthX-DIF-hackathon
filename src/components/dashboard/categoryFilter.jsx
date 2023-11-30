@@ -23,7 +23,7 @@ import { Separator } from "@/components/ui/separator";
 
 function CategoryFilter({ column, title, options }) {
   const facets = column?.getFacetedUniqueValues();
-  const selectedValues = new Set(column?.getFilterValue() || []);
+  const selectedValues = new Set(column?.getFilterValue());
   const [isOpen, setIsOpen] = useState(false);
 
   const togglePopover = () => {

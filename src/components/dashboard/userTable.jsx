@@ -54,37 +54,37 @@ const data = [
   {
     id: "m5gr84i9",
     healthrecordName: "success",
-    healthrecordCategory: "MRI",
+    healthrecordCategory: "mri",
     date: "1-1-2023",
   },
   {
     id: "m5gr84i9",
     healthrecordName: "abc",
-    healthrecordCategory: "MRI",
+    healthrecordCategory: "mri",
     date: "1-1-2023",
   },
   {
     id: "m5gr84i9",
     healthrecordName: "def",
-    healthrecordCategory: "MRI",
+    healthrecordCategory: "mri",
     date: "1-1-2023",
   },
   {
     id: "m5gr84i9",
     healthrecordName: "def",
-    healthrecordCategory: "CBC",
+    healthrecordCategory: "cbc",
     date: "1-1-2023",
   },
   {
     id: "m5gr84i9",
     healthrecordName: "def",
-    healthrecordCategory: "CBC",
+    healthrecordCategory: "cbc",
     date: "1-1-2023",
   },
   {
     id: "m5gr84i9",
     healthrecordName: "def",
-    healthrecordCategory: "CECT",
+    healthrecordCategory: "cect",
     date: "1-1-2023",
   },
 ];
@@ -103,6 +103,9 @@ const columns = [
     cell: ({ row }) => (
       <div className="capitalize">{row.getValue("healthrecordCategory")}</div>
     ),
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
+    },
   },
 
   {
@@ -166,20 +169,20 @@ const columns = [
 ];
 
 //schema for the healthrecord category filter
-export const healthrecordCategory = [
+const healthrecordCategory = [
   {
     value: "mri",
-    label: "MRI",
+    label: "Mri",
     icon: QuestionMarkCircledIcon,
   },
   {
     value: "cect",
-    label: "CECT",
+    label: "Cect",
     icon: CircleIcon,
   },
   {
     value: "cbc",
-    label: "cbc",
+    label: "Cbc",
     icon: StopwatchIcon,
   },
 ];
@@ -194,26 +197,28 @@ export function UserTable() {
   const table = useReactTable({
     data,
     columns,
+    state: {
+      sorting,
+      columnVisibility,
+      rowSelection,
+      columnFilters,
+    },
+    enableRowSelection: true,
+    onRowSelectionChange: setRowSelection,
     onSortingChange: setSorting,
     onColumnFiltersChange: setColumnFilters,
+    onColumnVisibilityChange: setColumnVisibility,
     getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: getFilteredRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
-    getFilteredRowModel: getFilteredRowModel(),
-    onColumnVisibilityChange: setColumnVisibility,
-    onRowSelectionChange: setRowSelection,
-    state: {
-      sorting,
-      columnFilters,
-      columnVisibility,
-      rowSelection,
-    },
   });
 
   return (
     <div className="p-8 ">
+      {/* Table Toolbar 🟡 */}
       <div className="flex items-center py-4">
         <div className="flex flex-1 items-center space-x-2">
           {" "}
@@ -274,6 +279,7 @@ export function UserTable() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
+      {/* Table */}
       <div className="rounded-md border bg-emerald-50">
         <Table>
           <TableHeader>
