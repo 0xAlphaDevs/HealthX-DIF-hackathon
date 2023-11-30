@@ -29,7 +29,7 @@ const protocolDefinition = {
   },
 };
 
-export default function CreateDid({ name, year }) {
+export default function CreateDid({ name, year, userType }) {
   const router = useRouter();
   const [web5, setWeb5] = useState(null);
   const [myDid, setMyDid] = useState(null);
@@ -132,7 +132,7 @@ export default function CreateDid({ name, year }) {
     setText("DID created successfully!");
     setLoading(false);
     // update recoil state
-    setDidData({ did: did, name: name, year: year });
+    setDidData({ did: did, name: name, year: year, userType: userType });
     router.push("/dashboard");
   }
 

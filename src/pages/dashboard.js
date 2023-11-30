@@ -10,14 +10,25 @@ import { OrganizationTable } from "@/components/dashboard/organizationTable";
 
 const MyDashboard = () => {
   const [didData, setDidData] = useRecoilState(didState);
+  console.log(didData);
+
+  const isUser = didData.userType.includes("individual");
 
   return (
     <>
       <Navbar />
-      <UserBanner />
-      <UserTable />
-      <OrganizationBanner />
-      <OrganizationTable />
+      {isUser ? (
+        <>
+          <UserBanner />
+          <UserTable />
+        </>
+      ) : (
+        <>
+          <OrganizationBanner />
+          <OrganizationTable />
+        </>
+      )}
+
       {/* <div className="mt-4">
         <div>MyDashboard : {didData.did}</div>
         <div>Name : {didData.name}</div>
