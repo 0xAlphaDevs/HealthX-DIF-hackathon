@@ -66,7 +66,11 @@ import {
   QuestionMarkCircledIcon,
   StopwatchIcon,
   Cross2Icon,
+  PlusIcon,
+  PlusCircledIcon,
 } from "@radix-ui/react-icons";
+import { useRecoilState } from "recoil";
+import didState from "@/atoms/didData";
 
 const data = [
   {
@@ -196,6 +200,8 @@ export function OrganizationTable() {
   const [columnVisibility, setColumnVisibility] = useState({});
   const [rowSelection, setRowSelection] = useState({});
 
+  const [didData, setDidData] = useRecoilState(didState);
+
   const table = useReactTable({
     data,
     columns,
@@ -216,6 +222,76 @@ export function OrganizationTable() {
       rowSelection,
     },
   });
+
+  const [healthrecordData, setHealthrecordData] = useState({
+    patientDid: "",
+    healthRecordName: "",
+    category: "",
+    file: "",
+  });
+
+  // construct health Record
+  const constructHealthRecord = async (
+    senderDid,
+    healthRecordName,
+    healthRecordCategory,
+    imageFile,
+    receiverDid
+  ) => {
+    let base64Image = null;
+
+    if (imageFile) {
+      const binaryImage = await imageFile.arrayBuffer();
+      base64Image = btoa(
+        new Uint8Array(binaryImage).reduce(
+          (data, byte) => data + String.fromCharCode(byte),
+          ""
+        )
+      );
+    }
+    const currentDate = new Date().toLocaleDateString();
+    const currentTime = new Date().toLocaleTimeString();
+
+    const healthRecord = {
+      sender: senderDid,
+      healthRecordName: healthRecordName,
+      healthRecordCategory: healthRecordCategory,
+      image: base64Image,
+      recipient: receiverDid,
+      issuedOn: `${currentDate} ${currentTime}`,
+    };
+    return healthRecord;
+  };
+
+  // send health record 🟡
+  async function sendHealthRecord(receiverDid) {
+    // construct health record here - will need to pass all arguments from form
+    const healthRecord = await constructHealthRecord(
+      didData.did,
+      healthrecordData.healthRecordName,
+      healthrecordData.category,
+      healthrecordData.file,
+      healthrecordData.patientDid
+    );
+
+    console.log("Healthrecord Data: ", healthRecord);
+    // const { record } = await web5.dwn.records.create({
+    //   data: healthRecord,
+    //   message: {
+    //     schema: "haalthRecord",
+    //     dataFormat: "application/json",
+    //   },
+    // });
+    // const { status } = await record.send(receiverDid);
+    // console.log("Record sent status : ", status);
+  }
+
+  function handleHealthRecordIssue(event) {
+    event.preventDefault();
+    console.log("Creating record...");
+    sendHealthRecord(healthrecordData.patientDid);
+  }
+
   const isFiltered = table.getState().columnFilters.length > 0;
   return (
     <div className="p-8 ">
@@ -225,16 +301,18 @@ export function OrganizationTable() {
         </div>
         <div>
           {" "}
+          {/* Modal */}
           <Dialog>
             <DialogTrigger>
               <Button className="bg-emerald-900 text-emerald-50 hover:bg-emerald-500">
-                Issue DID
+                <PlusCircledIcon className="mt-0.5" />
+                <span className="w-2"> </span>Issue Record
               </Button>
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
                 <DialogTitle className="text-emerald-900">
-                  Issue a Healthrecord.
+                  Issue a Health Record.
                 </DialogTitle>
                 <DialogDescription>
                   <Card className="p-2 border-emerald-800 bg-emerald-50 ">
@@ -247,46 +325,70 @@ export function OrganizationTable() {
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <form>
+                      <form onSubmit={handleHealthRecordIssue}>
                         <div className="grid w-full items-center gap-4">
                           <div className="flex flex-col space-y-1.5">
-                            <Label htmlFor="name" className="text-emerald-600">
+                            <Label className="text-emerald-600">
                               Patient's DID
                             </Label>
                             <Input
-                              id="name"
+                              value={healthrecordData.patientDid}
+                              onChange={(event) =>
+                                setHealthrecordData({
+                                  ...healthrecordData,
+                                  patientDid: event.target.value,
+                                })
+                              }
                               placeholder="Enter the pateint's DID"
                               className="border border-emerald-300"
                             />
                           </div>
                           <div className="flex flex-col space-y-1.5">
-                            <Label htmlFor="name" className="text-emerald-600">
+                            <Label className="text-emerald-600">
                               Healthrecord Name
                             </Label>
                             <Input
-                              id="name"
+                              value={healthrecordData.healthRecordName}
+                              onChange={(event) =>
+                                setHealthrecordData({
+                                  ...healthrecordData,
+                                  healthRecordName: event.target.value,
+                                })
+                              }
                               placeholder="Enter the healthrecord name"
                               className="border border-emerald-300"
                             />
                           </div>
                           <div className="flex flex-col space-y-1.5">
-                            <Label htmlFor="name" className="text-emerald-600">
+                            <Label className="text-emerald-600">
                               Healthrecord Category
                             </Label>
-                            <Select>
+                            <Select
+                              placeholder="Select a category"
+                              onValueChange={(value) =>
+                                setHealthrecordData({
+                                  ...healthrecordData,
+                                  category: value,
+                                })
+                              }
+                              className="border border-emerald-300"
+                            >
                               <SelectTrigger className="">
                                 <SelectValue placeholder="Select a category" />
                               </SelectTrigger>
                               <SelectContent>
                                 <SelectGroup>
-                                  <SelectItem value="radiology">
+                                  <SelectItem value="Cardiology">
+                                    Cardiology
+                                  </SelectItem>
+                                  <SelectItem value="Pathology">
+                                    Pathology
+                                  </SelectItem>
+                                  <SelectItem value="Neurology">
+                                    Neurology
+                                  </SelectItem>
+                                  <SelectItem value="Radiology">
                                     Radiology
-                                  </SelectItem>
-                                  <SelectItem value="pathalogy">
-                                    Pathalogy
-                                  </SelectItem>
-                                  <SelectItem value="laboratory">
-                                    Laboratory
                                   </SelectItem>
                                 </SelectGroup>
                               </SelectContent>
@@ -298,19 +400,25 @@ export function OrganizationTable() {
                             </Label>
                             <Input
                               type="file"
-                              accept="image/png"
+                              onChange={(event) =>
+                                setHealthrecordData({
+                                  ...healthrecordData,
+                                  file: event.target.files[0],
+                                })
+                              }
+                              accept="image/*"
                               placeholder="Choose file"
                               className="border border-emerald-300"
                             />
                           </div>
                         </div>
+                        <div className="flex justify-center">
+                          <Button className="bg-emerald-600 hover:bg-emerald-400 mt-2 ">
+                            Issue
+                          </Button>
+                        </div>
                       </form>
                     </CardContent>
-                    <CardFooter className="flex justify-center">
-                      <Button className="bg-emerald-600 hover:bg-emerald-400">
-                        Issue
-                      </Button>
-                    </CardFooter>
                   </Card>
                 </DialogDescription>
               </DialogHeader>
