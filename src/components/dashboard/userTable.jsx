@@ -5,6 +5,8 @@ import {
   ColumnFiltersState,
   SortingState,
   VisibilityState,
+  getFacetedRowModel,
+  getFacetedUniqueValues,
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -187,6 +189,7 @@ export function UserTable() {
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
   const [rowSelection, setRowSelection] = useState({});
+  // const isFiltered = table.getState().columnFilters.length > 0;
 
   const table = useReactTable({
     data,
@@ -196,6 +199,8 @@ export function UserTable() {
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    getFacetedRowModel: getFacetedRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
     getFilteredRowModel: getFilteredRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onRowSelectionChange: setRowSelection,
@@ -230,6 +235,16 @@ export function UserTable() {
               options={healthrecordCategory}
             />
           )}
+          {/* {isFiltered && (
+            <Button
+              variant="ghost"
+              onClick={() => table.resetColumnFilters()}
+              className="h-8 px-2 lg:px-3"
+            >
+              Reset
+              <Cross2Icon className="ml-2 h-4 w-4" />
+            </Button>
+          )} */}
         </div>
 
         <DropdownMenu>
