@@ -153,7 +153,7 @@ const columns = [
       return (
         <Dialog>
           <DialogTrigger>
-            <Button className="bg-emerald-900 text-emerald-50 hover:bg-emerald-500">
+            <Button className="bg-cyan-900 text-cyan-50 hover:bg-cyan-500">
               View
             </Button>
           </DialogTrigger>
@@ -302,7 +302,7 @@ export function OrganizationTable() {
   return (
     <div className="p-8 ">
       <div className="flex justify-between">
-        <div className="text-emerald-900 font-bold text-xl bg-emerald-50 p-2 rounded-lg">
+        <div className="text-cyan-900 font-bold text-xl bg-cyan-50 p-2 rounded-lg">
           Issued Records
         </div>
         <div>
@@ -310,23 +310,23 @@ export function OrganizationTable() {
           {/* Modal */}
           <Dialog>
             <DialogTrigger>
-              <Button className="bg-emerald-900 text-emerald-50 hover:bg-emerald-500">
+              <Button className="bg-cyan-900 text-cyan-50 hover:bg-cyan-500">
                 <PlusCircledIcon className="mt-0.5" />
                 <span className="w-2"> </span>Issue Record
               </Button>
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle className="text-emerald-900">
+                <DialogTitle className="text-cyan-900">
                   Issue a Health Record.
                 </DialogTitle>
                 <DialogDescription>
-                  <Card className="p-2 border-emerald-800 bg-emerald-50 ">
+                  <Card className="p-2 border-cyan-800 bg-cyan-50 ">
                     <CardHeader>
-                      {/* <CardTitle className="text-emerald-600">
+                      {/* <CardTitle className="text-cyan-600">
                         Create project
                       </CardTitle> */}
-                      <CardDescription className="text-emerald-600">
+                      <CardDescription className="text-cyan-600">
                         Enter details to issue a healthrecord.
                       </CardDescription>
                     </CardHeader>
@@ -334,7 +334,7 @@ export function OrganizationTable() {
                       <form onSubmit={handleHealthRecordIssue}>
                         <div className="grid w-full items-center gap-4">
                           <div className="flex flex-col space-y-1.5">
-                            <Label className="text-emerald-600">
+                            <Label className="text-cyan-600">
                               Patient's DID
                             </Label>
                             <Input
@@ -346,11 +346,11 @@ export function OrganizationTable() {
                                 })
                               }
                               placeholder="Enter the pateint's DID"
-                              className="border border-emerald-300"
+                              className="border border-cyan-300"
                             />
                           </div>
                           <div className="flex flex-col space-y-1.5">
-                            <Label className="text-emerald-600">
+                            <Label className="text-cyan-600">
                               Healthrecord Name
                             </Label>
                             <Input
@@ -362,11 +362,11 @@ export function OrganizationTable() {
                                 })
                               }
                               placeholder="Enter the healthrecord name"
-                              className="border border-emerald-300"
+                              className="border border-cyan-300"
                             />
                           </div>
                           <div className="flex flex-col space-y-1.5">
-                            <Label className="text-emerald-600">
+                            <Label className="text-cyan-600">
                               Healthrecord Category
                             </Label>
                             <Select
@@ -377,7 +377,7 @@ export function OrganizationTable() {
                                   category: value,
                                 })
                               }
-                              className="border border-emerald-300"
+                              className="border border-cyan-300"
                             >
                               <SelectTrigger className="">
                                 <SelectValue placeholder="Select a category" />
@@ -401,7 +401,7 @@ export function OrganizationTable() {
                             </Select>
                           </div>
                           <div className="flex flex-col space-y-1.5">
-                            <Label className="text-emerald-600">
+                            <Label className="text-cyan-600">
                               Upload Record
                             </Label>
                             <Input
@@ -414,12 +414,12 @@ export function OrganizationTable() {
                               }
                               accept="image/png"
                               placeholder="Choose file"
-                              className="border border-emerald-300"
+                              className="border border-cyan-300"
                             />
                           </div>
                         </div>
                         <div className="flex justify-center">
-                          <Button className="bg-emerald-600 hover:bg-emerald-400 mt-2 ">
+                          <Button className="bg-cyan-600 hover:bg-cyan-400 mt-2 ">
                             Issue
                           </Button>
                         </div>
@@ -444,7 +444,7 @@ export function OrganizationTable() {
                 .getColumn("healthrecordName")
                 ?.setFilterValue(event.target.value)
             }
-            className="max-w-sm bg-emerald-50"
+            className="max-w-sm bg-cyan-50"
           />
           {/* categoryFilter UI */}
           {table.getColumn("healthrecordCategory") && (
@@ -493,7 +493,7 @@ export function OrganizationTable() {
           </DropdownMenuContent>
         </DropdownMenu>
       </div>
-      <div className="rounded-md border bg-emerald-50">
+      <div className="rounded-md border bg-cyan-50">
         <Table>
           <TableHeader>
             {table.getHeaderGroups().map((headerGroup) => (

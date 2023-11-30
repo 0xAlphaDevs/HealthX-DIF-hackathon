@@ -19,24 +19,29 @@ const Navbar = () => {
   function handleCopyToClipboard() {
     navigator.clipboard.writeText(didData.did);
   }
-
+  const bgColor =
+    didData.userType === "organization" ? "bg-cyan-600" : "bg-emerald-800";
+  const textColor =
+    didData.userType === "organization" ? "text-cyan-100" : "text-emerald-100";
+  const badgeColor =
+    didData.userType === "organization" ? "bg-cyan-100" : "bg-emerald-100";
   return (
-    <div className="p-2 bg-emerald-800 flex justify-between">
+    <div className={`p-2 ${bgColor} flex justify-between`}>
       <div className="flex gap-2 items-center">
         <Avatar>
           <AvatarImage src="favicon.svg" alt="@shadcn" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>
-        <p className="font-bold text-emerald-100 text-xl">HealthX</p>
+        <p className={`font-bold ${textColor} text-xl`}>HealthX</p>
       </div>
 
       <div>
-        <Badge className="h-8 text-md">{formattedDid}</Badge>
+        <Badge className={`h-8 ${badgeColor} text-md`}>{formattedDid}</Badge>
         <TooltipProvider>
           <Tooltip>
             <TooltipTrigger>
               <Badge
-                className="cursor-pointer ml-2 mr-4 h-8 text-md"
+                className={`cursor-pointer ml-2 mr-4 h-8 text-md ${badgeColor}`}
                 onClick={handleCopyToClipboard}
               >
                 <CopyIcon />

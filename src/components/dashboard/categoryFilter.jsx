@@ -36,7 +36,7 @@ function CategoryFilter({ column, title, options }) {
         <Button
           variant="outline"
           size="sm"
-          className="bg-emerald-50"
+          className="bg-cyan-50"
           onClick={togglePopover}
         >
           <PlusCircledIcon className="mr-2 h-4 w-4" />
