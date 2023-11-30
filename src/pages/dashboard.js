@@ -10,7 +10,6 @@ import { OrganizationTable } from "@/components/dashboard/organizationTable";
 
 const MyDashboard = () => {
   const [didData, setDidData] = useRecoilState(didState);
-  console.log(didData);
 
   const isUser = didData.userType.includes("individual");
 

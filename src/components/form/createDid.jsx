@@ -10,20 +10,20 @@ import { useRecoilState } from "recoil";
 import didState from "@/atoms/didData";
 
 const protocolDefinition = {
-  protocol: "dinger-chat-protocol",
+  protocol: "https://alphadevs.dev/healthX-protocol",
   published: true,
   types: {
-    ding: {
-      schema: "ding",
+    healthRecord: {
+      schema: "healthRecord",
       dataFormats: ["application/json"],
     },
   },
   structure: {
-    ding: {
+    healthRecord: {
       $actions: [
         { who: "anyone", can: "write" },
-        { who: "author", of: "ding", can: "read" },
-        { who: "recipient", of: "ding", can: "read" },
+        { who: "author", of: "healthRecord", can: "read" },
+        { who: "recipient", of: "healthRecord", can: "read" },
       ],
     },
   },
@@ -66,47 +66,68 @@ export default function CreateDid({ name, year, userType }) {
     return did;
   }
 
-  // construct ding
-  const constructDing = () => {
+  // construct health Record 🟡
+  const constructHealthRecord = async (
+    senderDid,
+    healthRecordName,
+    healthRecordCategory,
+    imageFile,
+    receiverDid
+  ) => {
+    let base64Image = null;
+
+    if (imageFile) {
+      const binaryImage = await imageFile.arrayBuffer();
+      base64Image = btoa(
+        new Uint8Array(binaryImage).reduce(
+          (data, byte) => data + String.fromCharCode(byte),
+          ""
+        )
+      );
+    }
     const currentDate = new Date().toLocaleDateString();
     const currentTime = new Date().toLocaleTimeString();
-    const ding = {
-      sender: myDid,
-      note: "Test message 3",
-      recipient: recipientDid,
-      timestampWritten: `${currentDate} ${currentTime}`,
+
+    const healthRecord = {
+      sender: senderDid,
+      healthRecordName: healthRecordName,
+      healthRecordCategory: healthRecordCategory,
+      image: base64Image,
+      recipient: receiverDid,
+      issuedOn: `${currentDate} ${currentTime}`,
     };
-    return ding;
+    return healthRecord;
   };
 
-  // write a record
-  async function writeRecord(receiverDid) {
-    const ding = constructDing();
+  // send health record 🟡
+  async function sendHealthRecord(receiverDid) {
+    // construct health record here
+    const healthRecord = constructHealthRecord();
     const { record } = await web5.dwn.records.create({
-      data: ding,
+      data: healthRecord,
       message: {
-        protocol: "dinger-chat-protocol",
-        protocolPath: "ding",
-        schema: "ding",
-        recipient: receiverDid,
+        schema: "haalthRecord",
+        dataFormat: "application/json",
       },
     });
     const { status } = await record.send(receiverDid);
-    console.log("Send record status", status);
+    console.log("Record sent status : ", status);
   }
 
-  // read a record
-
-  const fetchDings = async (web5, did) => {
+  // fetch health records 🟡
+  const fetchHealthRecords = async (web5, did) => {
     const { records, status: recordStatus } = await web5.dwn.records.query({
       message: {
         filter: {
-          protocol: "dinger-chat-protocol",
-          protocolPath: "ding",
+          protocol: "https://alphadevs.dev/healthX-protocol",
+          protocolPath: "healthRecord",
         },
         dateSort: "createdAscending",
       },
     });
+
+    let receivedRecords = [];
+    let sentRecords = [];
 
     try {
       const results = await Promise.all(
@@ -114,14 +135,16 @@ export default function CreateDid({ name, year, userType }) {
       );
 
       if (recordStatus.code == 200) {
-        const received = results.filter((result) => result?.recipient === did);
-        const sent = results.filter((result) => result?.sender === did);
-        console.log("Received", received);
-        console.log("Sent", sent);
+        receivedRecords = results.filter((result) => result?.recipient === did);
+        sentRecords = results.filter((result) => result?.sender === did);
+        console.log("Received Health Records", receivedRecords);
+        console.log("Sent Health Records", sentRecords);
       }
     } catch (error) {
       console.error(error);
     }
+
+    return { receivedRecords, sentRecords };
   };
 
   async function handleClick() {
@@ -161,26 +184,6 @@ export default function CreateDid({ name, year, userType }) {
         )}
       </Button>
       <br />
-
-      {/* <Button
-        onClick={() => {
-          writeRecord(recipientDid);
-        }}
-        className="w-32"
-      >
-        Send Message
-      </Button>
-
-      <br />
-
-      <Button
-        onClick={() => {
-          fetchDings(web5, myDid);
-        }}
-        className="w-32"
-      >
-        Show Message
-      </Button> */}
     </div>
   );
 }
