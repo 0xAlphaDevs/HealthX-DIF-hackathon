@@ -50,7 +50,7 @@ import {
   StopwatchIcon,
   Cross2Icon,
 } from "@radix-ui/react-icons";
-
+import { useRouter } from "next/router";
 const data = [
   {
     id: "",
@@ -125,7 +125,7 @@ const columns = [
   {
     id: "view",
     cell: ({ row }) => {
-      const payment = row.original;
+      const router = useRouter();
       return (
         <Dialog>
           <DialogTrigger>
@@ -142,6 +142,14 @@ const columns = [
                   alt="Healthrecord Image"
                   style={{ width: "100%", height: "500px" }}
                 />
+                <Button
+                  onClick={() =>
+                    router.push(`/viewRecord?imagePath=report.png`)
+                  }
+                  className="bg-emerald-900 text-emerald-50 hover:bg-emerald-500"
+                >
+                  Open Record
+                </Button>
               </DialogDescription>
             </DialogHeader>
           </DialogContent>
@@ -149,31 +157,31 @@ const columns = [
       );
     },
   },
-  {
-    accessorKey: "share",
-    header: () => <div className="text-right"></div>,
-    cell: () => {
-      return (
-        <Dialog>
-          <DialogTrigger>
-            {" "}
-            <Button className="bg-emerald-900 text-emerald-50 hover:bg-emerald-500">
-              Share
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Are you sure absolutely sure?</DialogTitle>
-              <DialogDescription>
-                This action cannot be undone. This will permanently delete your
-                account and remove your data from our servers.
-              </DialogDescription>
-            </DialogHeader>
-          </DialogContent>
-        </Dialog>
-      );
-    },
-  },
+  // {
+  //   accessorKey: "share",
+  //   header: () => <div className="text-right"></div>,
+  //   cell: () => {
+  //     return (
+  //       <Dialog>
+  //         <DialogTrigger>
+  //           {" "}
+  //           <Button className="bg-emerald-900 text-emerald-50 hover:bg-emerald-500">
+  //             Share
+  //           </Button>
+  //         </DialogTrigger>
+  //         <DialogContent>
+  //           <DialogHeader>
+  //             <DialogTitle>Are you sure absolutely sure?</DialogTitle>
+  //             <DialogDescription>
+  //               This action cannot be undone. This will permanently delete your
+  //               account and remove your data from our servers.
+  //             </DialogDescription>
+  //           </DialogHeader>
+  //         </DialogContent>
+  //       </Dialog>
+  //     );
+  //   },
+  // },
 ];
 
 //schema for the healthrecord category filter
