@@ -48,6 +48,7 @@ import {
   CircleIcon,
   QuestionMarkCircledIcon,
   StopwatchIcon,
+  Cross2Icon,
 } from "@radix-ui/react-icons";
 
 const data = [
@@ -192,7 +193,6 @@ export function UserTable() {
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
   const [rowSelection, setRowSelection] = useState({});
-  // const isFiltered = table.getState().columnFilters.length > 0;
 
   const table = useReactTable({
     data,
@@ -215,7 +215,7 @@ export function UserTable() {
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
-
+  const isFiltered = table.getState().columnFilters.length > 0;
   return (
     <div className="p-8 ">
       {/* Table Toolbar 🟡 */}
@@ -240,7 +240,7 @@ export function UserTable() {
               options={healthrecordCategory}
             />
           )}
-          {/* {isFiltered && (
+          {isFiltered && (
             <Button
               variant="ghost"
               onClick={() => table.resetColumnFilters()}
@@ -249,7 +249,7 @@ export function UserTable() {
               Reset
               <Cross2Icon className="ml-2 h-4 w-4" />
             </Button>
-          )} */}
+          )}
         </div>
 
         <DropdownMenu>
