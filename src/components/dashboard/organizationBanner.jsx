@@ -2,14 +2,16 @@
 import React from "react";
 import {
   Card,
+  CardContent,
   CardDescription,
+  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Badge } from "@/components/ui/badge";
 import { useRecoilState } from "recoil";
 import { didState } from "@/atoms/data";
 import { CopyIcon } from "@radix-ui/react-icons";
+import { Badge } from "@/components/ui/badge";
 import {
   Tooltip,
   TooltipContent,
@@ -27,11 +29,11 @@ const OrganizationBanner = () => {
   return (
     <div className="grid grid-cols-2 gap-8 p-8">
       <Card className=" text-cyan-900 bg-cyan-50">
-        <CardHeader className="grid grid-cols-2 justify-between ">
+        <CardHeader className="grid grid-cols-2 justify-between gap-2 ">
           <div>
             <div className="">
-              <CardTitle>DID :</CardTitle>
-              <div className="flex">
+              <CardTitle className="text-cyan-900">DID </CardTitle>
+              <div className="flex mt-2">
                 <CardDescription>{formattedDid}</CardDescription>
                 <TooltipProvider>
                   <Tooltip>
@@ -51,19 +53,23 @@ const OrganizationBanner = () => {
               </div>
             </div>
             <div className="mt-2">
-              <CardTitle>Organization Name</CardTitle>
-              <CardDescription>{didData.name}</CardDescription>
+              <CardTitle className="text-cyan-900">
+                Organization Name{" "}
+              </CardTitle>
+              <CardDescription className="mt-2">{didData.name}</CardDescription>
             </div>
           </div>
           <div>
             <div>
-              <CardTitle>Year of Establishment</CardTitle>
-              <CardDescription>{didData.year}</CardDescription>
+              <CardTitle className="text-cyan-900">
+                Year of Establishment{" "}
+              </CardTitle>
+              <CardDescription className="mt-2">{didData.year}</CardDescription>
             </div>
-            <div className="mt-2">
-              <CardTitle>Type</CardTitle>
+            <div className="mt-3">
+              <CardTitle className="text-cyan-900">User Type </CardTitle>
               <CardDescription>
-                <Badge className="mt-1 bg-cyan-200 hover:bg-cyan-200 text-cyan-900 ">
+                <Badge className="mt-2 text-lg bg-cyan-200 hover:bg-cyan-200">
                   {didData.userType}
                 </Badge>
               </CardDescription>
@@ -72,37 +78,16 @@ const OrganizationBanner = () => {
         </CardHeader>
       </Card>
       <Card className=" text-cyan-900 bg-cyan-50">
-        {/* <CardHeader className="flex flex-col justify-between ">
-          <div className="">
-            <CardTitle>DID</CardTitle>
-            <div className="flex">
-              <CardDescription>{formattedDid}</CardDescription>
-              <TooltipProvider>
-                <Tooltip>
-                  <TooltipTrigger>
-                    <div
-                      className="cursor-pointer ml-2 mr-4 h-8 text-md"
-                      onClick={handleCopyToClipboard}
-                    >
-                      <CopyIcon />
-                    </div>
-                  </TooltipTrigger>
-                  <TooltipContent>
-                    <p>Copy DID</p>
-                  </TooltipContent>
-                </Tooltip>
-              </TooltipProvider>
-            </div>
+        <div className="grid grid-cols-2 justify-center h-full">
+          <div className="flex flex-col items-center justify-center">
+            <dt class="mb-2 text-3xl font-extrabold">73M+</dt>
+            <dd class="text-gray-500 dark:text-gray-400">Health Records</dd>
           </div>
-          <div>
-            <CardTitle>User Name</CardTitle>
-            <CardDescription>{didData.name}</CardDescription>
+          <div class="flex flex-col items-center justify-center">
+            <dt class="mb-2 text-3xl font-extrabold">100M+</dt>
+            <dd class="text-gray-500 dark:text-gray-400">Issuers</dd>
           </div>
-          <div>
-            <CardTitle>D.O.B.</CardTitle>
-            <CardDescription>{didData.year}</CardDescription>
-          </div>
-        </CardHeader> */}
+        </div>
       </Card>
     </div>
   );

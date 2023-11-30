@@ -302,7 +302,7 @@ export function OrganizationTable() {
   return (
     <div className="p-8 ">
       <div className="flex justify-between">
-        <div className="text-cyan-900 font-bold text-xl bg-cyan-50 p-2 rounded-lg">
+        <div className="text-cyan-900 font-bold text-2xl p-4 bg-cyan-50 rounded-lg">
           Issued Records
         </div>
         <div>

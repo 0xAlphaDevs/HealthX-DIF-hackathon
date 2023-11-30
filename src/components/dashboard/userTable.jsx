@@ -138,7 +138,9 @@ export function UserTable() {
       accessorKey: "healthrecordName",
       header: "Healthrecord Name",
       cell: ({ row }) => (
-        <div className="capitalize">{row.getValue("healthrecordName")}</div>
+        <div className="capitalize text-lg font-semibold">
+          {row.getValue("healthrecordName")}
+        </div>
       ),
     },
     {

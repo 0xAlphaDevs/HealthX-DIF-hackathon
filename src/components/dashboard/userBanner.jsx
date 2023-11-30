@@ -27,7 +27,7 @@ const UserBanner = () => {
     navigator.clipboard.writeText(didData.did);
   }
   return (
-    <div className="grid grid-cols-2 gap-8 m-8">
+    <div className="grid grid-cols-2 gap-8 p-8">
       <Card className=" text-emerald-900 bg-emerald-50">
         <CardHeader className="grid grid-cols-2 justify-between gap-2 ">
           <div>
@@ -65,7 +65,9 @@ const UserBanner = () => {
             <div className="mt-3">
               <CardTitle className="text-emerald-900">User Type </CardTitle>
               <CardDescription>
-                <Badge className="mt-2 text-lg">{didData.userType}</Badge>
+                <Badge className="mt-2 text-lg bg-green-200 hover:bg-green-200">
+                  {didData.userType}
+                </Badge>
               </CardDescription>
             </div>
           </div>
