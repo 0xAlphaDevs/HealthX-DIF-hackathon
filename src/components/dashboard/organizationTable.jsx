@@ -220,8 +220,8 @@ export function OrganizationTable() {
   return (
     <div className="p-8 ">
       <div className="flex justify-between">
-        <div className="text-emerald-900 font-bold text-lg bg-emerald-50 p-2 rounded-lg">
-          Issued DIDs
+        <div className="text-emerald-900 font-bold text-xl bg-emerald-50 p-2 rounded-lg">
+          Issued Records
         </div>
         <div>
           {" "}
@@ -255,7 +255,7 @@ export function OrganizationTable() {
                             </Label>
                             <Input
                               id="name"
-                              placeholder="Name of your project"
+                              placeholder="Enter the pateint's DID"
                               className="border border-emerald-300"
                             />
                           </div>
@@ -265,7 +265,7 @@ export function OrganizationTable() {
                             </Label>
                             <Input
                               id="name"
-                              placeholder="Name of your project"
+                              placeholder="Enter the healthrecord name"
                               className="border border-emerald-300"
                             />
                           </div>
@@ -294,8 +294,14 @@ export function OrganizationTable() {
                           </div>
                           <div className="flex flex-col space-y-1.5">
                             <Label htmlFor="name" className="text-emerald-600">
-                              Add Record
+                              Upload Record
                             </Label>
+                            <Input
+                              id="picture"
+                              type="file"
+                              placeholder="Choose file"
+                              className="border border-emerald-300"
+                            />
                           </div>
                         </div>
                       </form>
