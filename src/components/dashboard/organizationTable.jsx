@@ -56,36 +56,42 @@ const data = [
     healthrecordName: "success",
     healthrecordCategory: "MRI",
     date: "1-1-2023",
+    did: "wjwheuiqh",
   },
   {
     id: "m5gr84i9",
     healthrecordName: "abc",
     healthrecordCategory: "MRI",
     date: "1-1-2023",
+    did: "wjwheuiqh",
   },
   {
     id: "m5gr84i9",
     healthrecordName: "def",
     healthrecordCategory: "MRI",
     date: "1-1-2023",
+    did: "wjwheuiqh",
   },
   {
     id: "m5gr84i9",
     healthrecordName: "def",
     healthrecordCategory: "CBC",
     date: "1-1-2023",
+    did: "wjwheuiqh",
   },
   {
     id: "m5gr84i9",
     healthrecordName: "def",
     healthrecordCategory: "CBC",
     date: "1-1-2023",
+    did: "wjwheuiqh",
   },
   {
     id: "m5gr84i9",
     healthrecordName: "def",
     healthrecordCategory: "CECT",
     date: "1-1-2023",
+    did: "wjwheuiqh",
   },
 ];
 
@@ -93,7 +99,7 @@ const columns = [
   {
     accessorKey: "did",
     header: "Issued to",
-    cell: ({ row }) => <div className="lowercase">{row.getValue("date")}</div>,
+    cell: ({ row }) => <div className="lowercase">{row.getValue("did")}</div>,
   },
   {
     accessorKey: "healthrecordName",
@@ -108,6 +114,9 @@ const columns = [
     cell: ({ row }) => (
       <div className="capitalize">{row.getValue("healthrecordCategory")}</div>
     ),
+    filterFn: (row, id, value) => {
+      return value.includes(row.getValue(id));
+    },
   },
 
   {
@@ -145,7 +154,7 @@ const columns = [
 ];
 
 //schema for the healthrecord category filter
-export const healthrecordCategory = [
+const healthrecordCategory = [
   {
     value: "mri",
     label: "MRI",
@@ -168,7 +177,6 @@ export function OrganizationTable() {
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
   const [rowSelection, setRowSelection] = useState({});
-  // const isFiltered = table.getState().columnFilters.length > 0;
 
   const table = useReactTable({
     data,
@@ -190,7 +198,7 @@ export function OrganizationTable() {
       rowSelection,
     },
   });
-
+  const isFiltered = table.getState().columnFilters.length > 0;
   return (
     <div className="p-8 ">
       <div className="flex items-center py-4">
@@ -214,7 +222,7 @@ export function OrganizationTable() {
               options={healthrecordCategory}
             />
           )}
-          {/* {isFiltered && (
+          {isFiltered && (
             <Button
               variant="ghost"
               onClick={() => table.resetColumnFilters()}
@@ -223,7 +231,7 @@ export function OrganizationTable() {
               Reset
               <Cross2Icon className="ml-2 h-4 w-4" />
             </Button>
-          )} */}
+          )}
         </div>
 
         <DropdownMenu>
