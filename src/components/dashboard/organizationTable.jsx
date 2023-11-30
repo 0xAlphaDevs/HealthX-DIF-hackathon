@@ -231,6 +231,18 @@ export function OrganizationTable() {
     file: "",
   });
 
+  // create base64 image
+  const createBase64Image = async (imageFile) => {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(imageFile);
+      reader.onload = () => {
+        resolve(reader.result);
+      };
+      reader.onerror = reject;
+    });
+  };
+
   // construct health Record
   const constructHealthRecord = async (
     senderDid,
@@ -240,16 +252,10 @@ export function OrganizationTable() {
     receiverDid
   ) => {
     let base64Image = null;
+    console.log("Image File: ", imageFile);
 
-    if (imageFile) {
-      const binaryImage = await imageFile.arrayBuffer();
-      base64Image = btoa(
-        new Uint8Array(binaryImage).reduce(
-          (data, byte) => data + String.fromCharCode(byte),
-          ""
-        )
-      );
-    }
+    base64Image = await createBase64Image(imageFile);
+
     const currentDate = new Date().toLocaleDateString();
     const currentTime = new Date().toLocaleTimeString();
 
@@ -407,7 +413,7 @@ export function OrganizationTable() {
                                   file: event.target.files[0],
                                 })
                               }
-                              accept="image/*"
+                              accept="image/png"
                               placeholder="Choose file"
                               className="border border-emerald-300"
                             />

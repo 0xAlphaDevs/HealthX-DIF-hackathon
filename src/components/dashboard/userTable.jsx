@@ -52,6 +52,9 @@ import {
   Cross2Icon,
 } from "@radix-ui/react-icons";
 import { useRouter } from "next/router";
+import { base64ImageState } from "@/atoms/data";
+import { useSetRecoilState } from "recoil";
+
 const data = [
   {
     id: "",
@@ -98,99 +101,6 @@ const data = [
   },
 ];
 
-const columns = [
-  {
-    accessorKey: "healthrecordName",
-    header: "Healthrecord Name",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("healthrecordName")}</div>
-    ),
-  },
-  {
-    accessorKey: "healthrecordCategory",
-    header: "Category",
-    cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("healthrecordCategory")}</div>
-    ),
-    filterFn: (row, id, value) => {
-      return value.includes(row.getValue(id));
-    },
-  },
-
-  {
-    accessorKey: "date",
-    header: "Issued On",
-    cell: ({ row }) => <div className="lowercase">{row.getValue("date")}</div>,
-  },
-
-  {
-    id: "view",
-    cell: ({ row }) => {
-      const router = useRouter();
-      return (
-        <Dialog>
-          <DialogTrigger>
-            <Button className="bg-emerald-900 text-emerald-50 hover:bg-emerald-500">
-              View
-            </Button>
-          </DialogTrigger>
-          <DialogContent>
-            <DialogHeader>
-              <DialogTitle>Here is your Healthrecord.</DialogTitle>
-              <DialogDescription>
-                <img
-                  src="report.png"
-                  alt="Healthrecord Image"
-                  style={{
-                    width: "100%",
-                    height: "400px",
-                    objectFit: "contain",
-                  }}
-                />
-                <div className="flex justify-center">
-                  <Button
-                    onClick={() =>
-                      router.push(`/viewRecord?base64Image=${testBase64Image}`)
-                    }
-                    className="bg-emerald-900 text-emerald-50 hover:bg-emerald-500 mt-4"
-                  >
-                    Open Record
-                  </Button>
-                </div>
-              </DialogDescription>
-            </DialogHeader>
-          </DialogContent>
-        </Dialog>
-      );
-    },
-  },
-  // {
-  //   accessorKey: "share",
-  //   header: () => <div className="text-right"></div>,
-  //   cell: () => {
-  //     return (
-  //       <Dialog>
-  //         <DialogTrigger>
-  //           {" "}
-  //           <Button className="bg-emerald-900 text-emerald-50 hover:bg-emerald-500">
-  //             Share
-  //           </Button>
-  //         </DialogTrigger>
-  //         <DialogContent>
-  //           <DialogHeader>
-  //             <DialogTitle>Are you sure absolutely sure?</DialogTitle>
-  //             <DialogDescription>
-  //               This action cannot be undone. This will permanently delete your
-  //               account and remove your data from our servers.
-  //             </DialogDescription>
-  //           </DialogHeader>
-  //         </DialogContent>
-  //       </Dialog>
-  //     );
-  //   },
-  // },
-];
-
 //schema for the healthrecord category filter
 const healthrecordCategory = [
   {
@@ -220,6 +130,104 @@ export function UserTable() {
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
   const [rowSelection, setRowSelection] = useState({});
+
+  const setBase64Image = useSetRecoilState(base64ImageState);
+
+  const columns = [
+    {
+      accessorKey: "healthrecordName",
+      header: "Healthrecord Name",
+      cell: ({ row }) => (
+        <div className="capitalize">{row.getValue("healthrecordName")}</div>
+      ),
+    },
+    {
+      accessorKey: "healthrecordCategory",
+      header: "Category",
+      cell: ({ row }) => (
+        <div className="capitalize">{row.getValue("healthrecordCategory")}</div>
+      ),
+      filterFn: (row, id, value) => {
+        return value.includes(row.getValue(id));
+      },
+    },
+
+    {
+      accessorKey: "date",
+      header: "Issued On",
+      cell: ({ row }) => (
+        <div className="lowercase">{row.getValue("date")}</div>
+      ),
+    },
+
+    {
+      id: "view",
+      cell: ({ row }) => {
+        const router = useRouter();
+        return (
+          <Dialog>
+            <DialogTrigger>
+              <Button className="bg-emerald-900 text-emerald-50 hover:bg-emerald-500">
+                View
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle>Here is your Healthrecord.</DialogTitle>
+                <DialogDescription>
+                  <img
+                    src="report.png"
+                    alt="Healthrecord Image"
+                    style={{
+                      width: "100%",
+                      height: "400px",
+                      objectFit: "contain",
+                    }}
+                  />
+                  <div className="flex justify-center">
+                    <Button
+                      onClick={() => {
+                        setBase64Image(testBase64Image);
+                        router.push(`/viewRecord`);
+                      }}
+                      className="bg-emerald-900 text-emerald-50 hover:bg-emerald-500 mt-4"
+                    >
+                      Open Record
+                    </Button>
+                  </div>
+                </DialogDescription>
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
+        );
+      },
+    },
+    // {
+    //   accessorKey: "share",
+    //   header: () => <div className="text-right"></div>,
+    //   cell: () => {
+    //     return (
+    //       <Dialog>
+    //         <DialogTrigger>
+    //           {" "}
+    //           <Button className="bg-emerald-900 text-emerald-50 hover:bg-emerald-500">
+    //             Share
+    //           </Button>
+    //         </DialogTrigger>
+    //         <DialogContent>
+    //           <DialogHeader>
+    //             <DialogTitle>Are you sure absolutely sure?</DialogTitle>
+    //             <DialogDescription>
+    //               This action cannot be undone. This will permanently delete your
+    //               account and remove your data from our servers.
+    //             </DialogDescription>
+    //           </DialogHeader>
+    //         </DialogContent>
+    //       </Dialog>
+    //     );
+    //   },
+    // },
+  ];
 
   const table = useReactTable({
     data,

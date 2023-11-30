@@ -2,9 +2,12 @@
 import React from "react";
 import { useRecoilState } from "recoil";
 import { base64ImageState } from "../atoms/data";
+import { useRecoilValue } from "recoil";
 
 const ViewHealthRecord = () => {
-  const [base64Image, setBase64Image] = useRecoilState(base64ImageState);
+  const base64Image = useRecoilValue(base64ImageState);
+
+  console.log(base64Image);
 
   return (
     <div className="p-8 flex flex-col justify-center items-center gap-4">
