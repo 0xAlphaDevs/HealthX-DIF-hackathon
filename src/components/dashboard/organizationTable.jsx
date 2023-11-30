@@ -23,8 +23,25 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectLabel,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -34,7 +51,7 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
 import {
   Table,
   TableBody,
@@ -202,6 +219,100 @@ export function OrganizationTable() {
   const isFiltered = table.getState().columnFilters.length > 0;
   return (
     <div className="p-8 ">
+      <div className="flex justify-between">
+        <div className="text-emerald-900 font-bold text-lg bg-emerald-50 p-2 rounded-lg">
+          Issued DIDs
+        </div>
+        <div>
+          {" "}
+          <Dialog>
+            <DialogTrigger>
+              <Button className="bg-emerald-900 text-emerald-50 hover:bg-emerald-500">
+                Issue DID
+              </Button>
+            </DialogTrigger>
+            <DialogContent>
+              <DialogHeader>
+                <DialogTitle className="text-emerald-900">
+                  Issue a Healthrecord.
+                </DialogTitle>
+                <DialogDescription>
+                  <Card className="p-2 border-emerald-800 bg-emerald-50 ">
+                    <CardHeader>
+                      {/* <CardTitle className="text-emerald-600">
+                        Create project
+                      </CardTitle> */}
+                      <CardDescription className="text-emerald-600">
+                        Enter details to issue a healthrecord.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <form>
+                        <div className="grid w-full items-center gap-4">
+                          <div className="flex flex-col space-y-1.5">
+                            <Label htmlFor="name" className="text-emerald-600">
+                              Patient's DID
+                            </Label>
+                            <Input
+                              id="name"
+                              placeholder="Name of your project"
+                              className="border border-emerald-300"
+                            />
+                          </div>
+                          <div className="flex flex-col space-y-1.5">
+                            <Label htmlFor="name" className="text-emerald-600">
+                              Healthrecord Name
+                            </Label>
+                            <Input
+                              id="name"
+                              placeholder="Name of your project"
+                              className="border border-emerald-300"
+                            />
+                          </div>
+                          <div className="flex flex-col space-y-1.5">
+                            <Label htmlFor="name" className="text-emerald-600">
+                              Healthrecord Category
+                            </Label>
+                            <Select>
+                              <SelectTrigger className="">
+                                <SelectValue placeholder="Select a category" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectGroup>
+                                  <SelectItem value="radiology">
+                                    Radiology
+                                  </SelectItem>
+                                  <SelectItem value="pathalogy">
+                                    Pathalogy
+                                  </SelectItem>
+                                  <SelectItem value="laboratory">
+                                    Laboratory
+                                  </SelectItem>
+                                </SelectGroup>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          <div className="flex flex-col space-y-1.5">
+                            <Label htmlFor="name" className="text-emerald-600">
+                              Add Record
+                            </Label>
+                          </div>
+                        </div>
+                      </form>
+                    </CardContent>
+                    <CardFooter className="flex justify-center">
+                      <Button className="bg-emerald-600 hover:bg-emerald-400">
+                        Issue
+                      </Button>
+                    </CardFooter>
+                  </Card>
+                </DialogDescription>
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
+        </div>
+      </div>
+
       <div className="flex items-center py-4">
         <div className="flex flex-1 items-center space-x-2">
           {" "}
