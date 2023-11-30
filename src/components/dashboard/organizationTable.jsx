@@ -293,12 +293,12 @@ export function OrganizationTable() {
                             </Select>
                           </div>
                           <div className="flex flex-col space-y-1.5">
-                            <Label htmlFor="name" className="text-emerald-600">
+                            <Label className="text-emerald-600">
                               Upload Record
                             </Label>
                             <Input
-                              id="picture"
                               type="file"
+                              accept="image/png"
                               placeholder="Choose file"
                               className="border border-emerald-300"
                             />

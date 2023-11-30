@@ -101,7 +101,7 @@ export default function CreateDid({ name, year, userType }) {
 
   // send health record 🟡
   async function sendHealthRecord(receiverDid) {
-    // construct health record here
+    // construct health record here - will need to pass all arguments from form
     const healthRecord = constructHealthRecord();
     const { record } = await web5.dwn.records.create({
       data: healthRecord,

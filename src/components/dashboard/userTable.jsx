@@ -218,7 +218,7 @@ export function UserTable() {
   const isFiltered = table.getState().columnFilters.length > 0;
   return (
     <div className="p-8 ">
-      {/* Table Toolbar 🟡 */}
+      {/* Table Toolbar  */}
       <div className="flex items-center py-4">
         <div className="flex flex-1 items-center space-x-2">
           {" "}
