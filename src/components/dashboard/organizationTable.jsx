@@ -107,7 +107,7 @@ export function OrganizationTable() {
       accessorKey: "healthRecordCategory",
       header: "Category",
       cell: ({ row }) => (
-        <div className="capitalize inline-block bg-cyan-700 text-cyan-50 rounded-lg p-1">
+        <div className="capitalize inline-block font-semibold bg-cyan-700 text-cyan-50 rounded-lg p-1">
           {" "}
           {row.getValue("healthRecordCategory")}
         </div>
@@ -133,7 +133,7 @@ export function OrganizationTable() {
         return (
           <Dialog>
             <DialogTrigger>
-              <Button className="bg-emerald-900 text-emerald-50 hover:bg-emerald-500">
+              <Button className="bg-cyan-900 text-cyan-50 hover:bg-cyan-500">
                 View
               </Button>
             </DialogTrigger>
@@ -156,7 +156,7 @@ export function OrganizationTable() {
                         setBase64Image(testBase64Image);
                         router.push(`/viewRecord`);
                       }}
-                      className="bg-emerald-900 text-emerald-50 hover:bg-emerald-500 mt-4"
+                      className="bg-cyan-900 text-cyan-50 hover:bg-cyan-500 mt-4"
                     >
                       Open Record
                     </Button>

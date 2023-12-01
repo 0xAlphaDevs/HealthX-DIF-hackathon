@@ -23,15 +23,19 @@ export default function SelectType({ setType, setStep }) {
         variant="outline"
         type="single"
       >
-        <ToggleGroupItem value="individual" aria-label="Toggle user">
-          <h2 className="text-lg text-emerald-600 hover:text-white ">
-            Individual
-          </h2>
+        <ToggleGroupItem
+          value="individual"
+          aria-label="Toggle user"
+          className="text-lg text-emerald-600 hover:text-white"
+        >
+          <h2>Individual</h2>
         </ToggleGroupItem>
-        <ToggleGroupItem value="organization" aria-label="Toggle Organization">
-          <h2 className="text-lg text-emerald-600 hover:text-white">
-            Organization
-          </h2>
+        <ToggleGroupItem
+          value="organization"
+          aria-label="Toggle Organization"
+          className="text-lg text-emerald-600 hover:text-white"
+        >
+          <h2>Organization</h2>
         </ToggleGroupItem>
       </ToggleGroup>
     </div>
