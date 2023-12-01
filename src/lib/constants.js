@@ -240,3 +240,23 @@ export const healthRecordCategoryOptions = [
     label: "Neurology",
   },
 ];
+
+export const protocolDefinition = {
+  protocol: "https://alphadevs.dev/healthX-protocol",
+  published: true,
+  types: {
+    healthRecord: {
+      schema: "healthRecord",
+      dataFormats: ["application/json"],
+    },
+  },
+  structure: {
+    healthRecord: {
+      $actions: [
+        { who: "anyone", can: "write" },
+        { who: "author", of: "healthRecord", can: "read" },
+        { who: "recipient", of: "healthRecord", can: "read" },
+      ],
+    },
+  },
+};

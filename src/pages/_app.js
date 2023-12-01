@@ -1,14 +1,8 @@
-"use client";
 import "@/styles/globals.css";
-import {
-  RecoilRoot,
-  atom,
-  selector,
-  useRecoilState,
-  useRecoilValue,
-} from "recoil";
+import { RecoilRoot } from "recoil";
+import dynamic from "next/dynamic";
 
-export default function App({ Component, pageProps }) {
+const App = ({ Component, pageProps }) => {
   return (
     <>
       <RecoilRoot>
@@ -16,4 +10,8 @@ export default function App({ Component, pageProps }) {
       </RecoilRoot>
     </>
   );
-}
+};
+
+export default dynamic(() => Promise.resolve(App), {
+  ssr: false,
+});
