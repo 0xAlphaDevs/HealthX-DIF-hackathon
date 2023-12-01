@@ -1,10 +1,7 @@
-// This is a image viewer page
 import React, { useEffect } from "react";
-import { useRecoilState } from "recoil";
 import { base64ImageState } from "../atoms/data";
 import { useRecoilValue } from "recoil";
 import { useState } from "react";
-import { testBase64Image } from "@/helpers/mock";
 
 const ViewHealthRecord = () => {
   const base64Image = useRecoilValue(base64ImageState);
