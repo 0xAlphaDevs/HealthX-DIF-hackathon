@@ -26,12 +26,6 @@ const MyDashboard = () => {
           <OrganizationTable />
         </div>
       )}
-
-      {/* <div className="mt-4">
-        <div>MyDashboard : {didData.did}</div>
-        <div>Name : {didData.name}</div>
-        <div>Year : {didData.year}</div>
-      </div> */}
     </>
   );
 };

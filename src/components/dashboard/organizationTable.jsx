@@ -58,7 +58,7 @@ import {
   healthRecordCategoryOptions,
   organizationHealthRecordsData,
 } from "@/lib/constants";
-import { IssueDid } from "./issueDid";
+import { IssueHealthRecord } from "./issueHealthRecord";
 
 export function OrganizationTable() {
   const [sorting, setSorting] = useState([]);
@@ -204,80 +204,6 @@ export function OrganizationTable() {
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
 
-  const [healthRecordData, sethealthRecordData] = useState({
-    patientDid: "",
-    healthRecordName: "",
-    category: "",
-    file: "",
-  });
-
-  // create base64 image
-  const createBase64Image = async (imageFile) => {
-    return new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(imageFile);
-      reader.onload = () => {
-        resolve(reader.result);
-      };
-      reader.onerror = reject;
-    });
-  };
-
-  // construct health Record
-  const constructhealthRecord = async (
-    senderDid,
-    healthRecordName,
-    healthRecordCategory,
-    imageFile,
-    receiverDid
-  ) => {
-    let base64Image = null;
-
-    base64Image = await createBase64Image(imageFile);
-
-    const currentDate = new Date().toLocaleDateString();
-    const currentTime = new Date().toLocaleTimeString();
-
-    const healthRecord = {
-      sender: senderDid,
-      healthRecordName: healthRecordName,
-      healthRecordCategory: healthRecordCategory,
-      image: base64Image,
-      recipient: receiverDid,
-      issuedOn: `${currentDate} ${currentTime}`,
-    };
-    return healthRecord;
-  };
-
-  // send health record 🟡
-  async function sendhealthRecord(receiverDid) {
-    // construct health record here - will need to pass all arguments from form
-    const healthRecord = await constructhealthRecord(
-      didData.did,
-      healthRecordData.healthRecordName,
-      healthRecordData.category,
-      healthRecordData.file,
-      healthRecordData.patientDid
-    );
-
-    console.log("healthRecord Data: ", healthRecord);
-    // const { record } = await web5.dwn.records.create({
-    //   data: healthRecord,
-    //   message: {
-    //     schema: "haalthRecord",
-    //     dataFormat: "application/json",
-    //   },
-    // });
-    // const { status } = await record.send(receiverDid);
-    // console.log("Record sent status : ", status);
-  }
-
-  function handlehealthRecordIssue(event) {
-    event.preventDefault();
-    console.log("Creating record...");
-    sendhealthRecord(healthRecordData.patientDid);
-  }
-
   const isFiltered = table.getState().columnFilters.length > 0;
 
   return (
@@ -288,7 +214,7 @@ export function OrganizationTable() {
         </div>
         <div>
           {/* Modal */}
-          <IssueDid />
+          <IssueHealthRecord />
         </div>
       </div>
 

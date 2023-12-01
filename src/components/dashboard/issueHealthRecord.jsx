@@ -1,4 +1,3 @@
-"use client";
 import React, { useState } from "react";
 import {
   ColumnDef,
@@ -41,12 +40,12 @@ import {
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
 import { PlusCircledIcon } from "@radix-ui/react-icons";
-import { base64ImageState, didData } from "@/atoms/data";
-import { useSetRecoilState } from "recoil";
+import { didState } from "@/atoms/data";
+import { useRecoilValue } from "recoil";
 import { testBase64Image } from "@/helpers/mock";
 
-export function IssueDid() {
-  const setBase64Image = useSetRecoilState(base64ImageState);
+export function IssueHealthRecord() {
+  const didData = useRecoilValue(didState);
 
   const [healthRecordData, sethealthRecordData] = useState({
     patientName: "",
@@ -71,6 +70,7 @@ export function IssueDid() {
   // construct health Record
   const constructhealthRecord = async (
     senderDid,
+    patientName,
     healthRecordName,
     healthRecordCategory,
     imageFile,
@@ -85,6 +85,7 @@ export function IssueDid() {
 
     const healthRecord = {
       sender: senderDid,
+      patientName: patientName,
       healthRecordName: healthRecordName,
       healthRecordCategory: healthRecordCategory,
       image: base64Image,
@@ -99,6 +100,7 @@ export function IssueDid() {
     // construct health record here - will need to pass all arguments from form
     const healthRecord = await constructhealthRecord(
       didData.did,
+      healthRecordData.patientName,
       healthRecordData.healthRecordName,
       healthRecordData.category,
       healthRecordData.file,
@@ -162,6 +164,7 @@ export function IssueDid() {
                         }
                         placeholder="Enter the pateint's DID"
                         className="border border-cyan-300"
+                        required
                       />
                     </div>
                     <div className="flex flex-col space-y-1.5">
@@ -176,6 +179,7 @@ export function IssueDid() {
                         }
                         placeholder="Enter the pateint's DID"
                         className="border border-cyan-300"
+                        required
                       />
                     </div>
                     <div className="flex flex-col space-y-1.5">
@@ -190,6 +194,7 @@ export function IssueDid() {
                         }
                         placeholder="Enter the healthRecord name"
                         className="border border-cyan-300"
+                        required
                       />
                     </div>
                     <div className="flex flex-col space-y-1.5">
@@ -205,6 +210,7 @@ export function IssueDid() {
                           })
                         }
                         className="border border-cyan-300"
+                        required
                       >
                         <SelectTrigger className="">
                           <SelectValue placeholder="Select a category" />
@@ -234,6 +240,7 @@ export function IssueDid() {
                         accept="image/png"
                         placeholder="Choose file"
                         className="border border-cyan-300"
+                        required
                       />
                     </div>
                   </div>
