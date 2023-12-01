@@ -78,7 +78,9 @@ const columns = [
     accessorKey: "issuedTo",
     header: "Issued to",
     cell: ({ row }) => (
-      <div className="lowercase">{row.getValue("issuedTo")}</div>
+      <div className="lowercase font-bold bg-slate-300 inline-block rounded-full p-2">
+        {row.getValue("issuedTo")}
+      </div>
     ),
   },
   {
@@ -94,11 +96,9 @@ const columns = [
     accessorKey: "healthrecordCategory",
     header: "Category",
     cell: ({ row }) => (
-      <div className="capitalize">
+      <div className="capitalize inline-block bg-cyan-700 text-cyan-50 rounded-lg p-1">
         {" "}
-        <Badge className="bg-cyan-700 text-cyan-50 hover:bg-cyan-700 text-cyan-50 p-1 rounded-lg">
-          {row.getValue("healthrecordCategory")}
-        </Badge>
+        {row.getValue("healthrecordCategory")}
       </div>
     ),
     filterFn: (row, id, value) => {
@@ -128,7 +128,7 @@ const columns = [
           </DialogTrigger>
           <DialogContent>
             <DialogHeader>
-              <DialogTitle>Here is your Healthrecord.</DialogTitle>
+              <DialogTitle>Uploaded Healthrecord</DialogTitle>
               <DialogDescription>
                 <img
                   src="report.png"
