@@ -3,29 +3,39 @@ export const fetchRecords = async (web5, did) => {
     message: {
       filter: {
         protocol: "https://alphadevs.dev/healthX-protocol",
-        protocolPath: "healthRecord",
+        // protocolPath: "healthRecord",
       },
-      dateSort: "createdAscending",
     },
   });
+
+  console.log("Records:", records);
 
   let receivedRecords = [];
   let sentRecords = [];
 
   try {
-    const results = await Promise.all(
-      records.map(async (record) => record.data.json())
-    );
-
-    if (recordStatus.code == 200) {
-      receivedRecords = results.filter((result) => result?.recipient === did);
-      sentRecords = results.filter((result) => result?.sender === did);
-      console.log("Received Health Records", receivedRecords);
-      console.log("Sent Health Records", sentRecords);
-    }
+    await Promise.allSettled(
+      records.map(async (record) => {
+        const result = await record.data.json();
+        return result;
+      })
+    ).then((results) => {
+      results.forEach((result) => {
+        if (result.status === "fulfilled") {
+          if (result.value.recipient === did) {
+            receivedRecords.push(result.value);
+          } else if (result.value.sender === did) {
+            sentRecords.push(result.value);
+          }
+        }
+      });
+    });
   } catch (error) {
     console.error(error);
   }
+
+  console.log("Received Records:", receivedRecords);
+  console.log("Sent Records:", sentRecords);
 
   return { receivedRecords, sentRecords };
 };

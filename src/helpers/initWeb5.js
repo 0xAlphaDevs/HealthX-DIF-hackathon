@@ -5,6 +5,7 @@ export const initWeb5 = async () => {
     techPreview: {
       dwnEndpoints: ["https://dwn.tbddev.org/dwn0/"],
     },
+    sync: "5s",
   });
   return { web5, did };
 };

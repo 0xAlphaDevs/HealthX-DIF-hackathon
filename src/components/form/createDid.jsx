@@ -27,12 +27,20 @@ export default function CreateDid({ name, year, userType }) {
     setWeb5(web5);
     setMyDid(did);
 
-    const { protocol, status } = await web5.dwn.protocols.configure({
-      message: {
-        definition: protocolDefinition,
-      },
-    });
-    console.log("Configure protocol status :", protocol, status);
+    const { protocol, status: configureStatus } =
+      await web5.dwn.protocols.configure({
+        message: {
+          definition: protocolDefinition,
+        },
+      });
+
+    console.log("Protocol Installed Locally:", protocol, configureStatus);
+    const { status: configureRemoteStatus } = await protocol.send(did);
+    console.log(
+      "Did the protocol install on the remote DWN?",
+      configureRemoteStatus
+    );
+
     return did;
   }
 

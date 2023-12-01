@@ -1,20 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  ColumnDef,
-  ColumnFiltersState,
-  SortingState,
-  VisibilityState,
-  getFacetedRowModel,
-  getFacetedUniqueValues,
-  flexRender,
-  getCoreRowModel,
-  getFilteredRowModel,
-  getPaginationRowModel,
-  getSortedRowModel,
-  useReactTable,
-} from "@tanstack/react-table";
-import { ChevronDown } from "lucide-react";
-import {
   Dialog,
   DialogContent,
   DialogDescription,
@@ -39,14 +24,17 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Label } from "@/components/ui/label";
-import { PlusCircledIcon } from "@radix-ui/react-icons";
+import { PlusCircledIcon, CheckCircledIcon } from "@radix-ui/react-icons";
 import { didState } from "@/atoms/data";
 import { useRecoilValue } from "recoil";
+import { initWeb5 } from "@/helpers/initWeb5";
 import Loader from "../loader";
 
 export function IssueHealthRecord() {
   const didData = useRecoilValue(didState);
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [sendRecordSuccess, setSendRecordSuccess] = useState(false);
   const [healthRecordData, setHealthRecordData] = useState({
     patientName: "",
     patientDid: "",
@@ -55,10 +43,8 @@ export function IssueHealthRecord() {
     file: "",
   });
 
-  const [isLoading, setIsLoading] = useState(false);
-  const [successMessage, setSuccessMessage] = useState("");
-
-  const resetForm = () => {
+  function handleClick() {
+    // reset all state values
     setHealthRecordData({
       patientName: "",
       patientDid: "",
@@ -66,13 +52,9 @@ export function IssueHealthRecord() {
       category: "",
       file: "",
     });
-    setSuccessMessage("");
+    setSendRecordSuccess(false);
     setIsLoading(false);
-  };
-
-  useEffect(() => {
-    resetForm();
-  }, []);
+  }
 
   // create base64 image
   const createBase64Image = async (imageFile) => {
@@ -97,7 +79,7 @@ export function IssueHealthRecord() {
   ) => {
     let base64Image = null;
 
-    base64Image = await createBase64Image(imageFile);
+    // base64Image = await createBase64Image(imageFile);
 
     const currentDate = new Date().toLocaleDateString();
     const currentTime = new Date().toLocaleTimeString();
@@ -128,21 +110,27 @@ export function IssueHealthRecord() {
         healthRecordData.patientDid,
         healthRecordData.patientName
       );
-
       console.log("healthRecord Data: ", healthRecord);
-      // const { record } = await web5.dwn.records.create({
-      //   data: healthRecord,
-      //   message: {
-      //     schema: "haalthRecord",
-      //     dataFormat: "application/json",
-      //   },
-      // });
-      // const { status } = await record.send(receiverDid);
-      // console.log("Record sent status : ", status);
-      setTimeout(() => {
-        setSuccessMessage("Health record successfully submitted!");
-        setIsLoading(false);
-      }, 2000);
+
+      const { web5 } = await initWeb5();
+
+      const { record } = await web5.dwn.records.write({
+        data: healthRecord,
+        message: {
+          protocol: "https://alphadevs.dev/healthX-protocol",
+          protocolPath: "healthRecord",
+          schema: "https://alphadevs.dev/healthRecord",
+          recipient: healthRecordData.patientDid,
+          dataFormat: "application/json",
+        },
+      });
+      console.log("Record created:", record);
+
+      // send to remote dwd instantly
+      const { status } = await record.send(healthRecordData.patientDid);
+      console.log("Record sent status : ", status);
+      setIsLoading(false);
+      setSendRecordSuccess(true);
     } catch (error) {
       console.error("Error submitting health record:", error);
       setIsLoading(false);
@@ -158,36 +146,38 @@ export function IssueHealthRecord() {
   return (
     <Dialog>
       <DialogTrigger>
-        <Button className="bg-cyan-900 text-cyan-50 hover:bg-cyan-500">
+        <Button
+          onClick={handleClick}
+          className="bg-cyan-900 text-cyan-50 hover:bg-cyan-500"
+        >
           <PlusCircledIcon className="mt-0.5" />
           <span className="w-2"> </span>Issue Record
         </Button>
       </DialogTrigger>
       <DialogContent>
         {isLoading ? (
-          <div className="flex items-center">
+          <div className="flex flex-col items-center justify-center h-40 gap-4">
             <Loader />
+            <p>Creating Record ...</p>
           </div>
         ) : (
           <>
-            <DialogHeader>
-              <DialogTitle className="text-cyan-900">
-                Issue a Health Record.
-              </DialogTitle>
-              <DialogDescription>
-                <Card className="p-2 border-cyan-800 bg-cyan-50 ">
-                  <CardHeader>
-                    {/* <CardTitle className="text-cyan-600">
+            {!sendRecordSuccess ? (
+              <DialogHeader>
+                <DialogTitle className="text-cyan-900">
+                  Issue a Health Record.
+                </DialogTitle>
+                <DialogDescription>
+                  <Card className="p-2 border-cyan-800 bg-cyan-50 ">
+                    <CardHeader>
+                      {/* <CardTitle className="text-cyan-600">
                         Create project
                       </CardTitle> */}
-                    <CardDescription className="text-cyan-600">
-                      Enter details to issue a healthRecord.
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    {successMessage ? (
-                      <div className="text-green-600">{successMessage}</div>
-                    ) : (
+                      <CardDescription className="text-cyan-600">
+                        Enter details to issue a healthRecord.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
                       <form onSubmit={handlehealthRecordIssue}>
                         <div className="grid w-full items-center gap-4">
                           <div className="flex flex-col space-y-1.5">
@@ -292,7 +282,6 @@ export function IssueHealthRecord() {
                               accept="image/png"
                               placeholder="Choose file"
                               className="border border-cyan-300"
-                              required
                             />
                           </div>
                         </div>
@@ -302,11 +291,16 @@ export function IssueHealthRecord() {
                           </Button>
                         </div>
                       </form>
-                    )}
-                  </CardContent>
-                </Card>
-              </DialogDescription>
-            </DialogHeader>
+                    </CardContent>
+                  </Card>
+                </DialogDescription>
+              </DialogHeader>
+            ) : (
+              <div className="flex flex-col gap-4 items-center">
+                <CheckCircledIcon className="w-20 h-20 text-green-500" />
+                <p>Record Sent Successfully</p>
+              </div>
+            )}
           </>
         )}
       </DialogContent>

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -59,6 +59,8 @@ import {
   organizationHealthRecordsData,
 } from "@/lib/constants";
 import { IssueHealthRecord } from "./issueHealthRecord";
+import { initWeb5 } from "@/helpers/initWeb5";
+import { fetchRecords } from "@/helpers/fetchRecords";
 
 export function OrganizationTable() {
   const [sorting, setSorting] = useState([]);
@@ -67,6 +69,19 @@ export function OrganizationTable() {
   const [rowSelection, setRowSelection] = useState({});
 
   const setBase64Image = useSetRecoilState(base64ImageState);
+
+  //🟡
+  useEffect(() => {
+    const fetchTableData = async () => {
+      const { web5, did } = await initWeb5();
+      console.log("Fetching records...");
+      const records = await fetchRecords(web5, did);
+      // console.log("Records :", records);
+      // setTableData(data);
+    };
+
+    fetchTableData();
+  }, []);
 
   const columns = [
     {

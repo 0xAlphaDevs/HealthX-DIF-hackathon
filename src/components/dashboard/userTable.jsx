@@ -39,8 +39,8 @@ import {
 import CategoryFilter from "./categoryFilter";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { useRouter } from "next/router";
-import { base64ImageState, web5State, didState } from "@/atoms/data";
-import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
+import { base64ImageState } from "@/atoms/data";
+import { useSetRecoilState } from "recoil";
 import {
   userHealthRecordsData,
   healthRecordCategoryOptions,
@@ -54,30 +54,20 @@ export function UserTable() {
   const [columnVisibility, setColumnVisibility] = useState({});
   const [rowSelection, setRowSelection] = useState({});
 
-  // Web5 and DID
-  const { did } = useRecoilValue(didState);
-  let [web5Object, setWeb5Object] = useRecoilState(web5State);
-
   // 🟡
   const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
     const fetchTableData = async () => {
-      if (!web5Object) {
-        const { web5 } = await initWeb5();
-        setWeb5Object(web5);
-      } else {
-        console.log("Fetching records...");
-        console.log("DID :", did);
-        console.log("Web5 State:", web5Object);
-        const records = await fetchRecords(web5Object, did);
-        console.log("Records :", records);
-        // setTableData(data);
-      }
+      const { web5, did } = await initWeb5();
+      console.log("Fetching records...");
+      const records = await fetchRecords(web5, did);
+      // console.log("Records :", records);
+      // setTableData(data);
     };
 
     fetchTableData();
-  }, [web5Object, did]);
+  }, []);
 
   const setBase64Image = useSetRecoilState(base64ImageState);
 
