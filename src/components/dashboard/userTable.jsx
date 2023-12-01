@@ -1,10 +1,6 @@
 "use client";
 import React, { useState } from "react";
 import {
-  ColumnDef,
-  ColumnFiltersState,
-  SortingState,
-  VisibilityState,
   getFacetedRowModel,
   getFacetedUniqueValues,
   flexRender,
@@ -30,9 +26,6 @@ import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
   DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Input } from "@/components/ui/input";
@@ -45,85 +38,14 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import CategoryFilter from "./categoryFilter";
-import {
-  CircleIcon,
-  QuestionMarkCircledIcon,
-  StopwatchIcon,
-  Cross2Icon,
-} from "@radix-ui/react-icons";
+import { Cross2Icon } from "@radix-ui/react-icons";
 import { useRouter } from "next/router";
 import { base64ImageState } from "@/atoms/data";
 import { useSetRecoilState } from "recoil";
-
-const data = [
-  {
-    id: "",
-    healthrecordName: "KFT",
-    healthrecordCategory: "pathology",
-    date: "1-1-2023",
-  },
-  {
-    id: "",
-    healthrecordName: "Electroencephalogram",
-    healthrecordCategory: "neurology",
-    date: "1-1-2023",
-  },
-  {
-    id: "",
-    healthrecordName: "Brain MRI ",
-    healthrecordCategory: "neurology",
-    date: "1-1-2023",
-  },
-  {
-    id: "",
-    healthrecordName: "ECG",
-    healthrecordCategory: "cardiology",
-    date: "1-1-2023",
-  },
-  {
-    id: "",
-    healthrecordName: "CECT",
-    healthrecordCategory: "radiology",
-    date: "1-1-2023",
-  },
-
-  {
-    id: "",
-    healthrecordName: "X-Ray",
-    healthrecordCategory: "radiology",
-    date: "1-1-2023",
-  },
-  {
-    id: "",
-    healthrecordName: "CBC",
-    healthrecordCategory: "pathology",
-    date: "1-1-2023",
-  },
-];
-
-//schema for the healthrecord category filter
-const healthrecordCategory = [
-  {
-    value: "radiology",
-    label: "Radiology",
-    icon: QuestionMarkCircledIcon,
-  },
-  {
-    value: "pathology",
-    label: "Pathology",
-    icon: CircleIcon,
-  },
-  {
-    value: "cardiology",
-    label: "Cardiology",
-    icon: StopwatchIcon,
-  },
-  {
-    value: "neurology",
-    label: "Neurology",
-    icon: StopwatchIcon,
-  },
-];
+import {
+  userHealthRecordsData,
+  healthRecordCategoryOptions,
+} from "@/lib/constants";
 
 export function UserTable() {
   const [sorting, setSorting] = useState([]);
@@ -135,20 +57,22 @@ export function UserTable() {
 
   const columns = [
     {
-      accessorKey: "healthrecordName",
-      header: "Healthrecord Name",
+      accessorKey: "healthRecordName",
+      header: "healthRecord Name",
       cell: ({ row }) => (
         <div className="capitalize text-lg font-semibold text-emerald-900">
-          {row.getValue("healthrecordName")}
+          {row.getValue("healthRecordName")}
         </div>
       ),
     },
     {
-      accessorKey: "healthrecordCategory",
+      accessorKey: "healthRecordCategory",
       header: "Category",
       cell: ({ row }) => (
-        <div className="capitalize inline-block font-semibold bg-emerald-700 text-emerald-50 p-1 rounded-lg">
-          {row.getValue("healthrecordCategory")}
+        <div className="capitalize">
+          <Badge className="bg-emerald-700 text-emerald-50 p-1 rounded-lg">
+            {row.getValue("healthRecordCategory")}
+          </Badge>
         </div>
       ),
       filterFn: (row, id, value) => {
@@ -179,11 +103,11 @@ export function UserTable() {
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle>Here is your Healthrecord.</DialogTitle>
+                <DialogTitle>Here is your healthRecord.</DialogTitle>
                 <DialogDescription>
                   <img
                     src="report.png"
-                    alt="Healthrecord Image"
+                    alt="healthRecord Image"
                     style={{
                       width: "100%",
                       height: "400px",
@@ -236,7 +160,7 @@ export function UserTable() {
   ];
 
   const table = useReactTable({
-    data,
+    data: userHealthRecordsData,
     columns,
     state: {
       sorting,
@@ -268,20 +192,20 @@ export function UserTable() {
           {" "}
           <Input
             placeholder="Search a record..."
-            value={table.getColumn("healthrecordName")?.getFilterValue() || ""}
+            value={table.getColumn("healthRecordName")?.getFilterValue() || ""}
             onChange={(event) =>
               table
-                .getColumn("healthrecordName")
+                .getColumn("healthRecordName")
                 ?.setFilterValue(event.target.value)
             }
             className="max-w-sm bg-emerald-50"
           />
           {/* categoryFilter UI */}
-          {table.getColumn("healthrecordCategory") && (
+          {table.getColumn("healthRecordCategory") && (
             <CategoryFilter
-              column={table.getColumn("healthrecordCategory")}
+              column={table.getColumn("healthRecordCategory")}
               title="Category"
-              options={healthrecordCategory}
+              options={healthRecordCategoryOptions}
             />
           )}
           {isFiltered && (
@@ -374,30 +298,6 @@ export function UserTable() {
           </TableBody>
         </Table>
       </div>
-      {/* <div className="flex items-center justify-end space-x-2 py-4">
-        <div className="flex-1 text-sm text-muted-foreground">
-          {table.getFilteredSelectedRowModel().rows.length} of{" "}
-          {table.getFilteredRowModel().rows.length} row(s) selected.
-        </div>
-        <div className="space-x-2">
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.previousPage()}
-            disabled={!table.getCanPreviousPage()}
-          >
-            Previous
-          </Button>
-          <Button
-            variant="outline"
-            size="sm"
-            onClick={() => table.nextPage()}
-            disabled={!table.getCanNextPage()}
-          >
-            Next
-          </Button>
-        </div>
-      </div> */}
     </div>
   );
 }

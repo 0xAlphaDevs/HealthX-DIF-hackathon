@@ -27,9 +27,7 @@ import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
-  CardTitle,
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -73,75 +71,10 @@ import { base64ImageState, didData } from "@/atoms/data";
 import { useRouter } from "next/router";
 import { useSetRecoilState } from "recoil";
 import { testBase64Image } from "@/helpers/mock";
-
-//schema for the healthrecord category filter
-const healthrecordCategory = [
-  {
-    value: "radiology",
-    label: "Radiology",
-    icon: QuestionMarkCircledIcon,
-  },
-  {
-    value: "pathology",
-    label: "Pathology",
-    icon: CircleIcon,
-  },
-  {
-    value: "cardiology",
-    label: "Cardiology",
-    icon: StopwatchIcon,
-  },
-  {
-    value: "neurology",
-    label: "Neurology",
-    icon: StopwatchIcon,
-  },
-];
-
-const data = [
-  {
-    id: "m5gr84i9",
-    healthrecordName: "KFT",
-    healthrecordCategory: "pathology",
-    issuedOn: "1-1-2023",
-    issuedTo: "did:ethr:0x123456789abcdefghifjkfjvhjdscbkj,dnj",
-  },
-  {
-    id: "m5gr84i9",
-    healthrecordName: "Electroencephalogram",
-    healthrecordCategory: "neurology",
-    issuedOn: "1-1-2023",
-    issuedTo: "did:ethr:0x123456789abcdefghifjkfjvhjdscbkj,dnj",
-  },
-  {
-    id: "m5gr84i9",
-    healthrecordName: "Brain MRI ",
-    healthrecordCategory: "neurology",
-    issuedOn: "1-1-2023",
-    issuedTo: "did:ethr:0x123456789abcdefghifjkfjvhjdscbkj,dnj",
-  },
-  {
-    id: "m5gr84i9",
-    healthrecordName: "ECG",
-    healthrecordCategory: "cardiology",
-    issuedOn: "1-1-2023",
-    issuedTo: "did:ethr:0x123456789abcdefghifjkfjvhjdscbkj,dnj",
-  },
-  {
-    id: "m5gr84i9",
-    healthrecordName: "CECT",
-    healthrecordCategory: "radiology",
-    issuedOn: "1-1-2023",
-    issuedTo: "did:ethr:0x123456789abcdefghifjkfjvhjdscbkj,dnj",
-  },
-  {
-    id: "m5gr84i9",
-    healthrecordName: "X-Ray",
-    healthrecordCategory: "radiology",
-    issuedOn: "1-1-2023",
-    issuedTo: "did:ethr:0x123456789abcdefghifjkfjvhjdscbkj,dnj",
-  },
-];
+import {
+  healthRecordCategoryOptions,
+  organizationHealthRecordsData,
+} from "@/lib/constants";
 
 export function OrganizationTable() {
   const [sorting, setSorting] = useState([]);
@@ -162,21 +95,21 @@ export function OrganizationTable() {
       ),
     },
     {
-      accessorKey: "healthrecordName",
-      header: "Healthrecord Name",
+      accessorKey: "healthRecordName",
+      header: "healthRecord Name",
       cell: ({ row }) => (
         <div className="capitalize text-lg font-semibold text-cyan-900">
-          {row.getValue("healthrecordName")}
+          {row.getValue("healthRecordName")}
         </div>
       ),
     },
     {
-      accessorKey: "healthrecordCategory",
+      accessorKey: "healthRecordCategory",
       header: "Category",
       cell: ({ row }) => (
         <div className="capitalize inline-block font-semibold bg-cyan-700 text-cyan-50 rounded-lg p-1">
           {" "}
-          {row.getValue("healthrecordCategory")}
+          {row.getValue("healthRecordCategory")}
         </div>
       ),
       filterFn: (row, id, value) => {
@@ -206,13 +139,11 @@ export function OrganizationTable() {
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle className="text-cyan-900">
-                  Here is your Healthrecord.
-                </DialogTitle>
+                <DialogTitle>Here is your healthRecord.</DialogTitle>
                 <DialogDescription>
                   <img
                     src="report.png"
-                    alt="Healthrecord Image"
+                    alt="healthRecord Image"
                     style={{
                       width: "100%",
                       height: "400px",
@@ -240,7 +171,7 @@ export function OrganizationTable() {
   ];
 
   const table = useReactTable({
-    data,
+    data: organizationHealthRecordsData,
     columns,
     state: {
       sorting,
@@ -261,7 +192,7 @@ export function OrganizationTable() {
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
 
-  const [healthrecordData, setHealthrecordData] = useState({
+  const [healthRecordData, sethealthRecordData] = useState({
     patientDid: "",
     healthRecordName: "",
     category: "",
@@ -281,7 +212,7 @@ export function OrganizationTable() {
   };
 
   // construct health Record
-  const constructHealthRecord = async (
+  const constructhealthRecord = async (
     senderDid,
     healthRecordName,
     healthRecordCategory,
@@ -307,17 +238,17 @@ export function OrganizationTable() {
   };
 
   // send health record 🟡
-  async function sendHealthRecord(receiverDid) {
+  async function sendhealthRecord(receiverDid) {
     // construct health record here - will need to pass all arguments from form
-    const healthRecord = await constructHealthRecord(
+    const healthRecord = await constructhealthRecord(
       didData.did,
-      healthrecordData.healthRecordName,
-      healthrecordData.category,
-      healthrecordData.file,
-      healthrecordData.patientDid
+      healthRecordData.healthRecordName,
+      healthRecordData.category,
+      healthRecordData.file,
+      healthRecordData.patientDid
     );
 
-    console.log("Healthrecord Data: ", healthRecord);
+    console.log("healthRecord Data: ", healthRecord);
     // const { record } = await web5.dwn.records.create({
     //   data: healthRecord,
     //   message: {
@@ -329,10 +260,10 @@ export function OrganizationTable() {
     // console.log("Record sent status : ", status);
   }
 
-  function handleHealthRecordIssue(event) {
+  function handlehealthRecordIssue(event) {
     event.preventDefault();
     console.log("Creating record...");
-    sendHealthRecord(healthrecordData.patientDid);
+    sendhealthRecord(healthRecordData.patientDid);
   }
 
   const isFiltered = table.getState().columnFilters.length > 0;
@@ -365,21 +296,21 @@ export function OrganizationTable() {
                         Create project
                       </CardTitle> */}
                       <CardDescription className="text-cyan-600">
-                        Enter details to issue a healthrecord.
+                        Enter details to issue a healthRecord.
                       </CardDescription>
                     </CardHeader>
                     <CardContent>
-                      <form onSubmit={handleHealthRecordIssue}>
+                      <form onSubmit={handlehealthRecordIssue}>
                         <div className="grid w-full items-center gap-4">
                           <div className="flex flex-col space-y-1.5">
                             <Label className="text-cyan-600">
                               Patient's DID
                             </Label>
                             <Input
-                              value={healthrecordData.patientDid}
+                              value={healthRecordData.patientDid}
                               onChange={(event) =>
-                                setHealthrecordData({
-                                  ...healthrecordData,
+                                sethealthRecordData({
+                                  ...healthRecordData,
                                   patientDid: event.target.value,
                                 })
                               }
@@ -389,29 +320,29 @@ export function OrganizationTable() {
                           </div>
                           <div className="flex flex-col space-y-1.5">
                             <Label className="text-cyan-600">
-                              Healthrecord Name
+                              healthRecord Name
                             </Label>
                             <Input
-                              value={healthrecordData.healthRecordName}
+                              value={healthRecordData.healthRecordName}
                               onChange={(event) =>
-                                setHealthrecordData({
-                                  ...healthrecordData,
+                                sethealthRecordData({
+                                  ...healthRecordData,
                                   healthRecordName: event.target.value,
                                 })
                               }
-                              placeholder="Enter the healthrecord name"
+                              placeholder="Enter the healthRecord name"
                               className="border border-cyan-300"
                             />
                           </div>
                           <div className="flex flex-col space-y-1.5">
                             <Label className="text-cyan-600">
-                              Healthrecord Category
+                              healthRecord Category
                             </Label>
                             <Select
                               placeholder="Select a category"
                               onValueChange={(value) =>
-                                setHealthrecordData({
-                                  ...healthrecordData,
+                                sethealthRecordData({
+                                  ...healthRecordData,
                                   category: value,
                                 })
                               }
@@ -445,8 +376,8 @@ export function OrganizationTable() {
                             <Input
                               type="file"
                               onChange={(event) =>
-                                setHealthrecordData({
-                                  ...healthrecordData,
+                                sethealthRecordData({
+                                  ...healthRecordData,
                                   file: event.target.files[0],
                                 })
                               }
@@ -476,20 +407,20 @@ export function OrganizationTable() {
           {" "}
           <Input
             placeholder="Search a record..."
-            value={table.getColumn("healthrecordName")?.getFilterValue() || ""}
+            value={table.getColumn("healthRecordName")?.getFilterValue() || ""}
             onChange={(event) =>
               table
-                .getColumn("healthrecordName")
+                .getColumn("healthRecordName")
                 ?.setFilterValue(event.target.value)
             }
             className="max-w-sm bg-cyan-50"
           />
           {/* categoryFilter UI */}
-          {table.getColumn("healthrecordCategory") && (
+          {table.getColumn("healthRecordCategory") && (
             <CategoryFilter
-              column={table.getColumn("healthrecordCategory")}
+              column={table.getColumn("healthRecordCategory")}
               title="Category"
-              options={healthrecordCategory}
+              options={healthRecordCategoryOptions}
             />
           )}
           {isFiltered && (
