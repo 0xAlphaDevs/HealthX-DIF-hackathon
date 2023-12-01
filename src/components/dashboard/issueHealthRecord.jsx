@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ColumnDef,
   ColumnFiltersState,
@@ -42,18 +42,37 @@ import { Label } from "@/components/ui/label";
 import { PlusCircledIcon } from "@radix-ui/react-icons";
 import { didState } from "@/atoms/data";
 import { useRecoilValue } from "recoil";
-import { testBase64Image } from "@/helpers/mock";
+import Loader from "../loader";
 
 export function IssueHealthRecord() {
   const didData = useRecoilValue(didState);
 
-  const [healthRecordData, sethealthRecordData] = useState({
+  const [healthRecordData, setHealthRecordData] = useState({
     patientName: "",
     patientDid: "",
     healthRecordName: "",
     category: "",
     file: "",
   });
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [successMessage, setSuccessMessage] = useState("");
+
+  const resetForm = () => {
+    setHealthRecordData({
+      patientName: "",
+      patientDid: "",
+      healthRecordName: "",
+      category: "",
+      file: "",
+    });
+    setSuccessMessage("");
+    setIsLoading(false);
+  };
+
+  useEffect(() => {
+    resetForm();
+  }, []);
 
   // create base64 image
   const createBase64Image = async (imageFile) => {
@@ -97,27 +116,37 @@ export function IssueHealthRecord() {
 
   // send health record 🟡
   async function sendhealthRecord(receiverDid) {
-    // construct health record here - will need to pass all arguments from form
-    const healthRecord = await constructhealthRecord(
-      didData.did,
-      healthRecordData.patientName,
-      healthRecordData.healthRecordName,
-      healthRecordData.category,
-      healthRecordData.file,
-      healthRecordData.patientDid,
-      healthRecordData.patientName
-    );
+    try {
+      setIsLoading(true);
+      // construct health record here - will need to pass all arguments from form
+      const healthRecord = await constructhealthRecord(
+        didData.did,
+        healthRecordData.patientName,
+        healthRecordData.healthRecordName,
+        healthRecordData.category,
+        healthRecordData.file,
+        healthRecordData.patientDid,
+        healthRecordData.patientName
+      );
 
-    console.log("healthRecord Data: ", healthRecord);
-    // const { record } = await web5.dwn.records.create({
-    //   data: healthRecord,
-    //   message: {
-    //     schema: "haalthRecord",
-    //     dataFormat: "application/json",
-    //   },
-    // });
-    // const { status } = await record.send(receiverDid);
-    // console.log("Record sent status : ", status);
+      console.log("healthRecord Data: ", healthRecord);
+      // const { record } = await web5.dwn.records.create({
+      //   data: healthRecord,
+      //   message: {
+      //     schema: "haalthRecord",
+      //     dataFormat: "application/json",
+      //   },
+      // });
+      // const { status } = await record.send(receiverDid);
+      // console.log("Record sent status : ", status);
+      setTimeout(() => {
+        setSuccessMessage("Health record successfully submitted!");
+        setIsLoading(false);
+      }, 2000);
+    } catch (error) {
+      console.error("Error submitting health record:", error);
+      setIsLoading(false);
+    }
   }
 
   function handlehealthRecordIssue(event) {
@@ -135,125 +164,151 @@ export function IssueHealthRecord() {
         </Button>
       </DialogTrigger>
       <DialogContent>
-        <DialogHeader>
-          <DialogTitle className="text-cyan-900">
-            Issue a Health Record.
-          </DialogTitle>
-          <DialogDescription>
-            <Card className="p-2 border-cyan-800 bg-cyan-50 ">
-              <CardHeader>
-                {/* <CardTitle className="text-cyan-600">
+        {isLoading ? (
+          <div className="flex items-center">
+            <Loader />
+          </div>
+        ) : (
+          <>
+            <DialogHeader>
+              <DialogTitle className="text-cyan-900">
+                Issue a Health Record.
+              </DialogTitle>
+              <DialogDescription>
+                <Card className="p-2 border-cyan-800 bg-cyan-50 ">
+                  <CardHeader>
+                    {/* <CardTitle className="text-cyan-600">
                         Create project
                       </CardTitle> */}
-                <CardDescription className="text-cyan-600">
-                  Enter details to issue a healthRecord.
-                </CardDescription>
-              </CardHeader>
-              <CardContent>
-                <form onSubmit={handlehealthRecordIssue}>
-                  <div className="grid w-full items-center gap-4">
-                    <div className="flex flex-col space-y-1.5">
-                      <Label className="text-cyan-600">Patient's Name</Label>
-                      <Input
-                        value={healthRecordData.patientName}
-                        onChange={(event) =>
-                          sethealthRecordData({
-                            ...healthRecordData,
-                            patientName: event.target.value,
-                          })
-                        }
-                        placeholder="Enter the pateint's DID"
-                        className="border border-cyan-300"
-                        required
-                      />
-                    </div>
-                    <div className="flex flex-col space-y-1.5">
-                      <Label className="text-cyan-600">Patient's DID</Label>
-                      <Input
-                        value={healthRecordData.patientDid}
-                        onChange={(event) =>
-                          sethealthRecordData({
-                            ...healthRecordData,
-                            patientDid: event.target.value,
-                          })
-                        }
-                        placeholder="Enter the pateint's DID"
-                        className="border border-cyan-300"
-                        required
-                      />
-                    </div>
-                    <div className="flex flex-col space-y-1.5">
-                      <Label className="text-cyan-600">healthRecord Name</Label>
-                      <Input
-                        value={healthRecordData.healthRecordName}
-                        onChange={(event) =>
-                          sethealthRecordData({
-                            ...healthRecordData,
-                            healthRecordName: event.target.value,
-                          })
-                        }
-                        placeholder="Enter the healthRecord name"
-                        className="border border-cyan-300"
-                        required
-                      />
-                    </div>
-                    <div className="flex flex-col space-y-1.5">
-                      <Label className="text-cyan-600">
-                        healthRecord Category
-                      </Label>
-                      <Select
-                        placeholder="Select a category"
-                        onValueChange={(value) =>
-                          sethealthRecordData({
-                            ...healthRecordData,
-                            category: value,
-                          })
-                        }
-                        className="border border-cyan-300"
-                        required
-                      >
-                        <SelectTrigger className="">
-                          <SelectValue placeholder="Select a category" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          <SelectGroup>
-                            <SelectItem value="Cardiology">
-                              Cardiology
-                            </SelectItem>
-                            <SelectItem value="Pathology">Pathology</SelectItem>
-                            <SelectItem value="Neurology">Neurology</SelectItem>
-                            <SelectItem value="Radiology">Radiology</SelectItem>
-                          </SelectGroup>
-                        </SelectContent>
-                      </Select>
-                    </div>
-                    <div className="flex flex-col space-y-1.5">
-                      <Label className="text-cyan-600">Upload Record</Label>
-                      <Input
-                        type="file"
-                        onChange={(event) =>
-                          sethealthRecordData({
-                            ...healthRecordData,
-                            file: event.target.files[0],
-                          })
-                        }
-                        accept="image/png"
-                        placeholder="Choose file"
-                        className="border border-cyan-300"
-                        required
-                      />
-                    </div>
-                  </div>
-                  <div className="flex justify-center">
-                    <Button className="bg-cyan-600 hover:bg-cyan-400 mt-2 ">
-                      Issue
-                    </Button>
-                  </div>
-                </form>
-              </CardContent>
-            </Card>
-          </DialogDescription>
-        </DialogHeader>
+                    <CardDescription className="text-cyan-600">
+                      Enter details to issue a healthRecord.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent>
+                    {successMessage ? (
+                      <div className="text-green-600">{successMessage}</div>
+                    ) : (
+                      <form onSubmit={handlehealthRecordIssue}>
+                        <div className="grid w-full items-center gap-4">
+                          <div className="flex flex-col space-y-1.5">
+                            <Label className="text-cyan-600">
+                              Patient's Name
+                            </Label>
+                            <Input
+                              value={healthRecordData.patientName}
+                              onChange={(event) =>
+                                setHealthRecordData({
+                                  ...healthRecordData,
+                                  patientName: event.target.value,
+                                })
+                              }
+                              placeholder="Enter the pateint's DID"
+                              className="border border-cyan-300"
+                              required
+                            />
+                          </div>
+                          <div className="flex flex-col space-y-1.5">
+                            <Label className="text-cyan-600">
+                              Patient's DID
+                            </Label>
+                            <Input
+                              value={healthRecordData.patientDid}
+                              onChange={(event) =>
+                                setHealthRecordData({
+                                  ...healthRecordData,
+                                  patientDid: event.target.value,
+                                })
+                              }
+                              placeholder="Enter the pateint's DID"
+                              className="border border-cyan-300"
+                              required
+                            />
+                          </div>
+                          <div className="flex flex-col space-y-1.5">
+                            <Label className="text-cyan-600">
+                              healthRecord Name
+                            </Label>
+                            <Input
+                              value={healthRecordData.healthRecordName}
+                              onChange={(event) =>
+                                setHealthRecordData({
+                                  ...healthRecordData,
+                                  healthRecordName: event.target.value,
+                                })
+                              }
+                              placeholder="Enter the healthRecord name"
+                              className="border border-cyan-300"
+                              required
+                            />
+                          </div>
+                          <div className="flex flex-col space-y-1.5">
+                            <Label className="text-cyan-600">
+                              healthRecord Category
+                            </Label>
+                            <Select
+                              placeholder="Select a category"
+                              onValueChange={(value) =>
+                                setHealthRecordData({
+                                  ...healthRecordData,
+                                  category: value,
+                                })
+                              }
+                              className="border border-cyan-300"
+                              required
+                            >
+                              <SelectTrigger className="">
+                                <SelectValue placeholder="Select a category" />
+                              </SelectTrigger>
+                              <SelectContent>
+                                <SelectGroup>
+                                  <SelectItem value="Cardiology">
+                                    Cardiology
+                                  </SelectItem>
+                                  <SelectItem value="Pathology">
+                                    Pathology
+                                  </SelectItem>
+                                  <SelectItem value="Neurology">
+                                    Neurology
+                                  </SelectItem>
+                                  <SelectItem value="Radiology">
+                                    Radiology
+                                  </SelectItem>
+                                </SelectGroup>
+                              </SelectContent>
+                            </Select>
+                          </div>
+                          <div className="flex flex-col space-y-1.5">
+                            <Label className="text-cyan-600">
+                              Upload Record
+                            </Label>
+                            <Input
+                              type="file"
+                              onChange={(event) =>
+                                setHealthRecordData({
+                                  ...healthRecordData,
+                                  file: event.target.files[0],
+                                })
+                              }
+                              accept="image/png"
+                              placeholder="Choose file"
+                              className="border border-cyan-300"
+                              required
+                            />
+                          </div>
+                        </div>
+                        <div className="flex justify-center">
+                          <Button className="bg-cyan-600 hover:bg-cyan-400 mt-2 ">
+                            Issue
+                          </Button>
+                        </div>
+                      </form>
+                    )}
+                  </CardContent>
+                </Card>
+              </DialogDescription>
+            </DialogHeader>
+          </>
+        )}
       </DialogContent>
     </Dialog>
   );
