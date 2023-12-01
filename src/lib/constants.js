@@ -1,15 +1,3 @@
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
-import { CopyIcon } from "@radix-ui/react-icons";
-
-function handleCopyToClipboard() {
-  navigator.clipboard.writeText(didData.did);
-}
-
 export const userHealthRecordsData = [
   {
     id: "",
@@ -62,26 +50,10 @@ export const organizationHealthRecordsData = [
     healthRecordName: "KFT",
     healthRecordCategory: "pathology",
     issuedOn: "1-1-2023",
-    issuedTo: (
-      <div className="flex mt-2">
-        <p>did:ethr:0x123456789abcd</p>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger>
-              <div
-                className="cursor-pointer ml-2 mr-4 h-8 text-md"
-                onClick={handleCopyToClipboard}
-              >
-                <CopyIcon />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Copy DID</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      </div>
-    ),
+    issuedTo: {
+      did: "did:ethr:0x123456789abcdefghifjkfjvhjdscbkj,dnj",
+      name: "SomeName",
+    },
     name: "ABC",
   },
   {
@@ -89,26 +61,10 @@ export const organizationHealthRecordsData = [
     healthRecordName: "Electroencephalogram",
     healthRecordCategory: "neurology",
     issuedOn: "1-1-2023",
-    issuedTo: (
-      <div className="flex mt-2">
-        <p>did:ethr:0x123456789abcd</p>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger>
-              <div
-                className="cursor-pointer ml-2 mr-4 h-8 text-md"
-                onClick={handleCopyToClipboard}
-              >
-                <CopyIcon />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Copy DID</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      </div>
-    ),
+    issuedTo: {
+      did: "did:ethr:0x123456789abcdefghifjkfjvhjdscbkj,dnj",
+      name: "SomeName",
+    },
     name: "ABC",
   },
   {
@@ -116,26 +72,10 @@ export const organizationHealthRecordsData = [
     healthRecordName: "Brain MRI ",
     healthRecordCategory: "neurology",
     issuedOn: "1-1-2023",
-    issuedTo: (
-      <div className="flex mt-2">
-        <p>did:ethr:0x123456789abcd</p>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger>
-              <div
-                className="cursor-pointer ml-2 mr-4 h-8 text-md"
-                onClick={handleCopyToClipboard}
-              >
-                <CopyIcon />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Copy DID</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      </div>
-    ),
+    issuedTo: {
+      did: "did:ethr:0x123456789abcdefghifjkfjvhjdscbkj,dnj",
+      name: "SomeName",
+    },
     name: "ABC",
   },
   {
@@ -143,26 +83,10 @@ export const organizationHealthRecordsData = [
     healthRecordName: "ECG",
     healthRecordCategory: "cardiology",
     issuedOn: "1-1-2023",
-    issuedTo: (
-      <div className="flex mt-2">
-        <p>did:ethr:0x123456789abcd</p>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger>
-              <div
-                className="cursor-pointer ml-2 mr-4 h-8 text-md"
-                onClick={handleCopyToClipboard}
-              >
-                <CopyIcon />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Copy DID</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      </div>
-    ),
+    issuedTo: {
+      did: "did:ethr:0x123456789abcdefghifjkfjvhjdscbkj,dnj",
+      name: "SomeName",
+    },
     name: "ABC",
   },
   {
@@ -170,26 +94,10 @@ export const organizationHealthRecordsData = [
     healthRecordName: "CECT",
     healthRecordCategory: "radiology",
     issuedOn: "1-1-2023",
-    issuedTo: (
-      <div className="flex mt-2">
-        <p>did:ethr:0x123456789abcd</p>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger>
-              <div
-                className="cursor-pointer ml-2 mr-4 h-8 text-md"
-                onClick={handleCopyToClipboard}
-              >
-                <CopyIcon />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Copy DID</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      </div>
-    ),
+    issuedTo: {
+      did: "did:ethr:0x123456789abcdefghifjkfjvhjdscbkj,dnj",
+      name: "SomeName",
+    },
     name: "ABC",
   },
   {
@@ -197,26 +105,10 @@ export const organizationHealthRecordsData = [
     healthRecordName: "X-Ray",
     healthRecordCategory: "radiology",
     issuedOn: "1-1-2023",
-    issuedTo: (
-      <div className="flex mt-2">
-        <p>did:ethr:0x123456789abcd</p>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger>
-              <div
-                className="cursor-pointer ml-2 mr-4 h-8 text-md"
-                onClick={handleCopyToClipboard}
-              >
-                <CopyIcon />
-              </div>
-            </TooltipTrigger>
-            <TooltipContent>
-              <p>Copy DID</p>
-            </TooltipContent>
-          </Tooltip>
-        </TooltipProvider>
-      </div>
-    ),
+    issuedTo: {
+      did: "did:ethr:0x123456789abcdefghifjkfjvhjdscbkj,dnj",
+      name: "SomeName",
+    },
     name: "ABC",
   },
 ];
