@@ -24,7 +24,7 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { testBase64Image } from "@/helpers/mock";
-
+import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
   DropdownMenu,
@@ -138,7 +138,7 @@ export function UserTable() {
       accessorKey: "healthrecordName",
       header: "Healthrecord Name",
       cell: ({ row }) => (
-        <div className="capitalize text-lg font-semibold">
+        <div className="capitalize text-lg font-semibold text-emerald-900">
           {row.getValue("healthrecordName")}
         </div>
       ),
@@ -147,7 +147,11 @@ export function UserTable() {
       accessorKey: "healthrecordCategory",
       header: "Category",
       cell: ({ row }) => (
-        <div className="capitalize">{row.getValue("healthrecordCategory")}</div>
+        <div className="capitalize">
+          <Badge className="bg-emerald-700 text-emerald-50 p-1 rounded-lg">
+            {row.getValue("healthrecordCategory")}
+          </Badge>
+        </div>
       ),
       filterFn: (row, id, value) => {
         return value.includes(row.getValue(id));
@@ -158,7 +162,9 @@ export function UserTable() {
       accessorKey: "date",
       header: "Issued On",
       cell: ({ row }) => (
-        <div className="lowercase">{row.getValue("date")}</div>
+        <div className="lowercase font-bold bg-slate-300 inline-block rounded-full p-2">
+          {row.getValue("date")}
+        </div>
       ),
     },
 

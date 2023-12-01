@@ -69,72 +69,37 @@ import {
   PlusIcon,
   PlusCircledIcon,
 } from "@radix-ui/react-icons";
+import { Badge } from "@/components/ui/badge";
 import { useRecoilState } from "recoil";
 import { didState, healthRecordsState } from "@/atoms/data";
 
-const data = [
-  {
-    id: "m5gr84i9",
-    healthrecordName: "success",
-    healthrecordCategory: "MRI",
-    date: "1-1-2023",
-    did: "wjwheuiqh",
-  },
-  {
-    id: "m5gr84i9",
-    healthrecordName: "abc",
-    healthrecordCategory: "MRI",
-    date: "1-1-2023",
-    did: "wjwheuiqh",
-  },
-  {
-    id: "m5gr84i9",
-    healthrecordName: "def",
-    healthrecordCategory: "MRI",
-    date: "1-1-2023",
-    did: "wjwheuiqh",
-  },
-  {
-    id: "m5gr84i9",
-    healthrecordName: "def",
-    healthrecordCategory: "CBC",
-    date: "1-1-2023",
-    did: "wjwheuiqh",
-  },
-  {
-    id: "m5gr84i9",
-    healthrecordName: "def",
-    healthrecordCategory: "CBC",
-    date: "1-1-2023",
-    did: "wjwheuiqh",
-  },
-  {
-    id: "m5gr84i9",
-    healthrecordName: "def",
-    healthrecordCategory: "CECT",
-    date: "1-1-2023",
-    did: "wjwheuiqh",
-  },
-];
-
 const columns = [
   {
-    accessorKey: "did",
+    accessorKey: "issuedTo",
     header: "Issued to",
-    cell: ({ row }) => <div className="lowercase">{row.getValue("did")}</div>,
+    cell: ({ row }) => (
+      <div className="lowercase">{row.getValue("issuedTo")}</div>
+    ),
   },
   {
     accessorKey: "healthrecordName",
     header: "Healthrecord Name",
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("healthrecordName")}</div>
+      <div className="capitalize text-lg font-semibold text-cyan-900">
+        {row.getValue("healthrecordName")}
+      </div>
     ),
   },
   {
     accessorKey: "healthrecordCategory",
     header: "Category",
     cell: ({ row }) => (
-      <div className="capitalize">{row.getValue("healthrecordCategory")}</div>
+      <div className="capitalize">
+        {" "}
+        <Badge className="bg-cyan-700 text-cyan-50 hover:bg-cyan-700 text-cyan-50 p-1 rounded-lg">
+          {row.getValue("healthrecordCategory")}
+        </Badge>
+      </div>
     ),
     filterFn: (row, id, value) => {
       return value.includes(row.getValue(id));
@@ -142,9 +107,13 @@ const columns = [
   },
 
   {
-    accessorKey: "date",
+    accessorKey: "issuedOn",
     header: "Issued On",
-    cell: ({ row }) => <div className="lowercase">{row.getValue("date")}</div>,
+    cell: ({ row }) => (
+      <div className="lowercase font-bold bg-slate-300 inline-block rounded-full p-2">
+        {row.getValue("issuedOn")}
+      </div>
+    ),
   },
   {
     id: "view",
@@ -178,18 +147,23 @@ const columns = [
 //schema for the healthrecord category filter
 const healthrecordCategory = [
   {
-    value: "mri",
-    label: "MRI",
+    value: "radiology",
+    label: "Radiology",
     icon: QuestionMarkCircledIcon,
   },
   {
-    value: "cect",
-    label: "CECT",
+    value: "pathology",
+    label: "Pathology",
     icon: CircleIcon,
   },
   {
-    value: "cbc",
-    label: "cbc",
+    value: "cardiology",
+    label: "Cardiology",
+    icon: StopwatchIcon,
+  },
+  {
+    value: "neurology",
+    label: "Neurology",
     icon: StopwatchIcon,
   },
 ];
@@ -199,9 +173,55 @@ export function OrganizationTable() {
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
   const [rowSelection, setRowSelection] = useState({});
-
   const [didData, setDidData] = useRecoilState(didState);
   const [healthRecord, setHealthRecord] = useRecoilState(healthRecordsState);
+
+  const formattedDid = `${didData.did.slice(8, 16)}...${didData.did.slice(-8)}`;
+
+  const data = [
+    {
+      id: "m5gr84i9",
+      healthrecordName: "KFT",
+      healthrecordCategory: "pathology",
+      issuedOn: "1-1-2023",
+      issuedTo: formattedDid,
+    },
+    {
+      id: "m5gr84i9",
+      healthrecordName: "Electroencephalogram",
+      healthrecordCategory: "neurology",
+      issuedOn: "1-1-2023",
+      issuedTo: formattedDid,
+    },
+    {
+      id: "m5gr84i9",
+      healthrecordName: "Brain MRI ",
+      healthrecordCategory: "neurology",
+      issuedOn: "1-1-2023",
+      issuedTo: formattedDid,
+    },
+    {
+      id: "m5gr84i9",
+      healthrecordName: "ECG",
+      healthrecordCategory: "cardiology",
+      issuedOn: "1-1-2023",
+      issuedTo: formattedDid,
+    },
+    {
+      id: "m5gr84i9",
+      healthrecordName: "CECT",
+      healthrecordCategory: "radiology",
+      issuedOn: "1-1-2023",
+      issuedTo: formattedDid,
+    },
+    {
+      id: "m5gr84i9",
+      healthrecordName: "X-Ray",
+      healthrecordCategory: "radiology",
+      issuedOn: "1-1-2023",
+      issuedTo: formattedDid,
+    },
+  ];
 
   const table = useReactTable({
     data,
