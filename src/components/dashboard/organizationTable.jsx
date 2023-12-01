@@ -23,23 +23,8 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectLabel,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
 import {
   DropdownMenu,
   DropdownMenuCheckboxItem,
@@ -49,7 +34,6 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Label } from "@/components/ui/label";
 import {
   Table,
   TableBody,
@@ -59,15 +43,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import CategoryFilter from "./categoryFilter";
-import {
-  CircleIcon,
-  QuestionMarkCircledIcon,
-  StopwatchIcon,
-  Cross2Icon,
-  PlusIcon,
-  PlusCircledIcon,
-  CopyIcon,
-} from "@radix-ui/react-icons";
+import { Cross2Icon, CopyIcon } from "@radix-ui/react-icons";
 import {
   Tooltip,
   TooltipContent,
@@ -82,6 +58,7 @@ import {
   healthRecordCategoryOptions,
   organizationHealthRecordsData,
 } from "@/lib/constants";
+import { IssueDid } from "./issueDid";
 
 export function OrganizationTable() {
   const [sorting, setSorting] = useState([]);
@@ -310,130 +287,8 @@ export function OrganizationTable() {
           Issued Records
         </div>
         <div>
-          {" "}
           {/* Modal */}
-          <Dialog>
-            <DialogTrigger>
-              <Button className="bg-cyan-900 text-cyan-50 hover:bg-cyan-500">
-                <PlusCircledIcon className="mt-0.5" />
-                <span className="w-2"> </span>Issue Record
-              </Button>
-            </DialogTrigger>
-            <DialogContent>
-              <DialogHeader>
-                <DialogTitle className="text-cyan-900">
-                  Issue a Health Record.
-                </DialogTitle>
-                <DialogDescription>
-                  <Card className="p-2 border-cyan-800 bg-cyan-50 ">
-                    <CardHeader>
-                      {/* <CardTitle className="text-cyan-600">
-                        Create project
-                      </CardTitle> */}
-                      <CardDescription className="text-cyan-600">
-                        Enter details to issue a healthRecord.
-                      </CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                      <form onSubmit={handlehealthRecordIssue}>
-                        <div className="grid w-full items-center gap-4">
-                          <div className="flex flex-col space-y-1.5">
-                            <Label className="text-cyan-600">
-                              Patient's DID
-                            </Label>
-                            <Input
-                              value={healthRecordData.patientDid}
-                              onChange={(event) =>
-                                sethealthRecordData({
-                                  ...healthRecordData,
-                                  patientDid: event.target.value,
-                                })
-                              }
-                              placeholder="Enter the pateint's DID"
-                              className="border border-cyan-300"
-                            />
-                          </div>
-                          <div className="flex flex-col space-y-1.5">
-                            <Label className="text-cyan-600">
-                              healthRecord Name
-                            </Label>
-                            <Input
-                              value={healthRecordData.healthRecordName}
-                              onChange={(event) =>
-                                sethealthRecordData({
-                                  ...healthRecordData,
-                                  healthRecordName: event.target.value,
-                                })
-                              }
-                              placeholder="Enter the healthRecord name"
-                              className="border border-cyan-300"
-                            />
-                          </div>
-                          <div className="flex flex-col space-y-1.5">
-                            <Label className="text-cyan-600">
-                              healthRecord Category
-                            </Label>
-                            <Select
-                              placeholder="Select a category"
-                              onValueChange={(value) =>
-                                sethealthRecordData({
-                                  ...healthRecordData,
-                                  category: value,
-                                })
-                              }
-                              className="border border-cyan-300"
-                            >
-                              <SelectTrigger className="">
-                                <SelectValue placeholder="Select a category" />
-                              </SelectTrigger>
-                              <SelectContent>
-                                <SelectGroup>
-                                  <SelectItem value="Cardiology">
-                                    Cardiology
-                                  </SelectItem>
-                                  <SelectItem value="Pathology">
-                                    Pathology
-                                  </SelectItem>
-                                  <SelectItem value="Neurology">
-                                    Neurology
-                                  </SelectItem>
-                                  <SelectItem value="Radiology">
-                                    Radiology
-                                  </SelectItem>
-                                </SelectGroup>
-                              </SelectContent>
-                            </Select>
-                          </div>
-                          <div className="flex flex-col space-y-1.5">
-                            <Label className="text-cyan-600">
-                              Upload Record
-                            </Label>
-                            <Input
-                              type="file"
-                              onChange={(event) =>
-                                sethealthRecordData({
-                                  ...healthRecordData,
-                                  file: event.target.files[0],
-                                })
-                              }
-                              accept="image/png"
-                              placeholder="Choose file"
-                              className="border border-cyan-300"
-                            />
-                          </div>
-                        </div>
-                        <div className="flex justify-center">
-                          <Button className="bg-cyan-600 hover:bg-cyan-400 mt-2 ">
-                            Issue
-                          </Button>
-                        </div>
-                      </form>
-                    </CardContent>
-                  </Card>
-                </DialogDescription>
-              </DialogHeader>
-            </DialogContent>
-          </Dialog>
+          <IssueDid />
         </div>
       </div>
 
