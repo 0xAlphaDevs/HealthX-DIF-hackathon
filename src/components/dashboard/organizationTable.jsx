@@ -86,12 +86,18 @@ export function OrganizationTable() {
 
   const columns = [
     {
+      accessorKey: "name",
+      header: "",
+      cell: ({ row }) => <></>,
+    },
+    {
       accessorKey: "issuedTo",
       header: "Issued to",
       cell: ({ row }) => (
-        <div className="lowercase font-bold bg-slate-300 inline-block rounded-full p-2">
-          {row.getValue("issuedTo")}
-        </div>
+        <>
+          <div className="capitalize font-semibold">{row.getValue("name")}</div>
+          <div className="lowercase font-thin">{row.getValue("issuedTo")}</div>
+        </>
       ),
     },
     {
