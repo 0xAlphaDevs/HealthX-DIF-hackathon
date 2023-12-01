@@ -147,10 +147,8 @@ export function UserTable() {
       accessorKey: "healthrecordCategory",
       header: "Category",
       cell: ({ row }) => (
-        <div className="capitalize">
-          <Badge className="bg-emerald-700 text-emerald-50 p-1 rounded-lg">
-            {row.getValue("healthrecordCategory")}
-          </Badge>
+        <div className="capitalize inline-block font-semibold bg-emerald-700 text-emerald-50 p-1 rounded-lg">
+          {row.getValue("healthrecordCategory")}
         </div>
       ),
       filterFn: (row, id, value) => {
