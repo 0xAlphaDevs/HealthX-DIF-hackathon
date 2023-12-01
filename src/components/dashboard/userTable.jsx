@@ -262,7 +262,7 @@ export function UserTable() {
   return (
     <div className="p-8 ">
       <div className="text-emerald-900 font-bold text-2xl bg-emerald-50 p-4 rounded-lg inline-block">
-        Issued Records
+        My Health Records
       </div>
       {/* Table Toolbar  */}
       <div className="flex items-center py-4">
