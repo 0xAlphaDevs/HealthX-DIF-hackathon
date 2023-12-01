@@ -66,7 +66,14 @@ import {
   Cross2Icon,
   PlusIcon,
   PlusCircledIcon,
+  CopyIcon,
 } from "@radix-ui/react-icons";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
 import { base64ImageState, didData } from "@/atoms/data";
 import { useRouter } from "next/router";
 import { useSetRecoilState } from "recoil";
@@ -86,19 +93,41 @@ export function OrganizationTable() {
 
   const columns = [
     {
-      accessorKey: "name",
-      header: "",
-      cell: ({ row }) => <></>,
-    },
-    {
       accessorKey: "issuedTo",
       header: "Issued to",
-      cell: ({ row }) => (
-        <>
-          <div className="capitalize font-semibold">{row.getValue("name")}</div>
-          <div className="lowercase font-thin">{row.getValue("issuedTo")}</div>
-        </>
-      ),
+      cell: ({ row }) => {
+        const issuedToData = row.getValue("issuedTo");
+        const did = issuedToData ? issuedToData.did : "";
+        const name = issuedToData ? issuedToData.name : "";
+        function handleCopyToClipboard() {
+          navigator.clipboard.writeText(issuedToData.did);
+        }
+        return (
+          <>
+            <div className="capitalize font-semibold">{name}</div>
+            <div className="lowercase font-thin flex items-center">
+              <div>{did}</div>
+              <div>
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger>
+                      <div
+                        className="cursor-pointer ml-2 mr-4  text-md"
+                        onClick={handleCopyToClipboard}
+                      >
+                        <CopyIcon />
+                      </div>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Copy DID</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </div>
+            </div>
+          </>
+        );
+      },
     },
     {
       accessorKey: "healthRecordName",
