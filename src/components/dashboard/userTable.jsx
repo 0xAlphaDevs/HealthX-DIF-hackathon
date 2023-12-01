@@ -1,5 +1,4 @@
-"use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   getFacetedRowModel,
   getFacetedUniqueValues,
@@ -40,18 +39,45 @@ import {
 import CategoryFilter from "./categoryFilter";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { useRouter } from "next/router";
-import { base64ImageState } from "@/atoms/data";
-import { useSetRecoilState } from "recoil";
+import { base64ImageState, web5State, didState } from "@/atoms/data";
+import { useSetRecoilState, useRecoilState, useRecoilValue } from "recoil";
 import {
   userHealthRecordsData,
   healthRecordCategoryOptions,
 } from "@/lib/constants";
+import { initWeb5 } from "@/helpers/initWeb5";
+import { fetchRecords } from "@/helpers/fetchRecords";
 
 export function UserTable() {
   const [sorting, setSorting] = useState([]);
   const [columnFilters, setColumnFilters] = useState([]);
   const [columnVisibility, setColumnVisibility] = useState({});
   const [rowSelection, setRowSelection] = useState({});
+
+  // Web5 and DID
+  const { did } = useRecoilValue(didState);
+  let [web5Object, setWeb5Object] = useRecoilState(web5State);
+
+  // 🟡
+  const [tableData, setTableData] = useState([]);
+
+  useEffect(() => {
+    const fetchTableData = async () => {
+      if (!web5Object) {
+        const { web5 } = await initWeb5();
+        setWeb5Object(web5);
+      } else {
+        console.log("Fetching records...");
+        console.log("DID :", did);
+        console.log("Web5 State:", web5Object);
+        const records = await fetchRecords(web5Object, did);
+        console.log("Records :", records);
+        // setTableData(data);
+      }
+    };
+
+    fetchTableData();
+  }, [web5Object, did]);
 
   const setBase64Image = useSetRecoilState(base64ImageState);
 
@@ -132,31 +158,6 @@ export function UserTable() {
         );
       },
     },
-    // {
-    //   accessorKey: "share",
-    //   header: () => <div className="text-right"></div>,
-    //   cell: () => {
-    //     return (
-    //       <Dialog>
-    //         <DialogTrigger>
-    //           {" "}
-    //           <Button className="bg-emerald-900 text-emerald-50 hover:bg-emerald-500">
-    //             Share
-    //           </Button>
-    //         </DialogTrigger>
-    //         <DialogContent>
-    //           <DialogHeader>
-    //             <DialogTitle>Are you sure absolutely sure?</DialogTitle>
-    //             <DialogDescription>
-    //               This action cannot be undone. This will permanently delete your
-    //               account and remove your data from our servers.
-    //             </DialogDescription>
-    //           </DialogHeader>
-    //         </DialogContent>
-    //       </Dialog>
-    //     );
-    //   },
-    // },
   ];
 
   const table = useReactTable({
@@ -180,7 +181,9 @@ export function UserTable() {
     getFacetedRowModel: getFacetedRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
   });
+
   const isFiltered = table.getState().columnFilters.length > 0;
+
   return (
     <div className="p-8 ">
       <div className="text-emerald-900 font-bold text-2xl bg-emerald-50 p-4 rounded-lg inline-block">
