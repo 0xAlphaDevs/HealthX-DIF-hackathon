@@ -77,9 +77,25 @@ export function IssueHealthRecord() {
     imageFile,
     receiverDid
   ) => {
-    let base64Image = null;
+    let image = null;
 
-    base64Image = await createBase64Image(imageFile);
+    // image = await createBase64Image(imageFile);
+
+    // upload image to cloudinary 🟡
+    const data = new FormData();
+    data.append("file", imageFile);
+    data.append("upload_preset", "healthX_preset");
+    data.append("cloud_name", "healthx");
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/healthx/image/upload",
+      {
+        method: "POST",
+        body: data,
+      }
+    );
+    const file = await res.json();
+    image = file.secure_url;
+    //////////////////////
 
     const currentDate = new Date().toLocaleDateString();
     const currentTime = new Date().toLocaleTimeString();
@@ -89,7 +105,7 @@ export function IssueHealthRecord() {
       patientName: patientName,
       healthRecordName: healthRecordName,
       healthRecordCategory: healthRecordCategory,
-      image: base64Image,
+      image: image,
       recipient: receiverDid,
       issuedOn: `${currentDate} ${currentTime}`,
     };
@@ -127,36 +143,6 @@ export function IssueHealthRecord() {
       console.log("Record created:", record);
 
       // send to remote dwd instantly
-      const { status } = await record.send(healthRecordData.patientDid);
-      console.log("Record sent status : ", status);
-      setIsLoading(false);
-      setSendRecordSuccess(true);
-    } catch (error) {
-      console.error("Error submitting health record:", error);
-      setIsLoading(false);
-    }
-  }
-
-  // send healthImage record
-  async function sendhealthImageRecord(receiverDid) {
-    try {
-      setIsLoading(true);
-
-      const { web5 } = await initWeb5();
-
-      const blob = await createBase64Image(healthRecordData.file); //
-
-      console.log("Blob: ", blob);
-
-      const { record } = await web5.dwn.records.create({
-        data: blob,
-        message: {
-          dataFormat: "image/png",
-        },
-      });
-      console.log("Record created:", record);
-
-      // send to remote dwd instantly
       const { status } = await record.send(receiverDid);
       console.log("Record sent status : ", status);
       setIsLoading(false);
@@ -170,8 +156,7 @@ export function IssueHealthRecord() {
   function handlehealthRecordIssue(event) {
     event.preventDefault();
     console.log("Creating record...");
-    // sendhealthRecord(healthRecordData.patientDid);
-    sendhealthImageRecord(healthRecordData.patientDid);
+    sendhealthRecord(healthRecordData.patientDid);
   }
 
   return (
@@ -225,6 +210,7 @@ export function IssueHealthRecord() {
                               }
                               placeholder="Enter the pateint's DID"
                               className="border border-cyan-300"
+                              required
                             />
                           </div>
                           <div className="flex flex-col space-y-1.5">
@@ -258,6 +244,7 @@ export function IssueHealthRecord() {
                               }
                               placeholder="Enter the healthRecord name"
                               className="border border-cyan-300"
+                              required
                             />
                           </div>
                           <div className="flex flex-col space-y-1.5">
@@ -273,6 +260,7 @@ export function IssueHealthRecord() {
                                 })
                               }
                               className="border border-cyan-300"
+                              required
                             >
                               <SelectTrigger className="">
                                 <SelectValue placeholder="Select a category" />

@@ -141,9 +141,6 @@ export const protocolDefinition = {
       schema: "https://alphadevs.dev/healthRecord",
       dataFormats: ["application/json"],
     },
-    healthRecordImage: {
-      dataFormats: ["image/png"],
-    },
   },
   structure: {
     healthRecord: {
@@ -151,13 +148,6 @@ export const protocolDefinition = {
         { who: "anyone", can: "write" },
         { who: "author", of: "healthRecord", can: "read" },
         { who: "recipient", of: "healthRecord", can: "read" },
-      ],
-    },
-    healthRecordImage: {
-      $actions: [
-        { who: "anyone", can: "write" },
-        { who: "author", of: "healthRecordImage", can: "read" },
-        { who: "recipient", of: "healthRecordImage", can: "read" },
       ],
     },
   },
