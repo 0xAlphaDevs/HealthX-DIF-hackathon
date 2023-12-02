@@ -37,16 +37,20 @@ Follow these instructions to set up and run the project:
 - Next JS
 - Javascript
 - Tailwind CSS
-- Shadcn
 - Radix UI
 - Tanstack
 
-### OthervTechnologies
+### Other Technologies
 
 - web5/api (DWNs & DIDs)
 - Recoil
 - crypto-browserify
 - stream-browserify
+
+### DIF Work Items
+
+- DWNs
+- DIDs
 
 ## Our Solution (Architecture)
 
@@ -130,6 +134,10 @@ To further enhance organization experience and accessibility, we will be working
 ### 2. Share Button for Health Records
 
 To further enhance user experience and accessibility, we aim to introduce a "Share" button in the individual dashboard for every health record. This feature will empower users to share their health records with different healthcare organizations. By streamlining the sharing process, we intend to facilitate seamless collaboration between individuals and healthcare entities, contributing to a more interconnected and efficient healthcare ecosystem.
+
+### 3. Decentralized Identity (DID) Validation
+
+We will aim to validation DID on HealthX for secure and independent identity verification. This ensures trust in shared health records, empowering users and organization aligning with the latest in privacy technology.
 
 ## Team
 
