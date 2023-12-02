@@ -142,7 +142,6 @@ export const protocolDefinition = {
       dataFormats: ["application/json"],
     },
     healthRecordImage: {
-      schema: "https://alphadevs.dev/healthRecordImage",
       dataFormats: ["image/png"],
     },
   },
