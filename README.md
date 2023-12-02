@@ -7,7 +7,7 @@ Health X: Accessing Health History through Web5 - Seamlessly storing and sharing
 ## Table of Contents
 
 1. [Links](#links)
-2. [Instructions to Run](#instructions-to-run)
+2. [Instructions to Repo Setup](#instructions-to-repo-setup)
 3. [Tech Stack](#tech-stack)
 4. [Our Solution (Architecture)](#our-solution-architecture)
 5. [Future Vision](#future-vision)
@@ -19,7 +19,7 @@ Health X: Accessing Health History through Web5 - Seamlessly storing and sharing
 - [Git Repo with README](https://github.com/0xAlphaDevs/HealthX-DIF-hackathon)
 - [Presentation PDF]()
 
-## Instructions to Run
+## Instructions to Setup
 
 Follow these instructions to set up and run the project:
 
