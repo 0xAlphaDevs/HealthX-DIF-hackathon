@@ -137,13 +137,6 @@ export function IssueHealthRecord() {
     }
   }
 
-  // construct healthImage Record
-  const constructhealthImageRecord = async () => {
-    const blob = new Blob(healthRecordData.file, { type: "image/png" });
-
-    return blob;
-  };
-
   // send healthImage record
   async function sendhealthImageRecord(receiverDid) {
     try {
@@ -151,7 +144,7 @@ export function IssueHealthRecord() {
 
       const { web5 } = await initWeb5();
 
-      const blob = await constructhealthImageRecord(); //
+      const blob = await createBase64Image(healthRecordData.file); //
 
       console.log("Blob: ", blob);
 
