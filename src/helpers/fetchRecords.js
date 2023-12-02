@@ -3,7 +3,7 @@ export const fetchRecords = async (web5, did) => {
     message: {
       filter: {
         protocol: "https://alphadevs.dev/healthX-protocol",
-        // protocolPath: "healthRecord",
+        protocolPath: "healthRecord",
       },
     },
   });
