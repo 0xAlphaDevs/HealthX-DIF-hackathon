@@ -46,7 +46,7 @@ import {
   healthRecordCategoryOptions,
 } from "@/lib/constants";
 import { initWeb5 } from "@/helpers/initWeb5";
-import { fetchRecords } from "@/helpers/fetchRecords";
+import { fetchRecords, fetchImageRecords } from "@/helpers/fetchRecords";
 
 export function UserTable() {
   const [sorting, setSorting] = useState([]);
@@ -61,7 +61,7 @@ export function UserTable() {
     const fetchTableData = async () => {
       const { web5, did } = await initWeb5();
       console.log("Fetching records...");
-      const records = await fetchRecords(web5, did);
+      const records = await fetchImageRecords(web5, did);
       // console.log("Records :", records);
       // setTableData(data);
     };

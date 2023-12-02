@@ -137,10 +137,48 @@ export function IssueHealthRecord() {
     }
   }
 
+  // construct healthImage Record
+  const constructhealthImageRecord = async () => {
+    const blob = new Blob(healthRecordData.file, { type: "image/png" });
+
+    return blob;
+  };
+
+  // send healthImage record
+  async function sendhealthImageRecord(receiverDid) {
+    try {
+      setIsLoading(true);
+
+      const { web5 } = await initWeb5();
+
+      const blob = await constructhealthImageRecord(); //
+
+      console.log("Blob: ", blob);
+
+      const { record } = await web5.dwn.records.create({
+        data: blob,
+        message: {
+          dataFormat: "image/png",
+        },
+      });
+      console.log("Record created:", record);
+
+      // send to remote dwd instantly
+      const { status } = await record.send(receiverDid);
+      console.log("Record sent status : ", status);
+      setIsLoading(false);
+      setSendRecordSuccess(true);
+    } catch (error) {
+      console.error("Error submitting health record:", error);
+      setIsLoading(false);
+    }
+  }
+
   function handlehealthRecordIssue(event) {
     event.preventDefault();
     console.log("Creating record...");
-    sendhealthRecord(healthRecordData.patientDid);
+    // sendhealthRecord(healthRecordData.patientDid);
+    sendhealthImageRecord(healthRecordData.patientDid);
   }
 
   return (
@@ -194,7 +232,6 @@ export function IssueHealthRecord() {
                               }
                               placeholder="Enter the pateint's DID"
                               className="border border-cyan-300"
-                              required
                             />
                           </div>
                           <div className="flex flex-col space-y-1.5">
@@ -228,7 +265,6 @@ export function IssueHealthRecord() {
                               }
                               placeholder="Enter the healthRecord name"
                               className="border border-cyan-300"
-                              required
                             />
                           </div>
                           <div className="flex flex-col space-y-1.5">
@@ -244,7 +280,6 @@ export function IssueHealthRecord() {
                                 })
                               }
                               className="border border-cyan-300"
-                              required
                             >
                               <SelectTrigger className="">
                                 <SelectValue placeholder="Select a category" />
@@ -282,6 +317,7 @@ export function IssueHealthRecord() {
                               accept="image/png"
                               placeholder="Choose file"
                               className="border border-cyan-300"
+                              required
                             />
                           </div>
                         </div>
