@@ -139,7 +139,11 @@ export const protocolDefinition = {
   types: {
     healthRecord: {
       schema: "https://alphadevs.dev/healthRecord",
-      dataFormats: ["application/json"],
+      dataFormats: [
+        "application/json",
+        "image/png",
+        "application/octet-stream",
+      ],
     },
   },
   structure: {
