@@ -60,7 +60,7 @@ import {
 } from "@/lib/constants";
 import { IssueHealthRecord } from "./issueHealthRecord";
 import { initWeb5 } from "@/helpers/initWeb5";
-import { fetchRecords } from "@/helpers/fetchRecords";
+import { fetchImageRecords, fetchRecords } from "@/helpers/fetchRecords";
 
 export function OrganizationTable() {
   const [sorting, setSorting] = useState([]);
@@ -75,7 +75,7 @@ export function OrganizationTable() {
     const fetchTableData = async () => {
       const { web5, did } = await initWeb5();
       console.log("Fetching records...");
-      const records = await fetchRecords(web5, did);
+      const records = await fetchImageRecords(web5, did);
       // console.log("Records :", records);
       // setTableData(data);
     };
