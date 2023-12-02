@@ -2,15 +2,15 @@
 
 DIF Hackathon
 
-Health X: Accessing Healthcare through Web5 SDK - Seamlessly storing and sharing medical records on a decentralized web network (DWNs) using decentralized identifiers (DIDs). Providing healthcare organizations to issue secure records based on DIDs, while providing patients with easy access to their health data.
+Health X: Accessing Health History through Web5 - Seamlessly storing and sharing medical records on decentralized web nodes (DWNs) using decentralized identifiers (DIDs). Allowing healthcare organizations to issue secure health records to a pateint using his/her DIDs and providing patients with easy access to their health data.
 
 ## Table of Contents
 
 1. [Links](#links)
-2. [Tech Stack](#tech-stack)
-3. [Our Solution (Architecture)](#our-solution-architecture)
-4. [Instructions to Run](#instructions-to-run)
-5. [Future Features](#future-features)
+2. [Instructions to Run](#instructions-to-run)
+3. [Tech Stack](#tech-stack)
+4. [Our Solution (Architecture)](#our-solution-architecture)
+5. [Future Vision](#future-vision)
 6. [Team](#team)
 
 ## Links
@@ -18,6 +18,17 @@ Health X: Accessing Healthcare through Web5 SDK - Seamlessly storing and sharing
 - [Deployed URL]()
 - [Git Repo with README](https://github.com/0xAlphaDevs/HealthX-DIF-hackathon)
 - [Presentation PDF]()
+
+## Instructions to Run
+
+Follow these instructions to set up and run the project:
+
+**Using Github**
+
+- Clone the Git repository: `https://github.com/0xAlphaDevs/HealthX-DIF-hackathon.git`
+- Install project dependencies: `pnpm install`
+- Start the development server: `pnpm run dev`
+- Access the web app in your browser at [http://localhost:8080](http://localhost:8080)
 
 ## Tech Stack
 
@@ -91,24 +102,13 @@ Health X: Accessing Healthcare through Web5 SDK - Seamlessly storing and sharing
 
 **View Detailed Report Image**
 
-- Clicking teh view button on a specific record in the table allows the individual to view the detailed report image.
+- Clicking the view button on a specific record in the table allows the individual to view the detailed report image.
 - This opens a separate route displaying the image associated with the health record.
 
 **Search and Filter Functionality**
 
 - Efficiently navigate through issued records with implemented search and filter functionalities.
 - Easily locate specific records based on parameters such as health record name or category.
-
-## Instructions to Run
-
-Follow these instructions to set up and run the project:
-
-**Using Github**
-
-- Clone the Git repository: `https://github.com/0xAlphaDevs/HealthX-DIF-hackathon.git`
-- Install project dependencies: `pnpm install`
-- Start the development server: `pnpm run dev`
-- Access the web app in your browser at [http://localhost:8080](http://localhost:8080)
 
 ## App Working / ScreenShots
 
@@ -119,7 +119,7 @@ Follow these instructions to set up and run the project:
 ![image]()
 ![image]()
 
-## Future Features
+## Future Vision
 
 As we envision the continuous improvement and expansion of HealthX, here are some exciting features we plan to integrate into the platform:
 
