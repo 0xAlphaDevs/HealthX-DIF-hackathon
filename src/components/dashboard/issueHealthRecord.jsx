@@ -79,7 +79,7 @@ export function IssueHealthRecord() {
   ) => {
     let base64Image = null;
 
-    // base64Image = await createBase64Image(imageFile);
+    base64Image = await createBase64Image(imageFile);
 
     const currentDate = new Date().toLocaleDateString();
     const currentTime = new Date().toLocaleTimeString();
