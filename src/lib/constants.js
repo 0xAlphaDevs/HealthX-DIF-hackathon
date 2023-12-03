@@ -134,7 +134,7 @@ export const healthRecordCategoryOptions = [
 ];
 
 export const protocolDefinition = {
-  protocol: "https://alphadevs.dev/healthX",
+  protocol: "https://alphadevs.dev/healthX-protocol",
   published: true,
   types: {
     healthRecord: {
