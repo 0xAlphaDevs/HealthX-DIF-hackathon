@@ -68,6 +68,8 @@ export function OrganizationTable() {
   const [columnVisibility, setColumnVisibility] = useState({});
   const [rowSelection, setRowSelection] = useState({});
 
+  const [tableData, setTableData] = useState([]);
+
   const setBase64Image = useSetRecoilState(base64ImageState);
 
   //🟡
@@ -76,6 +78,7 @@ export function OrganizationTable() {
       const { web5, did } = await initWeb5();
       console.log("Fetching records...");
       const records = await fetchRecords(web5, did);
+      setTableData(organizationHealthRecordsData);
       // console.log("Records :", records);
       // setTableData(data);
     };
@@ -198,7 +201,7 @@ export function OrganizationTable() {
   ];
 
   const table = useReactTable({
-    data: organizationHealthRecordsData,
+    data: tableData,
     columns,
     state: {
       sorting,

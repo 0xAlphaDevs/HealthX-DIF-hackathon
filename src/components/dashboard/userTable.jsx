@@ -54,7 +54,6 @@ export function UserTable() {
   const [columnVisibility, setColumnVisibility] = useState({});
   const [rowSelection, setRowSelection] = useState({});
 
-  // 🟡
   const [tableData, setTableData] = useState([]);
 
   useEffect(() => {
@@ -62,6 +61,8 @@ export function UserTable() {
       const { web5, did } = await initWeb5();
       console.log("Fetching records...");
       const records = await fetchRecords(web5, did);
+      setTableData(userHealthRecordsData);
+
       // console.log("Records :", records);
       // setTableData(data);
     };
