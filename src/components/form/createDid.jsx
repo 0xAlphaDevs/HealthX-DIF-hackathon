@@ -5,7 +5,7 @@ import Loader from "../loader";
 import { Skeleton } from "@/components/ui/skeleton";
 import { useRecoilState } from "recoil";
 import { didState, web5State } from "@/atoms/data";
-import { protocolDefinition } from "@/lib/constants";
+import protocolDefinition from "@/lib/protocolDefinition.json";
 import { initWeb5 } from "@/helpers/initWeb5";
 
 export default function CreateDid({ name, year, userType }) {

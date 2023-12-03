@@ -133,22 +133,22 @@ export const healthRecordCategoryOptions = [
   },
 ];
 
-export const protocolDefinition = {
-  protocol: "https://alphadevs.dev/healthX-protocol",
-  published: true,
-  types: {
-    healthRecord: {
-      schema: "https://alphadevs.dev/healthX-protocol/healthRecord",
-      dataFormats: ["application/json"],
-    },
-  },
-  structure: {
-    healthRecord: {
-      $actions: [
-        { who: "anyone", can: "write" },
-        { who: "author", of: "healthRecord", can: "read" },
-        { who: "recipient", of: "healthRecord", can: "read" },
-      ],
-    },
-  },
-};
+// export const protocolDefinition = {
+//   protocol: "https://alphadevs.dev/healthX-protocol",
+//   published: true,
+//   types: {
+//     healthRecord: {
+//       schema: "https://alphadevs.dev/healthX-protocol/healthRecord",
+//       dataFormats: ["application/json"],
+//     },
+//   },
+//   structure: {
+//     healthRecord: {
+//       $actions: [
+//         { who: "anyone", can: "write" },
+//         { who: "author", of: "healthRecord", can: "read" },
+//         { who: "recipient", of: "healthRecord", can: "read" },
+//       ],
+//     },
+//   },
+// };
