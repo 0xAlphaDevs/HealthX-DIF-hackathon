@@ -1,6 +1,4 @@
-# HealthX
-
-DIF Hackathon
+# HealthX : DIF Hackathon
 
 Health X: Accessing Health History through Web5 - Seamlessly storing and sharing medical records on decentralized web nodes (DWNs) using decentralized identifiers (DIDs). Allowing healthcare organizations to issue secure health records to a pateint using his/her DIDs and providing patients with easy access to their health data.
 
