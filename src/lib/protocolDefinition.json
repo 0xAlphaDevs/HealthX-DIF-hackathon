@@ -1,18 +1,18 @@
 {
-  "protocol": "https://alphadevs.dev/healthX-protocol",
+  "protocol": "https://alphadevs.dev/healthx-protocol",
   "published": true,
   "types": {
-    "healthRecord": {
-      "schema": "healthRecord",
+    "healthrecord": {
+      "schema": "healthrecord",
       "dataFormats": ["application/json"]
     }
   },
   "structure": {
-    "healthRecord": {
+    "healthrecord": {
       "$actions": [
         { "who": "anyone", "can": "write" },
-        { "who": "author", "of": "healthRecord", "can": "read" },
-        { "who": "recipient", "of": "healthRecord", "can": "read" }
+        { "who": "author", "of": "healthrecord", "can": "read" },
+        { "who": "recipient", "of": "healthrecord", "can": "read" }
       ]
     }
   }
