@@ -17,10 +17,10 @@ export const didState = atom({
     name: "",
     year: "",
     userType: "",
-    organizationTotalRecords: "0",
-    userTotalrecords: "0",
-    totalIssuersForUser: "0",
-    totalPatientsForHospital: "0",
+    organizationTotalRecords: 0,
+    userTotalrecords: 0,
+    totalIssuersForUser: 0,
+    totalPatientsForHospital: 0,
   }, // default value (aka initial value)
   effects_UNSTABLE: [persistAtom],
 });
