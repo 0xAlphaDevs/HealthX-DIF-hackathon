@@ -2,8 +2,7 @@ export const fetchRecords = async (web5, did) => {
   const { records, status: recordStatus } = await web5.dwn.records.query({
     message: {
       filter: {
-        protocol: "-protocol",
-        protocolPath: "healthRecord",
+        protocol: "https://alphadevs.dev/healthX-protocol",
       },
     },
   });
