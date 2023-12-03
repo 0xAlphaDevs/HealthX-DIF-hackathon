@@ -144,7 +144,7 @@ export function UserTable() {
                 <DialogTitle>Here is your Health Record.</DialogTitle>
                 <DialogDescription>
                   <img
-                    src="report.png"
+                    src={image}
                     alt="healthRecord Image"
                     style={{
                       width: "100%",
