@@ -152,7 +152,7 @@ export function OrganizationTable() {
     },
     {
       accessorKey: "healthRecordName",
-      header: "healthRecord Name",
+      header: "Health Record Name",
       cell: ({ row }) => (
         <div className="capitalize text-lg font-semibold text-cyan-900">
           {row.getValue("healthRecordName")}
@@ -201,7 +201,7 @@ export function OrganizationTable() {
                 <DialogDescription>
                   <img
                     src={image}
-                    alt="healthRecord Image"
+                    alt="Health Record Image"
                     style={{
                       width: "100%",
                       height: "400px",
