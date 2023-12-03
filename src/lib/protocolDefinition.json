@@ -1,9 +1,9 @@
 {
-  "protocol": "https://alphadevs.dev/healthx",
+  "protocol": "http://www.alphadevs.dev/healthx",
   "published": true,
   "types": {
     "healthrecord": {
-      "schema": "https://alphadevs.dev/healthx/healthrecord",
+      "schema": "http://www.alphadevs.dev/healthx/healthrecord",
       "dataFormats": ["application/json"]
     }
   },
