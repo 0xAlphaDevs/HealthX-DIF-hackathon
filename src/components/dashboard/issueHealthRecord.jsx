@@ -133,9 +133,9 @@ export function IssueHealthRecord() {
       const { record } = await web5.dwn.records.write({
         data: healthRecord,
         message: {
-          protocol: "https://alphadevs.dev/healthx",
+          protocol: "http://www.alphadevs.dev/healthx",
           protocolPath: "healthrecord",
-          schema: "https://alphadevs.dev/healthx/healthrecord",
+          schema: "http://www.alphadevs.dev/healthx/healthrecord",
           recipient: healthRecordData.patientDid,
           dataFormat: "application/json",
         },
@@ -143,8 +143,8 @@ export function IssueHealthRecord() {
       console.log("Record created:", record);
 
       // send to remote dwn instantly
-      // const { status } = await record.send(receiverDid);
-      // console.log("Record sent status : ", status);
+      const { status } = await record.send(receiverDid);
+      console.log("Record sent status : ", status);
       setIsLoading(false);
       setSendRecordSuccess(true);
     } catch (error) {
