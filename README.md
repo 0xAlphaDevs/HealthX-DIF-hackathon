@@ -1,11 +1,11 @@
-# HealthX : DIF Hackathon
+# HealthX Protocol : DIF Hackathon
 
-Health X: Own your Health History with Web5 - Seamlessly storing and sharing medical records on decentralized web nodes (DWNs) using decentralized identifiers (DIDs). Allowing healthcare organizations to issue secure health records to a pateint using his/her DIDs and providing patients with easy access to their health data.
+HealthX : Own & Carry your Health History with Web5 - Seamlessly store and share medical records on decentralized web nodes (DWNs) using decentralized identifiers (DIDs). Allowing healthcare organizations to issue secure health records to a pateint using his/her DIDs and providing patients with easy access to their health data.
 
 ## Table of Contents
 
-1. [Links](#links)
-2. [Instructions to Repo Setup](#instructions-to-repo-setup)
+1. [All Links](#links)
+2. [Instructions to setup and run locally ](#instructions-to-setup)
 3. [Tech Stack](#tech-stack)
 4. [Our Solution (Architecture)](#our-solution-architecture)
 5. [Future Vision](#future-vision)
@@ -13,9 +13,9 @@ Health X: Own your Health History with Web5 - Seamlessly storing and sharing med
 
 ## Links
 
-- [Deployed URL]()
+- [Deployed URL](https://healthx-ivory.vercel.app/)
 - [Git Repo with README](https://github.com/0xAlphaDevs/HealthX-DIF-hackathon)
-- [Presentation PDF]()
+- [Presentation PDF](https://docs.google.com/presentation/d/1WulT4PpZY1_bNW4N4pKIIGrirs_soqmgBOZNiak4Idk)
 
 ## Instructions to Setup
 
@@ -26,7 +26,7 @@ Follow these instructions to set up and run the project:
 - Clone the Git repository: `https://github.com/0xAlphaDevs/HealthX-DIF-hackathon.git`
 - Install project dependencies: `pnpm install`
 - Start the development server: `pnpm run dev`
-- Access the web app in your browser at [http://localhost:8080](http://localhost:8080)
+- Access the web app in your browser at [http://localhost:3000](http://localhost:3000)
 
 ## Tech Stack
 
@@ -112,30 +112,25 @@ Follow these instructions to set up and run the project:
 - Efficiently navigate through issued records with implemented search and filter functionalities.
 - Easily locate specific records based on parameters such as health record name or category.
 
-## App Working / ScreenShots
-
-![image]()
-![image]()
-![image]()
-![image]()
-![image]()
-![image]()
-
 ## Future Vision
 
 As we envision the continuous improvement and expansion of HealthX, here are some exciting features we plan to integrate into the platform:
 
-### 1. Enhanced Record Format Accessibility
+### 1. Adding more Health Record Formats
 
 To further enhance organization experience and accessibility, we will be working towards expanding the upload record format options beyond images. Our goal is to provide organizations with the flexibility to upload and view health records in various formats, ensuring compatibility with diverse types of medical documentation.
 
-### 2. Share Button for Health Records
+### 2. Single click access request and sharing of medical records
 
-To further enhance user experience and accessibility, we aim to introduce a "Share" button in the individual dashboard for every health record. This feature will empower users to share their health records with different healthcare organizations. By streamlining the sharing process, we intend to facilitate seamless collaboration between individuals and healthcare entities, contributing to a more interconnected and efficient healthcare ecosystem.
+To further enhance user experience and accessibility, we aim to introduce request based record sharing functionality on dashboard for every health record. This feature will empower users to share their health records with different healthcare organizations. By streamlining the sharing process, we intend to facilitate seamless collaboration between individuals and healthcare entities, contributing to a more interconnected and efficient healthcare ecosystem.
 
-### 3. Decentralized Identity (DID) Validation
+### 3. Better Identity management with wallet integration
 
-We will aim to validation DID on HealthX for secure and independent identity verification. This ensures trust in shared health records, empowering users and organization aligning with the latest in privacy technology.
+We aim to work together with TBD to launch and integrate Web5 wallet to facilitate better identity management for users. This will allow users to easily manage their DIDs and health records, providing them with a more streamlined and efficient experience.
+
+### 4. Integration with HealthX Mobile App (Later Stage)
+
+We will be working towards the development of a mobile application for HealthX. This will allow users to access their health records on the go, providing them with a convenient and efficient way to manage their health history.
 
 ## Team
 
