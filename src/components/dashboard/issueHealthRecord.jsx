@@ -142,7 +142,7 @@ export function IssueHealthRecord() {
       });
       console.log("Record created:", record);
 
-      // send to remote dwd instantly
+      // send to remote dwn instantly
       const { status } = await record.send(receiverDid);
       console.log("Record sent status : ", status);
       setIsLoading(false);
