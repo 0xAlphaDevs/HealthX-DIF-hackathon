@@ -94,7 +94,7 @@ export function UserTable() {
   const columns = [
     {
       accessorKey: "healthRecordName",
-      header: "healthRecord Name",
+      header: "Health Record Name",
       cell: ({ row }) => (
         <div className="capitalize text-lg font-semibold text-emerald-900">
           {row.getValue("healthRecordName")}
