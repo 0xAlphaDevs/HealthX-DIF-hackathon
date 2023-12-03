@@ -138,7 +138,7 @@ export const protocolDefinition = {
   published: true,
   types: {
     healthRecord: {
-      schema: "https://alphadevs.dev/healthRecord",
+      schema: "https://alphadevs.dev/healthX-protocol/healthRecord",
       dataFormats: ["application/json"],
     },
   },
