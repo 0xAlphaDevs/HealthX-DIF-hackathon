@@ -74,17 +74,15 @@ export function UserTable() {
     const fetchTableData = async () => {
       const { web5, did } = await initWeb5();
       console.log("Fetching records...");
-      const { receivedRecords, userTotalrecords } = await fetchRecords(
-        web5,
-        did
-      );
+      const { receivedRecords, userTotalrecords, totalIssuersForUser } =
+        await fetchRecords(web5, did);
       setDidData((prev) => ({
         ...prev,
         userTotalrecords,
         totalIssuersForUser,
       }));
-      const fetchTableData = constructRecievedRecords(receivedRecords);
-      setTableData(fetchTableData);
+      const finalTableData = constructRecievedRecords(receivedRecords);
+      setTableData(finalTableData);
 
       // console.log("Records :", records);
       // setTableData(data);
