@@ -50,7 +50,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { imageState, didData } from "@/atoms/data";
+import { imageState, didState } from "@/atoms/data";
 import { useRouter } from "next/router";
 import { useSetRecoilState } from "recoil";
 import {
@@ -70,6 +70,7 @@ export function OrganizationTable() {
   const [tableData, setTableData] = useState([]);
 
   const setImageState = useSetRecoilState(imageState);
+  const setDidData = useSetRecoilState(didState);
 
   const constructSentRecords = (records) => {
     const data = records.map((record) => {
@@ -92,9 +93,17 @@ export function OrganizationTable() {
     const fetchTableData = async () => {
       const { web5, did } = await initWeb5();
       console.log("Fetching records...");
-      const records = await fetchRecords(web5, did);
-      console.log("Records :", records);
-      const finalTableData = constructSentRecords(records.sentRecords);
+      const {
+        sentRecords,
+        organizationTotalRecords,
+        totalPatientsForHospital,
+      } = await fetchRecords(web5, did);
+      setDidData((prev) => ({
+        ...prev,
+        organizationTotalRecords,
+        totalPatientsForHospital,
+      }));
+      const finalTableData = constructSentRecords(sentRecords);
       setTableData(finalTableData);
       // console.log("Records :", records);
       // setTableData(data);

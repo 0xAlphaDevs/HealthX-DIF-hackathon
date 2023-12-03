@@ -12,7 +12,16 @@ export const web5State = atom({
 
 export const didState = atom({
   key: "didState", // unique ID (with respect to other atoms/selectors)
-  default: { did: "", name: "", year: "", userType: "" }, // default value (aka initial value)
+  default: {
+    did: "",
+    name: "",
+    year: "",
+    userType: "",
+    organizationTotalRecords: "0",
+    userTotalrecords: "0",
+    totalIssuersForUser: "0",
+    totalPatientsForHospital: "0",
+  }, // default value (aka initial value)
   effects_UNSTABLE: [persistAtom],
 });
 

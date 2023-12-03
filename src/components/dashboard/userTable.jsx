@@ -38,7 +38,7 @@ import {
 import CategoryFilter from "./categoryFilter";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { useRouter } from "next/router";
-import { imageState } from "@/atoms/data";
+import { imageState, didState } from "@/atoms/data";
 import { useSetRecoilState } from "recoil";
 import {
   userHealthRecordsData,
@@ -56,6 +56,7 @@ export function UserTable() {
   const [tableData, setTableData] = useState([]);
 
   const setImageState = useSetRecoilState(imageState);
+  const setDidData = useSetRecoilState(didState);
 
   const constructRecievedRecords = (records) => {
     const data = records.map((record) => {
@@ -73,8 +74,16 @@ export function UserTable() {
     const fetchTableData = async () => {
       const { web5, did } = await initWeb5();
       console.log("Fetching records...");
-      const records = await fetchRecords(web5, did);
-      const fetchTableData = constructRecievedRecords(records.receivedRecords);
+      const { receivedRecords, userTotalrecords } = await fetchRecords(
+        web5,
+        did
+      );
+      setDidData((prev) => ({
+        ...prev,
+        userTotalrecords,
+        totalIssuersForUser,
+      }));
+      const fetchTableData = constructRecievedRecords(receivedRecords);
       setTableData(fetchTableData);
 
       // console.log("Records :", records);

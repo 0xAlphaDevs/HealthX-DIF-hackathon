@@ -27,7 +27,7 @@ const Navbar = () => {
   return (
     <div className={`p-2 ${bgColor} flex justify-between`}>
       <div className="flex gap-2 items-center">
-        <Avatar>
+        <Avatar className="rounded-none">
           <AvatarImage src="favicon.svg" alt="@shadcn" />
           <AvatarFallback>CN</AvatarFallback>
         </Avatar>

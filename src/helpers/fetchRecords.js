@@ -7,8 +7,6 @@ export const fetchRecords = async (web5, did) => {
     },
   });
 
-  // console.log("Records:", records);
-
   let receivedRecords = [];
   let sentRecords = [];
 
@@ -36,5 +34,39 @@ export const fetchRecords = async (web5, did) => {
   console.log("Received Records:", receivedRecords);
   console.log("Sent Records:", sentRecords);
 
-  return { receivedRecords, sentRecords };
+  let organizationTotalRecords = 0; // organization Health Records Issued
+  let userTotalrecords = 0; // user - Health Records
+  let recepients = {};
+  let senders = {};
+  let totalIssuersForUser = 0; // user total hospitals
+  let totalPatientsForHospital = 0; //organization total patients
+
+  receivedRecords.forEach((record) => {
+    userTotalrecords++;
+    if (recepients[record.sender] == true) {
+      return;
+    } else {
+      recepients[record.sender] = true;
+      totalIssuersForUser++;
+    }
+  });
+
+  sentRecords.forEach((record) => {
+    organizationTotalRecords++;
+    if (senders[record.recipient] == true) {
+      return;
+    } else {
+      senders[record.recipient] = true;
+      totalPatientsForHospital++;
+    }
+  });
+
+  return {
+    receivedRecords,
+    sentRecords,
+    organizationTotalRecords,
+    userTotalrecords,
+    totalIssuersForUser,
+    totalPatientsForHospital,
+  };
 };

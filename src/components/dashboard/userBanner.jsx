@@ -23,6 +23,10 @@ const UserBanner = () => {
   const [didData, setDidData] = useRecoilState(didState);
   const formattedDid = `${didData.did.slice(8, 16)}...${didData.did.slice(-8)}`;
 
+  useEffect(() => {
+    console.log(didData);
+  }, [didData]);
+
   function handleCopyToClipboard() {
     navigator.clipboard.writeText(didData.did);
   }
@@ -76,12 +80,16 @@ const UserBanner = () => {
       <Card className=" text-emerald-900 bg-emerald-50">
         <div className="grid grid-cols-2 justify-center h-full">
           <div className="flex flex-col items-center justify-center">
-            <dt class="mb-2 text-3xl font-extrabold">73M+</dt>
+            <dt class="mb-2 text-3xl font-extrabold">
+              {didData.userTotalrecords}
+            </dt>
             <dd class="text-gray-500 dark:text-gray-400">Health Records</dd>
           </div>
           <div class="flex flex-col items-center justify-center">
-            <dt class="mb-2 text-3xl font-extrabold">100M+</dt>
-            <dd class="text-gray-500 dark:text-gray-400">Issuers</dd>
+            <dt class="mb-2 text-3xl font-extrabold">
+              {didData.totalIssuersForUser}
+            </dt>
+            <dd class="text-gray-500 dark:text-gray-400">Hospitals</dd>
           </div>
         </div>
       </Card>
