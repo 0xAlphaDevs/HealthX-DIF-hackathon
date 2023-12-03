@@ -18,7 +18,6 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { testBase64Image } from "@/helpers/mock";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -39,7 +38,7 @@ import {
 import CategoryFilter from "./categoryFilter";
 import { Cross2Icon } from "@radix-ui/react-icons";
 import { useRouter } from "next/router";
-import { base64ImageState } from "@/atoms/data";
+import { imageState } from "@/atoms/data";
 import { useSetRecoilState } from "recoil";
 import {
   userHealthRecordsData,
@@ -56,12 +55,15 @@ export function UserTable() {
 
   const [tableData, setTableData] = useState([]);
 
+  const setImageState = useSetRecoilState(imageState);
+
   const constructRecievedRecords = (records) => {
     const data = records.map((record) => {
       return {
         healthRecordName: record.healthRecordName,
         healthRecordCategory: record.healthRecordCategory,
         issuedOn: record.issuedOn,
+        image: record.image,
       };
     });
     return data;
@@ -81,8 +83,6 @@ export function UserTable() {
 
     fetchTableData();
   }, []);
-
-  const setBase64Image = useSetRecoilState(base64ImageState);
 
   const columns = [
     {
@@ -120,8 +120,10 @@ export function UserTable() {
     },
 
     {
-      id: "view",
+      accessorKey: "image",
+      header: "",
       cell: ({ row }) => {
+        const image = row.getValue("image");
         const router = useRouter();
         return (
           <Dialog>
@@ -132,7 +134,7 @@ export function UserTable() {
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle>Here is your healthRecord.</DialogTitle>
+                <DialogTitle>Here is your Health Record.</DialogTitle>
                 <DialogDescription>
                   <img
                     src="report.png"
@@ -146,7 +148,7 @@ export function UserTable() {
                   <div className="flex justify-center">
                     <Button
                       onClick={() => {
-                        setBase64Image(testBase64Image);
+                        setImageState(image);
                         router.push(`/viewRecord`);
                       }}
                       className="bg-emerald-900 text-emerald-50 hover:bg-emerald-500 mt-4"

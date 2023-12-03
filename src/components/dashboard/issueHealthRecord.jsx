@@ -232,7 +232,7 @@ export function IssueHealthRecord() {
                           </div>
                           <div className="flex flex-col space-y-1.5">
                             <Label className="text-cyan-600">
-                              healthRecord Name
+                              Health Record Name
                             </Label>
                             <Input
                               value={healthRecordData.healthRecordName}
@@ -249,7 +249,7 @@ export function IssueHealthRecord() {
                           </div>
                           <div className="flex flex-col space-y-1.5">
                             <Label className="text-cyan-600">
-                              healthRecord Category
+                              Health Record Category
                             </Label>
                             <Select
                               placeholder="Select a category"

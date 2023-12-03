@@ -7,7 +7,7 @@ export const fetchRecords = async (web5, did) => {
     },
   });
 
-  console.log("Records:", records);
+  // console.log("Records:", records);
 
   let receivedRecords = [];
   let sentRecords = [];

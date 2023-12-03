@@ -50,10 +50,9 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { base64ImageState, didData } from "@/atoms/data";
+import { imageState, didData } from "@/atoms/data";
 import { useRouter } from "next/router";
 import { useSetRecoilState } from "recoil";
-import { testBase64Image } from "@/helpers/mock";
 import {
   healthRecordCategoryOptions,
   organizationHealthRecordsData,
@@ -70,7 +69,23 @@ export function OrganizationTable() {
 
   const [tableData, setTableData] = useState([]);
 
-  const setBase64Image = useSetRecoilState(base64ImageState);
+  const setImageState = useSetRecoilState(imageState);
+
+  const constructSentRecords = (records) => {
+    const data = records.map((record) => {
+      return {
+        healthRecordName: record.healthRecordName,
+        healthRecordCategory: record.healthRecordCategory,
+        issuedOn: record.issuedOn,
+        issuedTo: {
+          did: record.recipient,
+          name: record.patientName,
+        },
+        image: record.image,
+      };
+    });
+    return data;
+  };
 
   //🟡
   useEffect(() => {
@@ -78,7 +93,9 @@ export function OrganizationTable() {
       const { web5, did } = await initWeb5();
       console.log("Fetching records...");
       const records = await fetchRecords(web5, did);
-      setTableData(organizationHealthRecordsData);
+      console.log("Records :", records);
+      const finalTableData = constructSentRecords(records.sentRecords);
+      setTableData(finalTableData);
       // console.log("Records :", records);
       // setTableData(data);
     };
@@ -100,8 +117,8 @@ export function OrganizationTable() {
         return (
           <>
             <div className="capitalize font-semibold">{name}</div>
-            <div className="lowercase font-thin flex items-center">
-              <div>{did}</div>
+            <div className="font-thin flex items-center">
+              <div>{`${did.slice(8, 16)}...${did.slice(-8)}`}</div>
               <div>
                 <TooltipProvider>
                   <Tooltip>
@@ -157,8 +174,10 @@ export function OrganizationTable() {
       ),
     },
     {
-      id: "view",
+      accessorKey: "image",
+      header: "",
       cell: ({ row }) => {
+        const image = row.getValue("image");
         const router = useRouter();
         return (
           <Dialog>
@@ -169,10 +188,10 @@ export function OrganizationTable() {
             </DialogTrigger>
             <DialogContent>
               <DialogHeader>
-                <DialogTitle>Here is your healthRecord.</DialogTitle>
+                <DialogTitle>Here is your Health Record.</DialogTitle>
                 <DialogDescription>
                   <img
-                    src="report.png"
+                    src={image}
                     alt="healthRecord Image"
                     style={{
                       width: "100%",
@@ -183,7 +202,7 @@ export function OrganizationTable() {
                   <div className="flex justify-center">
                     <Button
                       onClick={() => {
-                        setBase64Image(testBase64Image);
+                        setImageState(image);
                         router.push(`/viewRecord`);
                       }}
                       className="bg-cyan-900 text-cyan-50 hover:bg-cyan-500 mt-4"

@@ -1,16 +1,16 @@
 import React, { useEffect } from "react";
-import { base64ImageState } from "../atoms/data";
+import { imageState } from "../atoms/data";
 import { useRecoilValue } from "recoil";
 import { useState } from "react";
 
 const ViewHealthRecord = () => {
-  const base64Image = useRecoilValue(base64ImageState);
+  const imageSrc = useRecoilValue(imageState);
   const [image, setImage] = useState("");
 
   useEffect(() => {
     // get base64 image from atom state
-    console.log("Base 64 image :", base64Image);
-    setImage(base64Image);
+    console.log("Image Source :", imageSrc);
+    setImage(imageSrc);
   }, []);
 
   return (

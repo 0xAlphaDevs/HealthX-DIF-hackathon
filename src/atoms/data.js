@@ -22,8 +22,8 @@ export const healthRecordsState = atom({
   effects_UNSTABLE: [persistAtom],
 });
 
-export const base64ImageState = atom({
-  key: "base64ImageState", // unique ID (with respect to other atoms/selectors)
+export const imageState = atom({
+  key: "imageState", // unique ID (with respect to other atoms/selectors)
   default: "", // default value (aka initial value)
   effects_UNSTABLE: [persistAtom],
 });
