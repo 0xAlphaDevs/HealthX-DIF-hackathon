@@ -81,7 +81,7 @@ export function IssueHealthRecord() {
 
     // image = await createBase64Image(imageFile);
 
-    // upload image to cloudinary 🟡
+    // upload image to cloudinary
     const data = new FormData();
     data.append("file", imageFile);
     data.append("upload_preset", "healthX_preset");
@@ -112,7 +112,7 @@ export function IssueHealthRecord() {
     return healthRecord;
   };
 
-  // send health record 🟡
+  // send health record
   async function sendhealthRecord(receiverDid) {
     try {
       setIsLoading(true);

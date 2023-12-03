@@ -88,7 +88,6 @@ export function OrganizationTable() {
     return data;
   };
 
-  //🟡
   useEffect(() => {
     const fetchTableData = async () => {
       const { web5, did } = await initWeb5();
