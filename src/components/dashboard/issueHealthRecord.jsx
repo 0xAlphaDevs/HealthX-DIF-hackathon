@@ -133,7 +133,7 @@ export function IssueHealthRecord() {
       const { record } = await web5.dwn.records.write({
         data: healthRecord,
         message: {
-          protocol: "https://alphadevs.dev/healthX",
+          protocol: "https://alphadevs.dev/healthX-protocol",
           protocolPath: "healthRecord",
           schema: "https://alphadevs.dev/healthRecord",
           recipient: healthRecordData.patientDid,
