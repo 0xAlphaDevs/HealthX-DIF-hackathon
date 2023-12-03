@@ -3,51 +3,7 @@ export const userHealthRecordsData = [
     healthRecordName: "KFT",
     healthRecordCategory: "pathology",
     issuedOn: "1-1-2023",
-    patientName: "ABC",
-    recipient: "XYZ",
-    sender: "ABC",
-    issuedTo: {
-      did: "did:ethr:0x123456789abcdefghifjkfjvhjdscbkj,dnj",
-      name: "SomeName",
-    },
     image: "https://www.google.com",
-  },
-  {
-    id: "",
-    healthRecordName: "Electroencephalogram",
-    healthRecordCategory: "neurology",
-    date: "1-1-2023",
-  },
-  {
-    id: "",
-    healthRecordName: "Brain MRI ",
-    healthRecordCategory: "neurology",
-    date: "1-1-2023",
-  },
-  {
-    id: "",
-    healthRecordName: "ECG",
-    healthRecordCategory: "cardiology",
-    date: "1-1-2023",
-  },
-  {
-    id: "",
-    healthRecordName: "CECT",
-    healthRecordCategory: "radiology",
-    date: "1-1-2023",
-  },
-
-  {
-    id: "",
-    healthRecordName: "X-Ray",
-    healthRecordCategory: "radiology",
-    date: "1-1-2023",
-  },
-  {
-    id: "",
-    healthRecordName: "CBC",
-    healthRecordCategory: "pathology",
-    date: "1-1-2023",
   },
 ];
 

@@ -56,12 +56,24 @@ export function UserTable() {
 
   const [tableData, setTableData] = useState([]);
 
+  const constructRecievedRecords = (records) => {
+    const data = records.map((record) => {
+      return {
+        healthRecordName: record.healthRecordName,
+        healthRecordCategory: record.healthRecordCategory,
+        issuedOn: record.issuedOn,
+      };
+    });
+    return data;
+  };
+
   useEffect(() => {
     const fetchTableData = async () => {
       const { web5, did } = await initWeb5();
       console.log("Fetching records...");
       const records = await fetchRecords(web5, did);
-      setTableData(userHealthRecordsData);
+      const fetchTableData = constructRecievedRecords(records.receivedRecords);
+      setTableData(fetchTableData);
 
       // console.log("Records :", records);
       // setTableData(data);
@@ -98,11 +110,11 @@ export function UserTable() {
     },
 
     {
-      accessorKey: "date",
+      accessorKey: "issuedOn",
       header: "Issued On",
       cell: ({ row }) => (
         <div className="lowercase font-bold bg-slate-300 inline-block rounded-full p-2">
-          {row.getValue("date")}
+          {row.getValue("issuedOn")}
         </div>
       ),
     },
@@ -152,7 +164,7 @@ export function UserTable() {
   ];
 
   const table = useReactTable({
-    data: userHealthRecordsData,
+    data: tableData,
     columns,
     state: {
       sorting,
