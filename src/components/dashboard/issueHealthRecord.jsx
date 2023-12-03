@@ -135,7 +135,7 @@ export function IssueHealthRecord() {
         message: {
           protocol: "https://alphadevs.dev/healthX-protocol",
           protocolPath: "healthRecord",
-          schema: "https://alphadevs.dev/healthX-protocol/healthRecord",
+          schema: "healthRecord",
           recipient: healthRecordData.patientDid,
           dataFormat: "application/json",
         },

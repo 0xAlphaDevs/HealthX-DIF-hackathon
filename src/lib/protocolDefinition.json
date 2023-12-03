@@ -3,7 +3,7 @@
   "published": true,
   "types": {
     "healthRecord": {
-      "schema": "https://alphadevs.dev/healthX-protocol/healthRecord",
+      "schema": "healthRecord",
       "dataFormats": ["application/json"]
     }
   },

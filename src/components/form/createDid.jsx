@@ -27,6 +27,8 @@ export default function CreateDid({ name, year, userType }) {
     setWeb5(web5);
     setMyDid(did);
 
+    console.log("CONFIGURING PROTOCOL...");
+    console.log(protocolDefinition);
     const { protocol, status: configureStatus } =
       await web5.dwn.protocols.configure({
         message: {
