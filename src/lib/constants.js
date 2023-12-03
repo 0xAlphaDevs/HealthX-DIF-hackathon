@@ -26,19 +26,19 @@ export const organizationHealthRecordsData = [
 //schema for the healthRecord category filter
 export const healthRecordCategoryOptions = [
   {
-    value: "radiology",
+    value: "Radiology",
     label: "Radiology",
   },
   {
-    value: "pathology",
+    value: "Pathology",
     label: "Pathology",
   },
   {
-    value: "cardiology",
+    value: "Cardiology",
     label: "Cardiology",
   },
   {
-    value: "neurology",
+    value: "Neurology",
     label: "Neurology",
   },
 ];
