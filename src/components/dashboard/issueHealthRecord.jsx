@@ -208,7 +208,7 @@ export function IssueHealthRecord() {
                                   patientName: event.target.value,
                                 })
                               }
-                              placeholder="Enter the pateint's DID"
+                              placeholder="Enter the Patient Name"
                               className="border border-cyan-300"
                               required
                             />
@@ -225,7 +225,7 @@ export function IssueHealthRecord() {
                                   patientDid: event.target.value,
                                 })
                               }
-                              placeholder="Enter the pateint's DID"
+                              placeholder="Enter the Patient's DID"
                               className="border border-cyan-300"
                               required
                             />
@@ -242,7 +242,7 @@ export function IssueHealthRecord() {
                                   healthRecordName: event.target.value,
                                 })
                               }
-                              placeholder="Enter the healthRecord name"
+                              placeholder="Enter the Health Record name"
                               className="border border-cyan-300"
                               required
                             />
